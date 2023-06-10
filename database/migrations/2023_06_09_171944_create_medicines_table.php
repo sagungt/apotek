@@ -13,18 +13,17 @@ return new class extends Migration
     {
         Schema::create('medicines', function (Blueprint $table) {
             $table->id();
+            $table->string('no_batch');
+            $table->date('no_exp');
             $table->string('name');
             $table->string('uom');
-            $table->integer('qty')->default(0);
-            $table->bigInteger('purchase_price')->default(0);
-            $table->bigInteger('selling_price')->default(0);
-            $table->text('description')->nullable();
-            $table->date('expiry_date');
-            $table->string('type');
+            $table->bigInteger('price')->default(0);
             $table->foreignId('category_id')
                 ->references('id')
-                ->on('categories')
-                ->nullOnDelete();
+                ->on('categories');
+            $table->foreignId('brand_id')
+                ->references('id')
+                ->on('brands');
             $table->timestamps();
         });
     }

@@ -10,23 +10,9 @@
             {{ session()->get('success') }}
         </x-adminlte-alert>
     @endif
-
-    <x-adminlte-input
-        name="search"
-        label="Search"
-        placeholder="search"
-        igroup-size="md"
-        wire:model="search"
-    >
-        <x-slot name="prependSlot">
-            <div class="input-group-text">
-                <i class="fas fa-search"></i>
-            </div>
-        </x-slot>
-    </x-adminlte-input>
-
+    
     <x-adminlte-button
-        class="btn-lg mb-3"
+        class="btn mb-3"
         type="button"
         label="Add New User"
         theme="outline-success"
@@ -34,14 +20,27 @@
         data-toggle="modal"
         data-target="#add-user"
     />
+    
+        <x-adminlte-input
+            name="search"
+            label="Search"
+            placeholder="search"
+            igroup-size="md"
+            wire:model="search"
+        >
+            <x-slot name="prependSlot">
+                <div class="input-group-text">
+                    <i class="fas fa-search"></i>
+                </div>
+            </x-slot>
+        </x-adminlte-input>
 
     <div class="table-responsive">
         <table class="table table-striped table-hover">
             <thead>
                 <tr>
                     <th scope="col">ID</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Email</th>
+                    <th scope="col">Username</th>
                     <th scope="col">Role</th>
                     <th scope="col">Action</th>
                 </tr>
@@ -50,15 +49,21 @@
                 @forelse ($users as $user)
                     <tr scope="row">
                         <td>{{ $user->id }}</td>
-                        <td>{{ $user->name }}</td>
-                        <td>{{ $user->email }}</td>
+                        <td>{{ $user->username }}</td>
                         <td>
+                            {{--
+                                Penamaan Role Bisa Disesuaikan pada tampilan website.
+                                Di database role cuma number 1, 2, 3
+                                1: Pemilik
+                                2: Gudang
+                                3: Apoteker
+                            --}}
                             @if ($user->role == 1)
-                                Super Admin
+                                Pemilik
                             @elseif ($user->role == 2)
-                                Admin
+                                Gudang
                             @else
-                                User
+                                Apoteker
                             @endif
                         </td>
                         <td>
@@ -78,7 +83,7 @@
                                         title="Delete"
                                         data-toggle="modal"
                                         data-target="#delete-user"
-                                        wire:click="$emitSelf('setUserId', {{ $user->id }})"
+                                        wire:click="$emitTo('users.delete-modal', 'setUserId', {{ $user->id }})"
                                     >
                                         <i class="fa fa-lg fa-fw fa-trash"></i>
                                     </button>

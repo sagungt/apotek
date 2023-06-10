@@ -11,31 +11,13 @@ class Index extends Component
     use WithPagination;
 
     public $search;
-    public $userId;
 
     protected $paginationTheme = 'bootstrap';
-    protected $listeners = ['reset' => 'refresh', 'delete', 'setUserId'];
+    protected $listeners = ['reset' => 'refresh'];
 
     public function refresh()
     {
         $this->resetPage();
-    }
-
-    public function setUserId($id)
-    {
-        $this->userId = $id;
-    }
-
-    public function delete()
-    {
-        try {
-            User::destroy($this->userId);
-        } catch (\Exception $e) {
-            return session()->flash('error', 'Failed');
-        }
-        $this->dispatchBrowserEvent('close-modal-delete-user');
-        $this->refresh();
-        return session()->flash('success', 'User deleted!');
     }
 
     public function render()
@@ -44,10 +26,10 @@ class Index extends Component
             ->when(strlen($this->search) > 0, fn ($query) =>
                 $query
                     ->where('id', 'like', '%' . $this->search . '%')
-                    ->orWhere('name', 'like', '%' . $this->search . '%')
-                    ->orWhere('email', 'like', '%' . $this->search . '%')
+                    ->orWhere('username', 'like', '%' . $this->search . '%')
             )
             ->paginate(10);
+        
         return view('livewire.users.index', compact('users'));
     }
 }

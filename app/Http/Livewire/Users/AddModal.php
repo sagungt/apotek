@@ -11,18 +11,16 @@ class AddModal extends Component
     public $newUser;
 
     protected $rules = [
-        'newUser.name'                         => 'required|min:3',
-        'newUser.email'                        => 'required|email',
+        'newUser.username'                     => 'required|min:4|unique:users,username|alpha_num:ascii',
         'newUser.password'                     => 'required|min:8|max:255|confirmed',
         'newUser.password_confirmation'        => 'required',
         'newUser.role'                         => 'required|numeric|in:1,2,3'
     ];
     protected $messages = [
-        'newUser.name.required'                     => 'The Name Field is required',
-        'newUser.email.required'                    => 'The Name Email is required',
-        'newUser.password.required'                 => 'The Name Password is required',
-        'newUser.password_confirmation.required'    => 'The Name Password Confirmation is required',
-        'newUser.role.required'                     => 'The Name Role is required'
+        'newUser.username.required'                 => 'The Username field is required',
+        'newUser.password.required'                 => 'The Password field is required',
+        'newUser.password_confirmation.required'    => 'The Password Confirmation field is required',
+        'newUser.role.required'                     => 'The Role field is required'
     ];
 
     public function submit()
@@ -34,15 +32,16 @@ class AddModal extends Component
         }
 
         $data = [
-            'name'      => $validated['newUser']['name'],
-            'email'     => $validated['newUser']['email'],
+            'username'  => $validated['newUser']['username'],
             'role'      => $validated['newUser']['role'],
             'password'  => bcrypt($validated['newUser']['password']),
         ];
         
         User::create($data);
 
+        $this->dispatchBrowserEvent('close-modal-add-user');
         $this->emitUp('reset');
+        $this->reset(['newUser']);
 
         return session()->flash('success', 'User successfully created!');
     }

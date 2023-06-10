@@ -321,6 +321,21 @@ return [
             'url'  => 'order',
             'icon' => 'fas fa-receipt'
         ],
+        [
+            'text' => 'Pesan',
+            'url'  => 'order',
+            'icon' => 'fas fa-receipt'
+        ],
+        [
+            'text' => 'Kategori',
+            'url'  => 'categories',
+            'icon' => 'fas fa-list'
+        ],
+        [
+            'text' => 'Merek',
+            'url'  => 'brands',
+            'icon' => 'fas fa-copyright'
+        ],
         // ['header' => 'account_settings'],
         // [
         //     'text' => 'profile',

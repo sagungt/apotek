@@ -16,9 +16,8 @@ class Medicine extends Model
         return $this->belongsTo(Category::class, 'category_id');
     }
 
-    public function order()
-    {
-        return $this->hasMany(Order::class);
+    public function brand() {
+        return $this->belongsTo(Brand::class, 'brand_id');
     }
 
     public function attachments()

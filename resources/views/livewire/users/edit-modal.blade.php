@@ -24,12 +24,12 @@
                 @endif
     
                 <x-adminlte-input
-                    autocomplete="full-name"
+                    autocomplete="username"
                     name="user"
-                    label="Name"
-                    placeholder="Full Name"
-                    wire:model.defer="user.name"
-                    error-key="user.name"
+                    label="Username"
+                    placeholder="UserName"
+                    wire:model.defer="user.username"
+                    error-key="user.username"
                 >
                     <x-slot name="prependSlot">
                         <div class="input-group-text">
@@ -37,23 +37,7 @@
                         </div>
                     </x-slot>
                 </x-adminlte-input>
-    
-                <x-adminlte-input
-                    autocomplete="email"
-                    name="email"
-                    label="E-Mail"
-                    type="email"
-                    placeholder="email@example.com"
-                    wire:model.defer="user.email"
-                    error-key="user.email"
-                >
-                    <x-slot name="prependSlot">
-                        <div class="input-group-text">
-                            <i class="fas fa-at"></i>
-                        </div>
-                    </x-slot>
-                </x-adminlte-input>
-    
+
                 <x-adminlte-select
                     name="role"
                     label="Role"
@@ -62,10 +46,10 @@
                 >
                     <option selected disabled>Select Role</option>
                     @can('super-admin')
-                        <option value="1">Super Admin</option>
+                        <option value="1">Pemilik</option>
                     @endcan
-                    <option value="2">Admin</option>
-                    <option value="3">User</option>
+                    <option value="2">Gudang</option>
+                    <option value="3">Apoteker</option>
                 </x-adminlte-select>
 
                 <x-adminlte-input
@@ -91,6 +75,21 @@
                     type="password"
                     placeholder="Repeat Password"
                     wire:model.defer="user.new_password_confirmation"
+                >
+                    <x-slot name="prependSlot">
+                        <div class="input-group-text">
+                            <i class="fas fa-key"></i>
+                        </div>
+                    </x-slot>
+                </x-adminlte-input>
+
+                <x-adminlte-input
+                    autocomplete="off"
+                    name="shared-password"
+                    label="Shared Password"
+                    type="password"
+                    placeholder="Shared Password"
+                    wire:model.defer="user.new_shared_password"
                 >
                     <x-slot name="prependSlot">
                         <div class="input-group-text">

@@ -7,6 +7,8 @@
         size='lg'
         v-centered
         wire:ignore.self
+        x-data
+        @close-modal-add-user.window="$('#add-user').modal('hide')"
     >
         <form wire:submit.prevent="submit">
             <div class="d-flex flex-column">
@@ -24,12 +26,12 @@
                 @endif
     
                 <x-adminlte-input
-                    autocomplete="full-name"
+                    autocomplete="username"
                     name="new-user"
-                    label="Name"
-                    placeholder="Full Name"
-                    wire:model.defer="newUser.name"
-                    error-key="newUser.name"
+                    label="Username"
+                    placeholder="Username"
+                    wire:model.defer="newUser.username"
+                    error-key="newUser.username"
                 >
                     <x-slot name="prependSlot">
                         <div class="input-group-text">
@@ -37,22 +39,7 @@
                         </div>
                     </x-slot>
                 </x-adminlte-input>
-    
-                <x-adminlte-input
-                    name="new-email"
-                    label="E-Mail"
-                    type="email"
-                    placeholder="email@example.com"
-                    wire:model.defer="newUser.email"
-                    error-key="newUser.email"
-                >
-                    <x-slot name="prependSlot">
-                        <div class="input-group-text">
-                            <i class="fas fa-at"></i>
-                        </div>
-                    </x-slot>
-                </x-adminlte-input>
-    
+
                 <x-adminlte-select
                     name="new-role"
                     label="Role"
@@ -61,10 +48,10 @@
                 >
                     <option selected disabled>Select Role</option>
                     @can('super-admin')
-                        <option value="1">Super Admin</option>
+                        <option value="1">Pemilik</option>
                     @endcan
-                    <option value="2">Admin</option>
-                    <option value="3">User</option>
+                    <option value="2">Gudang</option>
+                    <option value="3">Apoteker</option>
                 </x-adminlte-select>
 
                 <x-adminlte-input

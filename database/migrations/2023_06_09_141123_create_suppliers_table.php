@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('suppliers', function (Blueprint $table) {
             $table->id();
-            $table->string('username');
-            $table->string('password');
-            $table->string('shared_password')->nullable();
-            $table->integer('role')
-                ->default(3)
-                ->comment('1: Pemilik, 2: Bagian Gudang, 3: Apoteker');
-            $table->rememberToken();
+            $table->string('name');
+            $table->string('npwp');
+            $table->string('address');
+            $table->string('city');
+            $table->string('phone');
+            $table->string('fax');
+            $table->string('email');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('suppliers');
     }
 };

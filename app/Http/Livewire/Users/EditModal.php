@@ -13,16 +13,15 @@ class EditModal extends Component
     protected $listeners = ['setUser'];
 
     protected $rules = [
-        'user.name'                         => 'required|min:3',
-        'user.email'                        => 'required|email',
+        'user.username'                     => 'required|min:4|unique:users,username|alpha_num:ascii',
         'user.new_password'                 => 'nullable|min:8|max:255|confirmed',
         'user.new_password_confirmation'    => 'nullable',
+        'user.new_shared_password'          => 'nullable',
         'user.role'                         => 'required|numeric|in:1,2,3'
     ];
     protected $messages = [
-        'user.name.required'                         => 'The Name Field is required',
-        'user.email.required'                        => 'The Name Email is required',
-        'user.role.required'                         => 'The Name Role is required'
+        'user.name.required'                         => 'The Username field is required',
+        'user.role.required'                         => 'The Role field is required'
     ];
 
     public function setUser($id)
@@ -39,8 +38,7 @@ class EditModal extends Component
         }
 
         $data = [
-            'name'      => $validated['user']['name'],
-            'email'     => $validated['user']['email'],
+            'username'  => $validated['user']['username'],
             'role'      => $validated['user']['role'],
         ];
         
@@ -51,8 +49,16 @@ class EditModal extends Component
             ];
         }
 
+        if ($validated['user']['new_shared_password']) {
+            $data = [
+                ...$data,
+                'shared_password'  => bcrypt($validated['user']['new_shared_password']),
+            ];
+        }
+
         unset($this->user->new_password);
         unset($this->user->new_password_confirmation);
+        unset($this->user->new_shared_password);
 
         $this->user->update($data);
 
