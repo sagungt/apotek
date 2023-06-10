@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,9 +26,10 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::prefix('admin')->name('admin.')->middleware('can:admin')->group(function () {
-    Route::get('/users', [UserController::class, 'index'])
-        ->name('users');
-
+    Route::prefix('users')->name('users.')->group(function () {
+        Route::get('/', [UserController::class, 'index'])
+            ->name('index');
+    });
 });
 
 Route::prefix('categories')->name('categories.')->group(function () {
@@ -37,5 +39,10 @@ Route::prefix('categories')->name('categories.')->group(function () {
 
 Route::prefix('brands')->name('brands.')->group(function () {
     Route::get('/', [BrandController::class, 'index'])
+        ->name('index');
+});
+
+Route::prefix('suppliers')->name('suppliers.')->group(function () {
+    Route::get('/', [SupplierController::class, 'index'])
         ->name('index');
 });

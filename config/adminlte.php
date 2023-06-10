@@ -336,6 +336,11 @@ return [
             'url'  => 'brands',
             'icon' => 'fas fa-copyright'
         ],
+        [
+            'text' => 'Supplier',
+            'url'  => 'suppliers',
+            'icon' => 'fas fa-box-open'
+        ],
         // ['header' => 'account_settings'],
         // [
         //     'text' => 'profile',
