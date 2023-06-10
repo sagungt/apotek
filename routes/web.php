@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\MedicimeController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -44,5 +45,10 @@ Route::prefix('brands')->name('brands.')->group(function () {
 
 Route::prefix('suppliers')->name('suppliers.')->group(function () {
     Route::get('/', [SupplierController::class, 'index'])
+        ->name('index');
+});
+
+Route::prefix('medicines')->name('medicines.')->group(function () {
+    Route::get('/', [MedicimeController::class, 'index'])
         ->name('index');
 });

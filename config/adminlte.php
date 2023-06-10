@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 3',
+    'title' => 'Apotek',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -63,12 +63,12 @@ return [
     |
     */
 
-    'logo' => '<b>Admin</b>LTE',
+    'logo' => 'Apotek',
     'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
-    'logo_img_alt' => 'Admin Logo',
+    'logo_img_alt' => 'Apotek',
 
     /*
     |--------------------------------------------------------------------------
@@ -313,7 +313,7 @@ return [
         ],
         [
             'text' => 'Obat',
-            'url'  => 'obat',
+            'url'  => 'medicines',
             'icon' => 'fas fa-capsules'
         ],
         [
@@ -524,15 +524,40 @@ return [
             ],
         ],
         'Alpine JS' => [
-        'active' => true,
-        'files' => [
-            [
-                'type' => 'js',
-                'asset' => false,
-                'location' => '//cdn.jsdelivr.net/npm/alpinejs@3.12.1/dist/cdn.min.js',
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'js',
+                    'asset' => false,
+                    'location' => '//cdn.jsdelivr.net/npm/alpinejs@3.12.1/dist/cdn.min.js',
+                ],
             ],
         ],
-    ],
+        'moment' => [
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => asset('vendor/moment/moment.min.js')
+                ]
+            ]
+        ],
+        'Tempus Dominus' => [
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => asset('vendor/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')
+                ],
+                [
+                    'type' => 'css',
+                    'asset' => true,
+                    'location' => asset('vendor/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css')
+                ]
+            ]
+        ]
     ],
 
     /*
