@@ -21,19 +21,19 @@
         data-target="#add-user"
     />
     
-        <x-adminlte-input
-            name="search"
-            label="Search"
-            placeholder="search"
-            igroup-size="md"
-            wire:model="search"
-        >
-            <x-slot name="prependSlot">
-                <div class="input-group-text">
-                    <i class="fas fa-search"></i>
-                </div>
-            </x-slot>
-        </x-adminlte-input>
+    <x-adminlte-input
+        name="search"
+        label="Search"
+        placeholder="search"
+        igroup-size="md"
+        wire:model="search"
+    >
+        <x-slot name="prependSlot">
+            <div class="input-group-text">
+                <i class="fas fa-search"></i>
+            </div>
+        </x-slot>
+    </x-adminlte-input>
 
     <div class="table-responsive">
         <table class="table table-striped table-hover">
@@ -74,7 +74,7 @@
                                         title="Edit"
                                         data-toggle="modal"
                                         data-target="#edit-user"
-                                        wire:click="$emit('setUser', {{ $user->id }})"
+                                        wire:click="$emitTo('users.edit-modal', 'setUser', {{ $user->id }})"
                                     >
                                         <i class="fa fa-lg fa-fw fa-pen"></i>
                                     </button>
@@ -92,9 +92,9 @@
                         </td>
                     </tr>
                 @empty
-                    <td>
+                    <tr>
                         <td colspan="5" class="text-center">No Records found ...</td>
-                    </td>
+                    </tr>
                 @endforelse
             </tbody>
         </table>

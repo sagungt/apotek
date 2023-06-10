@@ -30,5 +30,11 @@ class DatabaseSeeder extends Seeder
             'shared_password' => bcrypt('password'),
             'role' => 3,
         ]);
+
+        for ($i = 1; $i <= 10; $i++) {
+            \App\Models\Category::create([
+                'name' => 'Category ' . $i
+            ]);
+        }
     }
 }
