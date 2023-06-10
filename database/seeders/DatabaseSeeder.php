@@ -35,6 +35,10 @@ class DatabaseSeeder extends Seeder
             \App\Models\Category::create([
                 'name' => 'Category ' . $i
             ]);
+
+            \App\Models\Brand::create([
+                'name' => 'Brand ' . $i
+            ]);
         }
     }
 }

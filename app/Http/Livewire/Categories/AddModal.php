@@ -26,7 +26,7 @@ class AddModal extends Component
         
         Category::create($data);
 
-        $this->dispatchBrowserEvent('close-modal-category-user');
+        $this->dispatchBrowserEvent('close-modal-add-category');
         $this->emitUp('reset');
         $this->reset(['newCategory']);
 

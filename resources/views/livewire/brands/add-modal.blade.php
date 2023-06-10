@@ -1,12 +1,14 @@
 <div>
     <x-adminlte-modal
-        id="edit-category"
-        title="Edit Category"
-        theme="blue"
-        icon="fas fa-list"
+        id="add-brand"
+        title="Add New Brand"
+        theme="success"
+        icon="fas fa-copyright"
         size='lg'
         v-centered
         wire:ignore.self
+        x-data
+        @close-modal-add-brand.window="$('#add-brand').modal('hide')"
     >
         <form wire:submit.prevent="submit">
             <div class="d-flex flex-column">
@@ -17,7 +19,7 @@
                     </x-adminlte-alert>
                 @endif
 
-                @if (session()->has('errorEdit'))
+                @if (session()->has('errorAdd'))
                     <x-adminlte-alert theme="danger" title="Error">
                         {{ session()->get('errorEdit') }}
                     </x-adminlte-alert>
@@ -25,11 +27,11 @@
     
                 <x-adminlte-input
                     autocomplete="name"
-                    name="category"
+                    name="new-brand"
                     label="Name"
-                    placeholder="Category Name"
-                    wire:model.defer="category.name"
-                    error-key="category.name"
+                    placeholder="Brand Name"
+                    wire:model.defer="newBrand.name"
+                    error-key="newBrand.name"
                 >
                     <x-slot name="prependSlot">
                         <div class="input-group-text">
@@ -37,12 +39,12 @@
                         </div>
                     </x-slot>
                 </x-adminlte-input>
-
+    
                 <x-adminlte-button
                     class="btn-flat"
                     type="submit"
                     label="Submit"
-                    theme="primary"
+                    theme="success"
                     icon="fas fa-lg fa-save"
                 />
             </div>

@@ -1,9 +1,9 @@
 <div>
     <x-adminlte-modal
-        id="edit-category"
-        title="Edit Category"
+        id="edit-brand"
+        title="Edit Brand"
         theme="blue"
-        icon="fas fa-list"
+        icon="fas fa-copyright"
         size='lg'
         v-centered
         wire:ignore.self
@@ -25,11 +25,11 @@
     
                 <x-adminlte-input
                     autocomplete="name"
-                    name="category"
+                    name="brand"
                     label="Name"
-                    placeholder="Category Name"
-                    wire:model.defer="category.name"
-                    error-key="category.name"
+                    placeholder="Brand Name"
+                    wire:model.defer="brand.name"
+                    error-key="brand.name"
                 >
                     <x-slot name="prependSlot">
                         <div class="input-group-text">

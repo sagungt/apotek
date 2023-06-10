@@ -2,11 +2,11 @@
     <x-adminlte-button
         class="btn mb-3"
         type="button"
-        label="Add New Category"
+        label="Add New Brand"
         theme="outline-success"
         icon="fas fa-lg fa-plus"
         data-toggle="modal"
-        data-target="#add-category"
+        data-target="#add-brand"
     />
     
     <x-adminlte-input
@@ -33,17 +33,17 @@
                 </tr>
             </thead>
             <tbody>
-                @forelse ($categories as $category)
+                @forelse ($brands as $brand)
                     <tr scope="row">
-                        <td>{{ $category->id }}</td>
-                        <td>{{ $category->name }}</td>
+                        <td>{{ $brand->id }}</td>
+                        <td>{{ $brand->name }}</td>
                         <td>
                             <button
                                 class="btn btn-xs btn-default text-primary mx-1"
                                 title="Edit"
                                 data-toggle="modal"
-                                data-target="#edit-category"
-                                wire:click="$emitTo('categories.edit-modal', 'setCategory', {{ $category->id }})"
+                                data-target="#edit-brand"
+                                wire:click="$emitTo('brands.edit-modal', 'setBrand', {{ $brand->id }})"
                             >
                                 <i class="fa fa-lg fa-fw fa-pen"></i>
                             </button>
@@ -51,8 +51,8 @@
                                 class="btn btn-xs btn-default text-danger mx-1"
                                 title="Delete"
                                 data-toggle="modal"
-                                data-target="#delete-category"
-                                wire:click="$emitTo('categories.delete-modal', 'setCategoryId', {{ $category->id }})"
+                                data-target="#delete-brand"
+                                wire:click="$emitTo('brands.delete-modal', 'setBrandId', {{ $brand->id }})"
                             >
                                 <i class="fa fa-lg fa-fw fa-trash"></i>
                             </button>
@@ -67,11 +67,11 @@
         </table>
     </div>
 
-    {{ $categories->links() }}
+    {{ $brands->links() }}
 
-    <livewire:categories.edit-modal />
+    <livewire:brands.edit-modal />
 
-    <livewire:categories.add-modal />
+    <livewire:brands.add-modal />
 
-    <livewire:categories.delete-modal />
+    <livewire:brands.delete-modal />
 </div>
