@@ -1,13 +1,13 @@
 <div>
-    <x-adminlte-button
-        class="btn mb-3"
-        type="button"
-        label="Add New Brand"
-        theme="outline-success"
-        icon="fas fa-lg fa-plus"
-        data-toggle="modal"
-        data-target="#add-brand"
-    />
+    <a href="{{ route('stocks.request') }}">
+        <x-adminlte-button
+            class="btn mb-3"
+            type="button"
+            label="Request Stock"
+            theme="outline-success"
+            icon="fas fa-lg fa-plus"
+        />
+    </a>
     
     <x-adminlte-input
         name="search"
@@ -28,22 +28,22 @@
             <thead>
                 <tr>
                     <th scope="col">ID</th>
-                    <th scope="col">Nama Merek</th>
+                    <th scope="col">Name</th>
                     <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody>
                 @forelse ($brands as $brand)
                     <tr scope="row">
-                        <td>{{ $brand->merek_id }}</td>
-                        <td>{{ $brand->nama_merek }}</td>
+                        <td>{{ $brand->id }}</td>
+                        <td>{{ $brand->name }}</td>
                         <td>
                             <button
                                 class="btn btn-xs btn-default text-primary mx-1"
                                 title="Edit"
                                 data-toggle="modal"
                                 data-target="#edit-brand"
-                                wire:click="$emitTo('brands.edit-modal', 'setBrand', {{ $brand->merek_id }})"
+                                wire:click="$emitTo('brands.edit-modal', 'setBrand', {{ $brand->id }})"
                             >
                                 <i class="fa fa-lg fa-fw fa-pen"></i>
                             </button>
@@ -52,7 +52,7 @@
                                 title="Delete"
                                 data-toggle="modal"
                                 data-target="#delete-brand"
-                                wire:click="$emitTo('brands.delete-modal', 'setBrandId', {{ $brand->merek_id }})"
+                                wire:click="$emitTo('brands.delete-modal', 'setBrandId', {{ $brand->id }})"
                             >
                                 <i class="fa fa-lg fa-fw fa-trash"></i>
                             </button>
@@ -67,11 +67,5 @@
         </table>
     </div>
 
-    {{ $brands->links() }}
-
-    <livewire:brands.edit-modal />
-
-    <livewire:brands.add-modal />
-
-    <livewire:brands.delete-modal />
+    {{ $stocks->links() }}
 </div>

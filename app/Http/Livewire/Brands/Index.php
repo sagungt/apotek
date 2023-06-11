@@ -25,9 +25,10 @@ class Index extends Component
         $brands = Brand::query()
             ->when(strlen($this->search) > 0, fn ($query) =>
                 $query
-                    ->where('id', 'like', '%' . $this->search . '%')
-                    ->orWhere('name', 'like', '%' . $this->search . '%')
+                    ->where('merek_id', 'like', '%' . $this->search . '%')
+                    ->orWhere('nama_merek', 'like', '%' . $this->search . '%')
             )
+            ->latest()
             ->paginate(10);
 
         return view('livewire.brands.index', compact('brands'));

@@ -3,6 +3,7 @@
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MedicimeController;
+use App\Http\Controllers\StockController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -51,4 +52,12 @@ Route::prefix('suppliers')->name('suppliers.')->group(function () {
 Route::prefix('medicines')->name('medicines.')->group(function () {
     Route::get('/', [MedicimeController::class, 'index'])
         ->name('index');
+});
+
+Route::prefix('stock')->name('stocks.')->group(function () {
+    Route::get('/', [StockController::class, 'index'])
+        ->name('index');
+
+    Route::get('/request', [StockController::class, 'request'])
+        ->name('request');
 });

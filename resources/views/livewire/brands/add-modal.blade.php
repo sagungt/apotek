@@ -30,8 +30,8 @@
                     name="new-brand"
                     label="Name"
                     placeholder="Brand Name"
-                    wire:model.defer="newBrand.name"
-                    error-key="newBrand.name"
+                    wire:model.defer="newBrand.nama_merek"
+                    error-key="newBrand.nama_merek"
                 >
                     <x-slot name="prependSlot">
                         <div class="input-group-text">

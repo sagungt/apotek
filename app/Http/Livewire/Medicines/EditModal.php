@@ -16,19 +16,22 @@ class EditModal extends Component
     protected $listeners = ['setMedicine'];
     protected $rules = [
         'medicine.no_batch'    => 'required',
-        'medicine.no_exp'      => 'required',
-        'medicine.name'        => 'required',
-        'medicine.uom'         => 'required',
-        'medicine.category_id' => 'required|exists:categories,id',
-        'medicine.brand_id'    => 'required|exists:brands,id',
+        'medicine.no_exp'      => 'required|date',
+        'medicine.nama_obat'   => 'required',
+        'medicine.satuan'      => 'required',
+        'medicine.harga'       => 'required|numeric',
+        'medicine.kategori_id' => 'required|exists:kategori,kategori_id',
+        'medicine.merek_id'    => 'required|exists:merek,merek_id',
     ];
     protected $messages = [
         'medicine.no_batch.required'    => 'The No Batch field is required',
         'medicine.no_exp.required'      => 'The No Exp field is required',
-        'medicine.name.required'        => 'The Medicine Name field is required',
-        'medicine.uom.required'         => 'The Medicine Unit of Measurement field is required',
-        'medicine.category_id.required' => 'The Medicine Category field is required',
-        'medicine.brand_id.required'    => 'The Medicine Brand field is required',
+        'medicine.no_exp.date'          => 'Invalid Date Format',
+        'medicine.nama_obat.required'   => 'The Medicine Name field is required',
+        'medicine.satuan.required'      => 'The Medicine Unit of Measurement field is required',
+        'medicine.harga.required'       => 'The Medicine Price field is required',
+        'medicine.kategori_id.required' => 'The Medicine Category field is required',
+        'medicine.merek_id.required'    => 'The Medicine Brand field is required',
     ];
 
     public function mount ()
@@ -46,16 +49,7 @@ class EditModal extends Component
     {
         $validated = $this->validate();
 
-        $data = [
-            'no_batch'    => $validated['medicine']['no_batch'],
-            'no_exp'      => $validated['medicine']['no_exp'],
-            'name'        => $validated['medicine']['name'],
-            'uom'         => $validated['medicine']['uom'],
-            'category_id' => $validated['medicine']['category_id'],
-            'brand_id'    => $validated['medicine']['brand_id'],
-        ];
-
-        $this->medicine->update($data);
+        $this->medicine->update([...$validated['medicine']]);
 
         $this->emitUp('reset');
 

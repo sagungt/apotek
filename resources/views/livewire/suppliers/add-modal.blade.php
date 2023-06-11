@@ -29,9 +29,9 @@
                     autocomplete="name"
                     name="new-brand"
                     label="Name"
-                    placeholder="Brand Name"
-                    wire:model.defer="newSupplier.name"
-                    error-key="newSupplier.name"
+                    placeholder="Supplier Name"
+                    wire:model.defer="newSupplier.supplier_nama"
+                    error-key="newSupplier.supplier_nama"
                 >
                     <x-slot name="prependSlot">
                         <div class="input-group-text">
@@ -44,7 +44,7 @@
                     autocomplete="npwp"
                     name="npwp"
                     label="NPWP"
-                    placeholder="Brand NPWP"
+                    placeholder="Supplier NPWP"
                     wire:model.defer="newSupplier.npwp"
                     error-key="newSupplier.npwp"
                 >
@@ -61,8 +61,8 @@
                     label="Address"
                     placeholder="Address"
                     rows="4"
-                    wire:model.defer="newSupplier.address"
-                    error-key="newSupplier.address"
+                    wire:model.defer="newSupplier.alamat"
+                    error-key="newSupplier.alamat"
                 >
                     <x-slot name="prependSlot">
                         <div class="input-group-text">
@@ -76,8 +76,8 @@
                     name="city"
                     label="City"
                     placeholder="City"
-                    wire:model.defer="newSupplier.city"
-                    error-key="newSupplier.city"
+                    wire:model.defer="newSupplier.kota"
+                    error-key="newSupplier.kota"
                 >
                     <x-slot name="prependSlot">
                         <div class="input-group-text">
@@ -91,8 +91,8 @@
                     name="phone"
                     label="Phone"
                     placeholder="Phone Number"
-                    wire:model.defer="newSupplier.phone"
-                    error-key="newSupplier.phone"
+                    wire:model.defer="newSupplier.telepon"
+                    error-key="newSupplier.telepon"
                 >
                     <x-slot name="prependSlot">
                         <div class="input-group-text">

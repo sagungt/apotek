@@ -30,8 +30,8 @@
                     name="new-cagegory"
                     label="Name"
                     placeholder="Category Name"
-                    wire:model.defer="newCategory.name"
-                    error-key="newCategory.name"
+                    wire:model.defer="newCategory.nama_kategori"
+                    error-key="newCategory.nama_kategori"
                 >
                     <x-slot name="prependSlot">
                         <div class="input-group-text">

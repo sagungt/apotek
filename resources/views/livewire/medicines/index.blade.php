@@ -30,8 +30,9 @@
                     <th scope="col">ID</th>
                     <th scope="col">No Batch</th>
                     <th scope="col">No Exp</th>
-                    <th scope="col">Nama</th>
+                    <th scope="col">Nama Obat</th>
                     <th scope="col">Satuan</th>
+                    <th scope="col">Harga</th>
                     <th scope="col">Kategori</th>
                     <th scope="col">Merek</th>
                 </tr>
@@ -39,20 +40,21 @@
             <tbody>
                 @forelse ($medicines as $medicine)
                     <tr scope="row">
-                        <td>{{ $medicine->id }}</td>
+                        <td>{{ $medicine->obat_id }}</td>
                         <td>{{ $medicine->no_batch ?? '-' }}</td>
                         <td>{{ $medicine->no_exp ?? '-' }}</td>
-                        <td>{{ $medicine->name ?? '-' }}</td>
-                        <td>{{ $medicine->uom ?? '-' }}</td>
-                        <td>{{ $medicine->category?->name ?? '-' }}</td>
-                        <td>{{ $medicine->brand?->name ?? '-' }}</td>
+                        <td>{{ $medicine->nama_obat ?? '-' }}</td>
+                        <td>{{ $medicine->satuan ?? '-' }}</td>
+                        <td>{{ $medicine->harga ?? '-' }}</td>
+                        <td>{{ $medicine->category?->nama_kategori ?? '-' }}</td>
+                        <td>{{ $medicine->brand?->nama_merek ?? '-' }}</td>
                         <td>
                             <button
                                 class="btn btn-xs btn-default text-primary mx-1"
                                 title="Edit"
                                 data-toggle="modal"
                                 data-target="#edit-medicine"
-                                wire:click="$emitTo('medicines.edit-modal', 'setMedicine', {{ $medicine->id }})"
+                                wire:click="$emitTo('medicines.edit-modal', 'setMedicine', {{ $medicine->obat_id }})"
                             >
                                 <i class="fa fa-lg fa-fw fa-pen"></i>
                             </button>
@@ -61,7 +63,7 @@
                                 title="Delete"
                                 data-toggle="modal"
                                 data-target="#delete-medicine"
-                                wire:click="$emitTo('medicines.delete-modal', 'setMedicineId', {{ $medicine->id }})"
+                                wire:click="$emitTo('medicines.delete-modal', 'setMedicineId', {{ $medicine->obat_id }})"
                             >
                                 <i class="fa fa-lg fa-fw fa-trash"></i>
                             </button>
@@ -69,7 +71,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="8" class="text-center">No Records found ...</td>
+                        <td colspan="9" class="text-center">No Records found ...</td>
                     </tr>
                 @endforelse
             </tbody>

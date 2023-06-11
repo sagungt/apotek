@@ -12,10 +12,10 @@ class EditModal extends Component
     protected $listeners = ['setBrand'];
 
     protected $rules = [
-        'brand.name'             => 'required|unique:brands,name',
+        'brand.nama_merek'             => 'required|unique:merek,nama_merek',
     ];
     protected $messages = [
-        'brand.name.required'    => 'The Brand Name field is required',
+        'brand.name_merek.required'    => 'The Brand Name field is required',
     ];
 
     public function setBrand($id)
@@ -28,7 +28,7 @@ class EditModal extends Component
         $validated = $this->validate();
 
         $data = [
-            'name'  => $validated['brand']['name'],
+            'nama_merek'  => $validated['brand']['nama_merek'],
         ];
 
         $this->brand->update($data);

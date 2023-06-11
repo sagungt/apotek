@@ -15,19 +15,22 @@ class AddModal extends Component
 
     protected $rules = [
         'newMedicine.no_batch'    => 'required',
-        'newMedicine.no_exp'      => 'required',
-        'newMedicine.name'        => 'required',
-        'newMedicine.uom'         => 'required',
-        'newMedicine.category_id' => 'required|exists:categories,id',
-        'newMedicine.brand_id'    => 'required|exists:brands,id',
+        'newMedicine.no_exp'      => 'required|date',
+        'newMedicine.nama_obat'   => 'required',
+        'newMedicine.satuan'      => 'required',
+        'newMedicine.harga'       => 'required|numeric',
+        'newMedicine.kategori_id' => 'required|exists:kategori,kategori_id',
+        'newMedicine.merek_id'    => 'required|exists:merek,merek_id',
     ];
     protected $messages = [
         'newMedicine.no_batch.required'    => 'The No Batch field is required',
         'newMedicine.no_exp.required'      => 'The No Exp field is required',
-        'newMedicine.name.required'        => 'The Medicine Name field is required',
-        'newMedicine.uom.required'         => 'The Medicine Unit of Measurement field is required',
-        'newMedicine.category_id.required' => 'The Medicine Category field is required',
-        'newMedicine.brand_id.required'    => 'The Medicine Brand field is required',
+        'newMedicine.no_exp.date'          => 'Invalid Date Format',
+        'newMedicine.nama_obat.required'   => 'The Medicine Name field is required',
+        'newMedicine.satuan.required'      => 'The Medicine Unit of Measurement field is required',
+        'newMedicine.harga.required'       => 'The Medicine Price field is required',
+        'newMedicine.kategori_id.required' => 'The Medicine Category field is required',
+        'newMedicine.merek_id.required'    => 'The Medicine Brand field is required',
     ];
 
     public function mount()
@@ -40,16 +43,7 @@ class AddModal extends Component
     {
         $validated = $this->validate();
 
-        $data = [
-            'no_batch'    => $validated['newMedicine']['no_batch'],
-            'no_exp'      => $validated['newMedicine']['no_exp'],
-            'name'        => $validated['newMedicine']['name'],
-            'uom'         => $validated['newMedicine']['uom'],
-            'category_id' => $validated['newMedicine']['category_id'],
-            'brand_id'    => $validated['newMedicine']['brand_id'],
-        ];
-        
-        Medicine::create($data);
+        Medicine::create([...$validated['newMedicine']]);
 
         $this->dispatchBrowserEvent('close-modal-add-medicine');
         $this->emitUp('reset');

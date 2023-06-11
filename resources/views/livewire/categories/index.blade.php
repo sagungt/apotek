@@ -28,22 +28,22 @@
             <thead>
                 <tr>
                     <th scope="col">ID</th>
-                    <th scope="col">Name</th>
+                    <th scope="col">Nama Kategori</th>
                     <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody>
                 @forelse ($categories as $category)
                     <tr scope="row">
-                        <td>{{ $category->id }}</td>
-                        <td>{{ $category->name }}</td>
+                        <td>{{ $category->kategori_id }}</td>
+                        <td>{{ $category->nama_kategori }}</td>
                         <td>
                             <button
                                 class="btn btn-xs btn-default text-primary mx-1"
                                 title="Edit"
                                 data-toggle="modal"
                                 data-target="#edit-category"
-                                wire:click="$emitTo('categories.edit-modal', 'setCategory', {{ $category->id }})"
+                                wire:click="$emitTo('categories.edit-modal', 'setCategory', {{ $category->kategori_id }})"
                             >
                                 <i class="fa fa-lg fa-fw fa-pen"></i>
                             </button>
@@ -52,7 +52,7 @@
                                 title="Delete"
                                 data-toggle="modal"
                                 data-target="#delete-category"
-                                wire:click="$emitTo('categories.delete-modal', 'setCategoryId', {{ $category->id }})"
+                                wire:click="$emitTo('categories.delete-modal', 'setCategoryId', {{ $category->kategori_id }})"
                             >
                                 <i class="fa fa-lg fa-fw fa-trash"></i>
                             </button>

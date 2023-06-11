@@ -28,8 +28,8 @@
                     name="new-brand"
                     label="Name"
                     placeholder="Brand Name"
-                    wire:model.defer="supplier.name"
-                    error-key="supplier.name"
+                    wire:model.defer="supplier.supplier_nama"
+                    error-key="supplier.supplier_nama"
                 >
                     <x-slot name="prependSlot">
                         <div class="input-group-text">
@@ -59,8 +59,8 @@
                     label="Address"
                     placeholder="Address"
                     rows="4"
-                    wire:model.defer="supplier.address"
-                    error-key="supplier.address"
+                    wire:model.defer="supplier.alamat"
+                    error-key="supplier.alamat"
                 >
                     <x-slot name="prependSlot">
                         <div class="input-group-text">
@@ -74,8 +74,8 @@
                     name="city"
                     label="City"
                     placeholder="City"
-                    wire:model.defer="supplier.city"
-                    error-key="supplier.city"
+                    wire:model.defer="supplier.kota"
+                    error-key="supplier.kota"
                 >
                     <x-slot name="prependSlot">
                         <div class="input-group-text">
@@ -89,8 +89,8 @@
                     name="phone"
                     label="Phone"
                     placeholder="Phone Number"
-                    wire:model.defer="supplier.phone"
-                    error-key="supplier.phone"
+                    wire:model.defer="supplier.telepon"
+                    error-key="supplier.telepon"
                 >
                     <x-slot name="prependSlot">
                         <div class="input-group-text">

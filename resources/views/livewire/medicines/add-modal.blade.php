@@ -40,29 +40,31 @@
                     </x-slot>
                 </x-adminlte-input>
 
-                <x-adminlte-input-date
+                <x-adminlte-input
                     autocomplete="no_exp"
                     name="no_exp"
                     label="No Exp"
+                    type="date"
                     placeholder="No Exp"
-                    :config="['format' => 'DD/MM/YY']"
                     wire:model.defer="newMedicine.no_exp"
                     error-key="newMedicine.no_exp"
+                    x-data
+                    x-on:click="$el.showPicker()"
                 >
                     <x-slot name="prependSlot">
                         <div class="input-group-text">
                             <i class="fas fa-hourglass"></i>
                         </div>
                     </x-slot>
-                </x-adminlte-input-date>
+                </x-adminlte-input>
 
                 <x-adminlte-input
                     autocomplete="name"
                     name="name"
                     label="Name"
                     placeholder="Name"
-                    wire:model.defer="newMedicine.name"
-                    error-key="newMedicine.name"
+                    wire:model.defer="newMedicine.nama_obat"
+                    error-key="newMedicine.nama_obat"
                 >
                     <x-slot name="prependSlot">
                         <div class="input-group-text">
@@ -76,8 +78,8 @@
                     name="uom"
                     label="Unit of Measurement"
                     placeholder="Unit of Measurement"
-                    wire:model.defer="newMedicine.uom"
-                    error-key="newMedicine.uom"
+                    wire:model.defer="newMedicine.satuan"
+                    error-key="newMedicine.satuan"
                 >
                     <x-slot name="prependSlot">
                         <div class="input-group-text">
@@ -86,27 +88,43 @@
                     </x-slot>
                 </x-adminlte-input>
 
+                <x-adminlte-input
+                    autocomplete="harga"
+                    name="harga"
+                    label="Price"
+                    type="number"
+                    placeholder="Price"
+                    wire:model.defer="newMedicine.harga"
+                    error-key="newMedicine.harga"
+                >
+                    <x-slot name="prependSlot">
+                        <div class="input-group-text">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                    </x-slot>
+                </x-adminlte-input>
+
                 <x-adminlte-select
                     name="category"
                     label="Category"
-                    wire:model.defer="newMedicine.category_id"
-                    error-key="newMedicine.category_id"
+                    wire:model.defer="newMedicine.kategori_id"
+                    error-key="newMedicine.kategori_id"
                 >
                     <option selected disabled>Select Category</option>
                     @foreach ($categories as $category)
-                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        <option value="{{ $category->kategori_id }}">{{ $category->nama_kategori }}</option>
                     @endforeach
                 </x-adminlte-select>
 
                 <x-adminlte-select
                     name="brand"
                     label="Brand"
-                    wire:model.defer="newMedicine.brand_id"
-                    error-key="newMedicine.brand_id"
+                    wire:model.defer="newMedicine.merek_id"
+                    error-key="newMedicine.merek_id"
                 >
                     <option selected disabled>Select Brand</option>
                     @foreach ($brands as $brand)
-                        <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                        <option value="{{ $brand->merek_id }}">{{ $brand->nama_merek }}</option>
                     @endforeach
                 </x-adminlte-select>
     

@@ -25,9 +25,10 @@ class Index extends Component
         $categories = Category::query()
             ->when(strlen($this->search) > 0, fn ($query) =>
                 $query
-                    ->where('id', 'like', '%' . $this->search . '%')
-                    ->orWhere('name', 'like', '%' . $this->search . '%')
+                    ->where('kategori_id', 'like', '%' . $this->search . '%')
+                    ->orWhere('nama_kategori', 'like', '%' . $this->search . '%')
             )
+            ->latest()
             ->paginate(10);
         
         return view('livewire.categories.index', compact('categories'));

@@ -10,10 +10,10 @@ class AddModal extends Component
     public $newCategory;
 
     protected $rules = [
-        'newCategory.name'          => 'required|unique:categories,name',
+        'newCategory.nama_kategori'          => 'required|unique:kategori,nama_kategori',
     ];
     protected $messages = [
-        'newCategory.name.required' => 'The Category Name field is required',
+        'newCategory.nama_kategori.required' => 'The Category Name field is required',
     ];
 
     public function submit()
@@ -21,7 +21,7 @@ class AddModal extends Component
         $validated = $this->validate();
 
         $data = [
-            'name'  => $validated['newCategory']['name'],
+            'nama_kategori'  => $validated['newCategory']['nama_kategori'],
         ];
         
         Category::create($data);

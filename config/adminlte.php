@@ -312,19 +312,32 @@ return [
             'icon' => 'fas fa-home'
         ],
         [
+            'text' => 'Stock',
+            'url'  => 'stocks/request',
+            'icon' => 'fas fa-box',
+            'submenu' => [
+                [
+                    'text' => 'Index',
+                    'url'  => 'stocks'
+                ],
+                [
+                    'text' => 'Request',
+                    'url'  => 'stocks/request',
+                ],
+            ]
+        ],
+        [
+            'text' => 'Pesan',
+            'url'  => 'order',
+            'icon' => 'fas fa-receipt'
+        ],
+        [
+            'header' => 'MANAGEMENT',
+        ],
+        [
             'text' => 'Obat',
             'url'  => 'medicines',
             'icon' => 'fas fa-capsules'
-        ],
-        [
-            'text' => 'Pesan',
-            'url'  => 'order',
-            'icon' => 'fas fa-receipt'
-        ],
-        [
-            'text' => 'Pesan',
-            'url'  => 'order',
-            'icon' => 'fas fa-receipt'
         ],
         [
             'text' => 'Kategori',
@@ -539,7 +552,7 @@ return [
                 [
                     'type' => 'js',
                     'asset' => true,
-                    'location' => asset('vendor/moment/moment.min.js')
+                    'location' => 'vendor/moment/moment.min.js'
                 ]
             ]
         ],
@@ -549,12 +562,12 @@ return [
                 [
                     'type' => 'js',
                     'asset' => true,
-                    'location' => asset('vendor/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')
+                    'location' => 'vendor/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js'
                 ],
                 [
                     'type' => 'css',
                     'asset' => true,
-                    'location' => asset('vendor/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css')
+                    'location' => 'vendor/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css'
                 ]
             ]
         ]

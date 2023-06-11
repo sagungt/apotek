@@ -12,10 +12,10 @@ class EditModal extends Component
     protected $listeners = ['setCategory'];
 
     protected $rules = [
-        'category.name'             => 'required|unique:categories,name',
+        'category.nama_kategori'             => 'required|unique:kategori,nama_kategori',
     ];
     protected $messages = [
-        'category.name.required'    => 'The Category Name field is required',
+        'category.nama_kategori.required'    => 'The Category Name field is required',
     ];
 
     public function setCategory($id)
@@ -28,7 +28,7 @@ class EditModal extends Component
         $validated = $this->validate();
 
         $data = [
-            'name'  => $validated['category']['name'],
+            'nama_kategori'  => $validated['category']['nama_kategori'],
         ];
 
         $this->category->update($data);

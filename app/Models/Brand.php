@@ -9,5 +9,7 @@ class Brand extends Model
 {
     use HasFactory;
 
-    protected $guarded = ['id'];
+    protected $table = 'merek';
+    protected $primaryKey = 'merek_id';
+    protected $guarded = ['merek_id'];
 }

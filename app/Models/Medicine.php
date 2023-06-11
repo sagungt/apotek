@@ -9,15 +9,17 @@ class Medicine extends Model
 {
     use HasFactory;
     
-    protected $guarded = ['id'];
+    protected $table = 'obat';
+    protected $primaryKey = 'obat_id';
+    protected $guarded = ['obat_id'];
 
     public function category()
     {
-        return $this->belongsTo(Category::class, 'category_id');
+        return $this->belongsTo(Category::class, 'kategori_id');
     }
 
     public function brand() {
-        return $this->belongsTo(Brand::class, 'brand_id');
+        return $this->belongsTo(Brand::class, 'merek_id');
     }
 
     public function attachments()

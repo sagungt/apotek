@@ -33,11 +33,11 @@ class DatabaseSeeder extends Seeder
 
         for ($i = 1; $i <= 10; $i++) {
             \App\Models\Category::create([
-                'name' => 'Category ' . $i
+                'nama_kategori' => 'Category ' . $i
             ]);
 
             \App\Models\Brand::create([
-                'name' => 'Brand ' . $i
+                'nama_merek' => 'Brand ' . $i
             ]);
         }
     }

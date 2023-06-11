@@ -26,16 +26,16 @@ class Index extends Component
             ->with(['category', 'brand'])
             ->when(strlen($this->search) > 0, fn ($query) =>
                 $query
-                    ->where('id', 'like', '%' . $this->search . '%')
+                    ->where('obat_id', 'like', '%' . $this->search . '%')
                     ->orWhere('no_batch', 'like', '%' . $this->search . '%')
                     ->orWhere('no_exp', 'like', '%' . $this->search . '%')
-                    ->orWhere('name', 'like', '%' . $this->search . '%')
-                    ->orWhere('price', 'like', '%' . $this->search . '%')
+                    ->orWhere('nama_obat', 'like', '%' . $this->search . '%')
+                    ->orWhere('harga', 'like', '%' . $this->search . '%')
                     ->orWhereHas('category', fn ($query) =>
-                        $query->where('name', 'like', '%' . $this->search . '%')
+                        $query->where('nama_kategori', 'like', '%' . $this->search . '%')
                     )
                     ->orWhereHas('brand', fn ($query) =>
-                        $query->where('name', 'like', '%' . $this->search . '%')
+                        $query->where('nama_merek', 'like', '%' . $this->search . '%')
                     )
             )
             ->paginate(10);

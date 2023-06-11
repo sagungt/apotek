@@ -9,7 +9,9 @@ class Category extends Model
 {
     use HasFactory;
 
-    protected $guarded = ['id'];
+    protected $table = 'kategori';
+    protected $primaryKey = 'kategori_id';
+    protected $guarded = ['kategori_id'];
 
     public function medicines()
     {

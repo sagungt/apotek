@@ -28,8 +28,8 @@
                     name="category"
                     label="Name"
                     placeholder="Category Name"
-                    wire:model.defer="category.name"
-                    error-key="category.name"
+                    wire:model.defer="category.nama_kategori"
+                    error-key="category.nama_kategori"
                 >
                     <x-slot name="prependSlot">
                         <div class="input-group-text">

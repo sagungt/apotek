@@ -10,10 +10,10 @@ class AddModal extends Component
     public $newBrand;
 
     protected $rules = [
-        'newBrand.name'          => 'required|unique:brands,name',
+        'newBrand.nama_merek'          => 'required|unique:merek,nama_merek',
     ];
     protected $messages = [
-        'newBrand.name.required' => 'The Brand Name field is required',
+        'newBrand.nama_merek.required' => 'The Brand Name field is required',
     ];
 
     public function submit()
@@ -21,7 +21,7 @@ class AddModal extends Component
         $validated = $this->validate();
 
         $data = [
-            'name'  => $validated['newBrand']['name'],
+            'nama_merek'  => $validated['newBrand']['nama_merek'],
         ];
         
         Brand::create($data);

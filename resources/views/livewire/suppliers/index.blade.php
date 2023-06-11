@@ -41,12 +41,12 @@
             <tbody>
                 @forelse ($suppliers as $supplier)
                     <tr scope="row">
-                        <td>{{ $supplier->id }}</td>
-                        <td>{{ $supplier->name ?? '-' }}</td>
+                        <td>{{ $supplier->supplier_id }}</td>
+                        <td>{{ $supplier->supplier_nama ?? '-' }}</td>
                         <td>{{ $supplier->npwp ?? '-' }}</td>
-                        <td>{{ $supplier->address ?? '-' }}</td>
-                        <td>{{ $supplier->city ?? '-' }}</td>
-                        <td>{{ $supplier->phone ?? '-' }}</td>
+                        <td>{{ $supplier->alamat ?? '-' }}</td>
+                        <td>{{ $supplier->kota ?? '-' }}</td>
+                        <td>{{ $supplier->telepon ?? '-' }}</td>
                         <td>{{ $supplier->fax ?? '-' }}</td>
                         <td>{{ $supplier->email ?? '-' }}</td>
                         <td>
@@ -55,7 +55,7 @@
                                 title="Edit"
                                 data-toggle="modal"
                                 data-target="#edit-supplier"
-                                wire:click="$emitTo('suppliers.edit-modal', 'setSupplier', {{ $supplier->id }})"
+                                wire:click="$emitTo('suppliers.edit-modal', 'setSupplier', {{ $supplier->supplier_id }})"
                             >
                                 <i class="fa fa-lg fa-fw fa-pen"></i>
                             </button>
@@ -64,7 +64,7 @@
                                 title="Delete"
                                 data-toggle="modal"
                                 data-target="#delete-supplier"
-                                wire:click="$emitTo('suppliers.delete-modal', 'setSupplierId', {{ $supplier->id }})"
+                                wire:click="$emitTo('suppliers.delete-modal', 'setSupplierId', {{ $supplier->supplier_id }})"
                             >
                                 <i class="fa fa-lg fa-fw fa-trash"></i>
                             </button>

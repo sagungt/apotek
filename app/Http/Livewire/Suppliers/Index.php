@@ -25,12 +25,12 @@ class Index extends Component
         $suppliers = Supplier::query()
             ->when(strlen($this->search) > 0, fn ($query) =>
                 $query
-                    ->where('id', 'like', '%' . $this->search . '%')
-                    ->orWhere('name', 'like', '%' . $this->search . '%')
+                    ->where('supplier_id', 'like', '%' . $this->search . '%')
+                    ->orWhere('supplier_nama', 'like', '%' . $this->search . '%')
                     ->orWhere('npwp', 'like', '%' . $this->search . '%')
-                    ->orWhere('address', 'like', '%' . $this->search . '%')
-                    ->orWhere('city', 'like', '%' . $this->search . '%')
-                    ->orWhere('phone', 'like', '%' . $this->search . '%')
+                    ->orWhere('alamat', 'like', '%' . $this->search . '%')
+                    ->orWhere('kota', 'like', '%' . $this->search . '%')
+                    ->orWhere('telepon', 'like', '%' . $this->search . '%')
                     ->orWhere('fax', 'like', '%' . $this->search . '%')
                     ->orWhere('email', 'like', '%' . $this->search . '%')
             )

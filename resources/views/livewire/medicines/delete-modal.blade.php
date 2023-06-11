@@ -8,7 +8,7 @@
         v-centered
         wire:ignore.self
         x-data
-        @close-modal-delete-medicine.window="$('#medicine-medicine').modal('hide')"
+        @close-modal-delete-medicine.window="$('#delete-medicine').modal('hide')"
     >
         @if (session()->has('successDelete'))
             <x-adminlte-alert theme="danger" title="Danger">
