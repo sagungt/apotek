@@ -13,6 +13,7 @@ class EditModal extends Component
 
     protected $rules = [
         'category.nama_kategori'             => 'required|unique:kategori,nama_kategori',
+        'category.deskripsi'                 => 'nullable',
     ];
     protected $messages = [
         'category.nama_kategori.required'    => 'The Category Name field is required',
@@ -27,11 +28,7 @@ class EditModal extends Component
     {
         $validated = $this->validate();
 
-        $data = [
-            'nama_kategori'  => $validated['category']['nama_kategori'],
-        ];
-
-        $this->category->update($data);
+        $this->category->update([...$validated['category']]);
 
         $this->emitUp('reset');
 

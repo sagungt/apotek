@@ -13,8 +13,6 @@ return new class extends Migration
     {
         Schema::create('obat', function (Blueprint $table) {
             $table->id('obat_id');
-            $table->string('no_batch');
-            $table->date('no_exp');
             $table->string('nama_obat');
             $table->string('satuan');
             $table->bigInteger('harga')->default(0);
@@ -24,6 +22,7 @@ return new class extends Migration
             $table->foreignId('merek_id')
                 ->references('merek_id')
                 ->on('merek');
+            $table->string('tipe');
             $table->timestamps();
         });
     }

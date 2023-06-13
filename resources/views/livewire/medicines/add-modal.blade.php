@@ -24,39 +24,6 @@
                         {{ session()->get('errorEdit') }}
                     </x-adminlte-alert>
                 @endif
-    
-                <x-adminlte-input
-                    autocomplete="no_batch"
-                    name="no_batch"
-                    label="No Batch"
-                    placeholder="No Batch"
-                    wire:model.defer="newMedicine.no_batch"
-                    error-key="newMedicine.no_batch"
-                >
-                    <x-slot name="prependSlot">
-                        <div class="input-group-text">
-                            <i class="fas fa-clock"></i>
-                        </div>
-                    </x-slot>
-                </x-adminlte-input>
-
-                <x-adminlte-input
-                    autocomplete="no_exp"
-                    name="no_exp"
-                    label="No Exp"
-                    type="date"
-                    placeholder="No Exp"
-                    wire:model.defer="newMedicine.no_exp"
-                    error-key="newMedicine.no_exp"
-                    x-data
-                    x-on:click="$el.showPicker()"
-                >
-                    <x-slot name="prependSlot">
-                        <div class="input-group-text">
-                            <i class="fas fa-hourglass"></i>
-                        </div>
-                    </x-slot>
-                </x-adminlte-input>
 
                 <x-adminlte-input
                     autocomplete="name"
@@ -100,6 +67,21 @@
                     <x-slot name="prependSlot">
                         <div class="input-group-text">
                             <i class="fas fa-dollar-sign"></i>
+                        </div>
+                    </x-slot>
+                </x-adminlte-input>
+
+                <x-adminlte-input
+                    autocomplete="tipe_obat"
+                    name="tipe_obat"
+                    label="Tipe Obat"
+                    placeholder="Tipe Obat"
+                    wire:model.defer="newMedicine.tipe"
+                    error-key="newMedicine.tipe"
+                >
+                    <x-slot name="prependSlot">
+                        <div class="input-group-text">
+                            <i class="fas fa-capsules"></i>
                         </div>
                     </x-slot>
                 </x-adminlte-input>

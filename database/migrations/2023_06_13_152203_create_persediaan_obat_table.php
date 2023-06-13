@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('inventories', function (Blueprint $table) {
+        Schema::create('persediaan_obat', function (Blueprint $table) {
             $table->id();
-            $table->string('type');
-            $table->unsignedBigInteger('type_id');
             $table->foreignId('obat_id')
                 ->references('obat_id')
                 ->on('obat');
-            $table->integer('kuantitas');
-            $table->bigInteger('total');
+            $table->integer('stok');
+            $table->bigInteger('harga_jual');
+            $table->string('no_batch');
+            $table->date('no_exp');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('inventories');
+        Schema::dropIfExists('persediaan_obat');
     }
 };

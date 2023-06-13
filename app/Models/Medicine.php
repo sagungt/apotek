@@ -26,4 +26,9 @@ class Medicine extends Model
     {
         return $this->morphMany(Attachment::class, 'attachable');
     }
+
+    public function stocks()
+    {
+        return $this->hasMany(Stock::class, 'id', 'obat_id');
+    }
 }

@@ -1,5 +1,5 @@
 <div>
-    <a href="{{ route('stocks.request') }}">
+    <a href="{{ route('orders.request') }}">
         <x-adminlte-button
             class="btn mb-3"
             type="button"
@@ -28,17 +28,23 @@
             <thead>
                 <tr>
                     <th scope="col">ID</th>
-                    <th scope="col">Name</th>
+                    <th scope="col">No Faktur</th>
+                    <th scope="col">Tanggal</th>
+                    <th scope="col">Total</th>
+                    <th scope="col">Status</th>
                     <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody>
-                @forelse ($brands as $brand)
+                @forelse ($purchases as $purchase)
                     <tr scope="row">
-                        <td>{{ $brand->id }}</td>
-                        <td>{{ $brand->name }}</td>
+                        <td>{{ $purchase->pembelian_id }}</td>
+                        <td>{{ $purchase->no_faktur }}</td>
+                        <td>{{ $purchase->taggal }}</td>
+                        <td>{{ $purchase->total }}</td>
+                        <td>{{ $purchase->status }}</td>
                         <td>
-                            <button
+                            {{-- <button
                                 class="btn btn-xs btn-default text-primary mx-1"
                                 title="Edit"
                                 data-toggle="modal"
@@ -55,17 +61,26 @@
                                 wire:click="$emitTo('brands.delete-modal', 'setBrandId', {{ $brand->id }})"
                             >
                                 <i class="fa fa-lg fa-fw fa-trash"></i>
+                            </button> --}}
+                            <button
+                                class="btn btn-xs btn-default text-primary mx-1"
+                                title="Show"
+                                data-toggle="modal"
+                                data-target="#show-request"
+                                wire:click="$emitTo('stocks.show-modal', 'setPurchaseId', {{ $purchase->pembelian_id }})"
+                            >
+                                <i class="fa fa-lg fa-fw fa-eye"></i>
                             </button>
                         </td>
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="3" class="text-center">No Records found ...</td>
+                        <td colspan="6" class="text-center">No Records found ...</td>
                     </tr>
                 @endforelse
             </tbody>
         </table>
     </div>
 
-    {{ $stocks->links() }}
+    {{ $purchases->links() }}
 </div>

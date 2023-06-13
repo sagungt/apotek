@@ -15,21 +15,18 @@ class EditModal extends Component
 
     protected $listeners = ['setMedicine'];
     protected $rules = [
-        'medicine.no_batch'    => 'required',
-        'medicine.no_exp'      => 'required|date',
         'medicine.nama_obat'   => 'required',
         'medicine.satuan'      => 'required',
         'medicine.harga'       => 'required|numeric',
+        'medicine.tipe'        => 'required',
         'medicine.kategori_id' => 'required|exists:kategori,kategori_id',
         'medicine.merek_id'    => 'required|exists:merek,merek_id',
     ];
     protected $messages = [
-        'medicine.no_batch.required'    => 'The No Batch field is required',
-        'medicine.no_exp.required'      => 'The No Exp field is required',
-        'medicine.no_exp.date'          => 'Invalid Date Format',
         'medicine.nama_obat.required'   => 'The Medicine Name field is required',
         'medicine.satuan.required'      => 'The Medicine Unit of Measurement field is required',
         'medicine.harga.required'       => 'The Medicine Price field is required',
+        'medicine.tipe.required'       => 'The Medicine Type field is required',
         'medicine.kategori_id.required' => 'The Medicine Category field is required',
         'medicine.merek_id.required'    => 'The Medicine Brand field is required',
     ];

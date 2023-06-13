@@ -28,24 +28,23 @@
             <thead>
                 <tr>
                     <th scope="col">ID</th>
-                    <th scope="col">No Batch</th>
-                    <th scope="col">No Exp</th>
                     <th scope="col">Nama Obat</th>
                     <th scope="col">Satuan</th>
                     <th scope="col">Harga</th>
+                    <th scope="col">Tipe</th>
                     <th scope="col">Kategori</th>
                     <th scope="col">Merek</th>
+                    <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody>
                 @forelse ($medicines as $medicine)
                     <tr scope="row">
                         <td>{{ $medicine->obat_id }}</td>
-                        <td>{{ $medicine->no_batch ?? '-' }}</td>
-                        <td>{{ $medicine->no_exp ?? '-' }}</td>
                         <td>{{ $medicine->nama_obat ?? '-' }}</td>
                         <td>{{ $medicine->satuan ?? '-' }}</td>
                         <td>{{ $medicine->harga ?? '-' }}</td>
+                        <td>{{ $medicine->tipe ?? '-' }}</td>
                         <td>{{ $medicine->category?->nama_kategori ?? '-' }}</td>
                         <td>{{ $medicine->brand?->nama_merek ?? '-' }}</td>
                         <td>
@@ -71,7 +70,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="9" class="text-center">No Records found ...</td>
+                        <td colspan="8" class="text-center">No Records found ...</td>
                     </tr>
                 @endforelse
             </tbody>

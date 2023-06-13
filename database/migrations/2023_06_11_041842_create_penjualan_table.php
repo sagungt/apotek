@@ -16,6 +16,9 @@ return new class extends Migration
             $table->string('no_faktur')->nullable();
             $table->date('tanggal')->nullable();
             $table->bigInteger('jumlah')->nullable();
+            $table->string('tipe');
+            $table->string('nama_dokter')->nullable();
+            $table->string('nama_pelanggan')->nullable();
             $table->timestamps();
         });
     }

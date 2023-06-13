@@ -27,6 +27,7 @@ class Index extends Component
                 $query
                     ->where('kategori_id', 'like', '%' . $this->search . '%')
                     ->orWhere('nama_kategori', 'like', '%' . $this->search . '%')
+                    ->orWhere('deskripsi', 'like', '%' . $this->search . '%')
             )
             ->latest()
             ->paginate(10);

@@ -38,6 +38,21 @@
                     </x-slot>
                 </x-adminlte-input>
 
+                <x-adminlte-textarea
+                    autocomplete="deskripsi"
+                    name="deskripsi"
+                    label="Deskripsi"
+                    placeholder="Deskripsi"
+                    wire:model.defer="category.deskripsi"
+                    error-key="category.deskripsi"
+                >
+                    <x-slot name="prependSlot">
+                        <div class="input-group-text">
+                            <i class="fas fa-info"></i>
+                        </div>
+                    </x-slot>
+                </x-adminlte-textarea>
+
                 <x-adminlte-button
                     class="btn-flat"
                     type="submit"

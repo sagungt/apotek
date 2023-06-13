@@ -312,17 +312,17 @@ return [
             'icon' => 'fas fa-home'
         ],
         [
-            'text' => 'Stock',
-            'url'  => 'stocks/request',
+            'text' => 'Order',
+            'url'  => 'orders/request',
             'icon' => 'fas fa-box',
             'submenu' => [
                 [
                     'text' => 'Index',
-                    'url'  => 'stocks'
+                    'url'  => 'orders'
                 ],
                 [
                     'text' => 'Request',
-                    'url'  => 'stocks/request',
+                    'url'  => 'orders/request',
                 ],
             ]
         ],

@@ -7,5 +7,5 @@
 @stop
 
 @section('content')
-    <livewire:stocks.request />
+    <livewire:orders.request />
 @stop

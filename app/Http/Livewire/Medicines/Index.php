@@ -27,10 +27,10 @@ class Index extends Component
             ->when(strlen($this->search) > 0, fn ($query) =>
                 $query
                     ->where('obat_id', 'like', '%' . $this->search . '%')
-                    ->orWhere('no_batch', 'like', '%' . $this->search . '%')
-                    ->orWhere('no_exp', 'like', '%' . $this->search . '%')
                     ->orWhere('nama_obat', 'like', '%' . $this->search . '%')
                     ->orWhere('harga', 'like', '%' . $this->search . '%')
+                    ->orWhere('satuan', 'like', '%' . $this->search . '%')
+                    ->orWhere('tipe', 'like', '%' . $this->search . '%')
                     ->orWhereHas('category', fn ($query) =>
                         $query->where('nama_kategori', 'like', '%' . $this->search . '%')
                     )

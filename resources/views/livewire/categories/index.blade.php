@@ -29,6 +29,7 @@
                 <tr>
                     <th scope="col">ID</th>
                     <th scope="col">Nama Kategori</th>
+                    <th scope="col" class="text-center">Deskripsi</th>
                     <th scope="col">Action</th>
                 </tr>
             </thead>
@@ -37,6 +38,7 @@
                     <tr scope="row">
                         <td>{{ $category->kategori_id }}</td>
                         <td>{{ $category->nama_kategori }}</td>
+                        <td><p class="text-center">{{ $category->deskripsi ?? '-' }}</p></td>
                         <td>
                             <button
                                 class="btn btn-xs btn-default text-primary mx-1"

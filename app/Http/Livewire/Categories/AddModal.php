@@ -11,20 +11,18 @@ class AddModal extends Component
 
     protected $rules = [
         'newCategory.nama_kategori'          => 'required|unique:kategori,nama_kategori',
+        'newCategory.deskripsi'              => 'nullable',
     ];
     protected $messages = [
         'newCategory.nama_kategori.required' => 'The Category Name field is required',
+        'newCategory.deskripsi.required'     => 'The Category Description field is required',
     ];
 
     public function submit()
     {
         $validated = $this->validate();
 
-        $data = [
-            'nama_kategori'  => $validated['newCategory']['nama_kategori'],
-        ];
-        
-        Category::create($data);
+        Category::create([...$validated['newCategory']]);
 
         $this->dispatchBrowserEvent('close-modal-add-category');
         $this->emitUp('reset');

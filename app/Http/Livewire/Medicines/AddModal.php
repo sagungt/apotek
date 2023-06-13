@@ -14,21 +14,18 @@ class AddModal extends Component
     public $brands;
 
     protected $rules = [
-        'newMedicine.no_batch'    => 'required',
-        'newMedicine.no_exp'      => 'required|date',
         'newMedicine.nama_obat'   => 'required',
         'newMedicine.satuan'      => 'required',
         'newMedicine.harga'       => 'required|numeric',
+        'newMedicine.tipe'        => 'required',
         'newMedicine.kategori_id' => 'required|exists:kategori,kategori_id',
         'newMedicine.merek_id'    => 'required|exists:merek,merek_id',
     ];
     protected $messages = [
-        'newMedicine.no_batch.required'    => 'The No Batch field is required',
-        'newMedicine.no_exp.required'      => 'The No Exp field is required',
-        'newMedicine.no_exp.date'          => 'Invalid Date Format',
         'newMedicine.nama_obat.required'   => 'The Medicine Name field is required',
         'newMedicine.satuan.required'      => 'The Medicine Unit of Measurement field is required',
         'newMedicine.harga.required'       => 'The Medicine Price field is required',
+        'newMedicine.tipe.required'       => 'The Medicine Type field is required',
         'newMedicine.kategori_id.required' => 'The Medicine Category field is required',
         'newMedicine.merek_id.required'    => 'The Medicine Brand field is required',
     ];
