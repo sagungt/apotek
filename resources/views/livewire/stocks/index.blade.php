@@ -39,35 +39,31 @@
                 @forelse ($purchases as $purchase)
                     <tr scope="row">
                         <td>{{ $purchase->pembelian_id }}</td>
-                        <td>{{ $purchase->no_faktur }}</td>
-                        <td>{{ $purchase->taggal }}</td>
-                        <td>{{ $purchase->total }}</td>
+                        <td>{{ $purchase->no_faktur ?? 'Waiting for payment' }}</td>
+                        <td>{{ $purchase->tanggal }}</td>
+                        <td>{{ number_format($purchase->total) }}</td>
                         <td>{{ $purchase->status }}</td>
                         <td>
-                            {{-- <button
-                                class="btn btn-xs btn-default text-primary mx-1"
-                                title="Edit"
-                                data-toggle="modal"
-                                data-target="#edit-brand"
-                                wire:click="$emitTo('brands.edit-modal', 'setBrand', {{ $brand->id }})"
-                            >
-                                <i class="fa fa-lg fa-fw fa-pen"></i>
-                            </button>
+                            @can('gudang')
+                                @if ($purchase->status === 'Purchasing')
+                                    
+                                @endif
+                            @endcan
                             <button
-                                class="btn btn-xs btn-default text-danger mx-1"
-                                title="Delete"
+                                class="btn btn-xs btn-default text-success mx-1"
+                                title="Confirm"
                                 data-toggle="modal"
-                                data-target="#delete-brand"
-                                wire:click="$emitTo('brands.delete-modal', 'setBrandId', {{ $brand->id }})"
+                                data-target="#confirm-modal"
+                                wire:click="$emitTo('stocks.confirm-modal', 'setPurchase', {{ $purchase->pembelian_id }})"
                             >
-                                <i class="fa fa-lg fa-fw fa-trash"></i>
-                            </button> --}}
+                                <i class="fa fa-lg fa-fw fa-check"></i>
+                            </button>
                             <button
                                 class="btn btn-xs btn-default text-primary mx-1"
                                 title="Show"
                                 data-toggle="modal"
-                                data-target="#show-request"
-                                wire:click="$emitTo('stocks.show-modal', 'setPurchaseId', {{ $purchase->pembelian_id }})"
+                                data-target="#detail-order"
+                                wire:click="$emitTo('stocks.detail-modal', 'setPurchase', {{ $purchase->pembelian_id }})"
                             >
                                 <i class="fa fa-lg fa-fw fa-eye"></i>
                             </button>
@@ -83,4 +79,8 @@
     </div>
 
     {{ $purchases->links() }}
+
+    <livewire:stocks.detail-modal />
+
+    <livewire:stocks.confirm-modal />
 </div>

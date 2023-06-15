@@ -13,6 +13,11 @@ class OrderList extends Model
 
     public function flow()
     {
-        $this->morphTo();
+        return $this->morphTo();
+    }
+
+    public function medicine()
+    {
+        return $this->belongsTo(Medicine::class, 'obat_id');
     }
 }

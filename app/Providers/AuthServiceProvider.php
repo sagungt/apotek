@@ -27,9 +27,9 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Gate::define('super-admin', fn (User $user) => $user->role == 1);
-        Gate::define('admin', fn (User $user) => $user->role == 2 || $user->role == 1);
-        Gate::define('user', fn (User $user) => $user->role == 3);
+        Gate::define('pemilik', fn (User $user) => $user->role == 1);
+        Gate::define('gudang', fn (User $user) => $user->role == 2);
+        Gate::define('apoteker', fn (User $user) => $user->role == 3);
 
         // Auth::viaRequest('with-shared-password', function (Request $request) {
         //     $user = User::where('username', $request->only('username'))->first();

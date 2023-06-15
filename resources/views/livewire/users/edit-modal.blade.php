@@ -45,7 +45,7 @@
                     error-key="user.role"
                 >
                     <option selected disabled>Select Role</option>
-                    @can('super-admin')
+                    @can('pemilik')
                         <option value="1">Pemilik</option>
                     @endcan
                     <option value="2">Gudang</option>

@@ -68,7 +68,7 @@
                         </td>
                         <td>
                             @unless ($user->role === 1)
-                                @can('admin')
+                                @can(['gudang', 'pemilik'])
                                     <button
                                         class="btn btn-xs btn-default text-primary mx-1"
                                         title="Edit"

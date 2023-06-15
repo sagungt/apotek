@@ -33,7 +33,7 @@ class EditModal extends Component
     {
         $validated = $this->validate();
 
-        if (!Gate::allows('super-admin') && $validated['user']['role'] == 1) {
+        if (!Gate::allows('pemilik') && $validated['user']['role'] == 1) {
             return session()->flash('errorEdit', 'Not Allowed');
         }
 

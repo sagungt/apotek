@@ -20,6 +20,7 @@ return new class extends Migration
             $table->bigInteger('harga_jual');
             $table->string('no_batch');
             $table->date('no_exp');
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }

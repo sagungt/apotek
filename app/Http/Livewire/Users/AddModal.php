@@ -27,7 +27,7 @@ class AddModal extends Component
     {
         $validated = $this->validate();
 
-        if (!Gate::allows('super-admin') && $validated['newUser']['role'] == 1) {
+        if (!Gate::allows('pemilik') && $validated['newUser']['role'] == 1) {
             return session()->flash('errorAdd', 'Not Allowed');
         }
 

@@ -92,7 +92,7 @@
                     wire:model.defer="newMedicine.kategori_id"
                     error-key="newMedicine.kategori_id"
                 >
-                    <option selected disabled>Select Category</option>
+                    <option selected>Select Category</option>
                     @foreach ($categories as $category)
                         <option value="{{ $category->kategori_id }}">{{ $category->nama_kategori }}</option>
                     @endforeach
@@ -104,7 +104,7 @@
                     wire:model.defer="newMedicine.merek_id"
                     error-key="newMedicine.merek_id"
                 >
-                    <option selected disabled>Select Brand</option>
+                    <option selected>Select Brand</option>
                     @foreach ($brands as $brand)
                         <option value="{{ $brand->merek_id }}">{{ $brand->nama_merek }}</option>
                     @endforeach

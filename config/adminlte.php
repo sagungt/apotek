@@ -327,9 +327,9 @@ return [
             ]
         ],
         [
-            'text' => 'Pesan',
-            'url'  => 'order',
-            'icon' => 'fas fa-receipt'
+            'text' => 'Jual',
+            'url'  => 'sell',
+            'icon' => 'fas fa-dollar-sign',
         ],
         [
             'header' => 'MANAGEMENT',
@@ -365,16 +365,16 @@ return [
         //     'url'  => 'admin/settings',
         //     'icon' => 'fas fa-fw fa-lock',
         // ],
-        [
-            'header' => 'USER MANAGEMENT',
-            'can' => ['super-admin', 'admin']
-        ],
-        [
-            'text' => 'Users',
-            'url'  => 'admin/users',
-            'icon' => 'fas fa-fw fa-users',
-            'can' => ['super-admin', 'admin'],
-        ],
+        // [
+        //     'header' => 'USER MANAGEMENT',
+        //     'can' => ['pemilik']
+        // ],
+        // [
+        //     'text' => 'Users',
+        //     'url'  => 'admin/users',
+        //     'icon' => 'fas fa-fw fa-users',
+        //     'can' => ['pemilik'],
+        // ],
         // [
         //     'text'    => 'multilevel',
         //     'icon'    => 'fas fa-fw fa-share',

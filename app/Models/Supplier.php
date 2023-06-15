@@ -12,4 +12,9 @@ class Supplier extends Model
     protected $table = 'supplier';
     protected $primaryKey = 'supplier_id';
     protected $guarded = ['supplier_id'];
+
+    public function purchases()
+    {
+        return $this->hasMany(Purchase::class, 'supplier_id');
+    }
 }

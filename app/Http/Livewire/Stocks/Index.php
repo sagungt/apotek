@@ -10,6 +10,13 @@ class Index extends Component
 {
     use WithPagination;
 
+    protected $listeners = ['reset' => 'refresh'];
+
+    public function refresh()
+    {
+        $this->resetPage();
+    }
+
     public function render()
     {
         $purchases = Purchase::query()

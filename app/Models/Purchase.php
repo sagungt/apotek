@@ -22,4 +22,9 @@ class Purchase extends Model
     {
         return $this->morphMany(Attachment::class, 'attachable');
     }
+
+    public function supplier()
+    {
+        return $this->belongsTo(Supplier::class, 'supplier_id');
+    }
 }
