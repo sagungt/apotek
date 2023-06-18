@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('attachments', function (Blueprint $table) {
             $table->id();
-            $table->string('type');
+            $table->string('tag');
             $table->string('attachment_name');
             $table->string('attachment');
             $table->string('attachable_id');

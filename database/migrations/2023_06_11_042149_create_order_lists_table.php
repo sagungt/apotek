@@ -14,9 +14,7 @@ return new class extends Migration
         Schema::create('order_lists', function (Blueprint $table) {
             $table->id();
             $table->morphs('flow');
-            $table->foreignId('obat_id')
-                ->references('obat_id')
-                ->on('obat');
+            $table->morphs('medicine');
             $table->integer('kuantitas');
             $table->bigInteger('total');
             $table->string('status')->nullable();

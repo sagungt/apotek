@@ -15,4 +15,24 @@ class OrderController extends Controller
     {
         return view('orders.request');
     }
+
+    public function sales()
+    {
+        return view('orders.sales');
+    }
+
+    public function sell()
+    {
+        return view('orders.sell');
+    }
+
+    public function salesHistory()
+    {
+        return view('history.sales');
+    }
+
+    public function purchasesHistory()
+    {
+        return view('history.purchases');
+    }
 }

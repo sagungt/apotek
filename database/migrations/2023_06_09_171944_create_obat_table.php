@@ -22,7 +22,7 @@ return new class extends Migration
             $table->foreignId('merek_id')
                 ->references('merek_id')
                 ->on('merek');
-            $table->string('tipe');
+            $table->string('jenis');
             $table->timestamps();
         });
     }

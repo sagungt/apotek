@@ -72,12 +72,12 @@
                 </x-adminlte-input>
 
                 <x-adminlte-input
-                    autocomplete="tipe_obat"
-                    name="tipe_obat"
-                    label="Tipe Obat"
-                    placeholder="Tipe Obat"
-                    wire:model.defer="newMedicine.tipe"
-                    error-key="newMedicine.tipe"
+                    autocomplete="jenis_obat"
+                    name="jenis_obat"
+                    label="Jenis Obat"
+                    placeholder="Jenis Obat"
+                    wire:model.defer="newMedicine.jenis"
+                    error-key="newMedicine.jenis"
                 >
                     <x-slot name="prependSlot">
                         <div class="input-group-text">

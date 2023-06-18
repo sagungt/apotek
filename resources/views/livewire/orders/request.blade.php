@@ -150,6 +150,7 @@
         <hr>
 
         <x-adminlte-button
+            :disabled="sizeof($orders) === 0"
             class="btn btn-lg align-self-end"
             type="button"
             label="Order"

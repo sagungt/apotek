@@ -30,7 +30,7 @@ class Index extends Component
                     ->orWhere('nama_obat', 'like', '%' . $this->search . '%')
                     ->orWhere('harga', 'like', '%' . $this->search . '%')
                     ->orWhere('satuan', 'like', '%' . $this->search . '%')
-                    ->orWhere('tipe', 'like', '%' . $this->search . '%')
+                    ->orWhere('jenis', 'like', '%' . $this->search . '%')
                     ->orWhereHas('category', fn ($query) =>
                         $query->where('nama_kategori', 'like', '%' . $this->search . '%')
                     )

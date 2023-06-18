@@ -3,9 +3,9 @@
 @section('title', 'Stocks')
 
 @section('content_header')
-    <h1>Stocks</h1>
+    <h1>Pembelian</h1>
 @stop
 
 @section('content')
-    <livewire:stocks.index />
+    <livewire:stocks.index :is-history="false" />
 @stop

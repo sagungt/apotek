@@ -5,6 +5,8 @@ namespace App\Providers;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use JeroenNoten\LaravelAdminLte\Events\BuildingMenu;
 
@@ -27,12 +29,28 @@ class EventServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Event::listen(BuildingMenu::class, function (BuildingMenu $event) {
-            // Add some items to the menu...
-            $event->menu->add('MAIN NAVIGATION');
-            $event->menu->add([
-                'text' => 'Blog',
-                'url' => 'admin/blog',
-                'label' => \App\Models\User::query()->count()
+            $threeMonthFromNow = Carbon::now()->addMonths(3);
+            $role = auth()->user()->role;
+            switch ($role) {
+                case 2:
+                    $almostExpired = DB::table('persediaan_obat')
+                        ->whereDate('no_exp', '>=', Carbon::now())
+                        ->whereDate('no_exp', '<=', $threeMonthFromNow)
+                        ->count();
+                    break;
+                
+                default:
+                    $almostExpired = DB::table('persediaan_obat')
+                        ->where('status', '=', 'Almost Expired')
+                        ->count();
+                    break;
+            }
+            $event->menu->addAfter('home', [
+                'text' => 'Expiry',
+                'url' => 'stock/expiry',
+                'can' => ['apoteker', 'gudang'],
+                'label' => $almostExpired,
+                'icon' => 'fas fa-hourglass-half'
             ]);
         });
     }

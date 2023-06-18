@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('penjualan', function (Blueprint $table) {
             $table->id('penjualan_id');
-            $table->string('no_faktur')->nullable();
+            $table->string('no_faktur')->unique()->nullable();
             $table->date('tanggal')->nullable();
             $table->bigInteger('jumlah')->nullable();
             $table->string('tipe');

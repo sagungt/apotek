@@ -18,6 +18,6 @@ class OrderList extends Model
 
     public function medicine()
     {
-        return $this->belongsTo(Medicine::class, 'obat_id');
+        return $this->morphTo();
     }
 }

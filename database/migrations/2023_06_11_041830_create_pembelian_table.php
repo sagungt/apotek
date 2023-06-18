@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('pembelian', function (Blueprint $table) {
             $table->id('pembelian_id');
-            $table->string('no_faktur')->nullable();
+            $table->string('no_faktur')->unique()->nullable();
             $table->date('tanggal')->nullable();
             $table->bigInteger('total')->default(0);
             $table->string('status')->nullable();

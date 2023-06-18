@@ -80,6 +80,23 @@
                             </div>
                         </x-slot>
                     </x-adminlte-textarea>
+
+                    {{-- @if ($purchase?->status === 'Purchasing')
+                        <x-adminlte-input-file
+                            name="bukti"
+                            id="bukti"
+                            label="Bukti (jika ada)"
+                            placeholder="Choose a file..."
+                            wire:model="attachment"
+                            error-key="attachment"
+                        >
+                            <x-slot name="prependSlot">
+                                <div class="input-group-text">
+                                    <i class="fas fa-upload"></i>
+                                </div>
+                            </x-slot>
+                        </x-adminlte-input-file>
+                    @endif --}}
                 </div>
 
                 <div class="my-2 p-2">

@@ -1,11 +1,11 @@
 @extends('adminlte::page')
 
-@section('title', 'Dashboard')
+@section('title', 'Jual')
 
 @section('content_header')
-    <h1>Dashboard</h1>
+    <h1>Jual</h1>
 @stop
 
 @section('content')
-    <livewire:home />
+    <livewire:stocks.sell />
 @stop

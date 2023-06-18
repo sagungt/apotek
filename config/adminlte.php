@@ -307,13 +307,13 @@ return [
             'text' => 'Search',
         ],
         [
+            'key' => 'home',
             'text' => 'Home',
             'url'  => 'home',
             'icon' => 'fas fa-home'
         ],
         [
-            'text' => 'Order',
-            'url'  => 'orders/request',
+            'text' => 'Pembelian',
             'icon' => 'fas fa-box',
             'submenu' => [
                 [
@@ -323,35 +323,67 @@ return [
                 [
                     'text' => 'Request',
                     'url'  => 'orders/request',
+                    'can' => ['apoteker']
                 ],
             ]
         ],
         [
-            'text' => 'Jual',
-            'url'  => 'sell',
+            'text' => 'Penjualan',
             'icon' => 'fas fa-dollar-sign',
+            'can' => ['apoteker', 'pemilik'],
+            'submenu' => [
+                [
+                    'text' => 'Index',
+                    'url'  => 'sales'
+                ],
+                [
+                    'text' => 'Jual',
+                    'url'  => 'sales/sell',
+                    'can' => ['apoteker']
+                ],
+            ]
+        ],
+        [
+            'text' => 'History',
+            'icon' => 'fas fa-chart-line',
+            'can' => ['pemilik'],
+            'submenu' => [
+                [
+                    'text' => 'Pembelian',
+                    'url'  => 'history/pembelian',
+                ],
+                [
+                    'text' => 'Penjualan',
+                    'url'  => 'history/penjualan'
+                ],
+            ]
         ],
         [
             'header' => 'MANAGEMENT',
+            'can' => ['gudang']
         ],
         [
             'text' => 'Obat',
             'url'  => 'medicines',
+            'can' => ['gudang'],
             'icon' => 'fas fa-capsules'
         ],
         [
             'text' => 'Kategori',
             'url'  => 'categories',
+            'can' => ['gudang'],
             'icon' => 'fas fa-list'
         ],
         [
             'text' => 'Merek',
             'url'  => 'brands',
+            'can' => ['gudang'],
             'icon' => 'fas fa-copyright'
         ],
         [
             'text' => 'Supplier',
             'url'  => 'suppliers',
+            'can' => ['gudang'],
             'icon' => 'fas fa-box-open'
         ],
         // ['header' => 'account_settings'],

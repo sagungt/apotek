@@ -42,7 +42,7 @@ class User extends Authenticatable
         'shared_password' => 'hashed'
     ];
 
-    public function role() {
+    public function roleName() {
         $role = '';
         switch ($this->role) {
             case 1:

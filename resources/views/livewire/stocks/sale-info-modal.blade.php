@@ -28,41 +28,43 @@
                 <div class="d-flex flex-column my-2">
                     <div class="d-flex p-2">
                         <span class="w-25 fw-bold">ID</span>
-                        <span class="w-75">{{ $purchase?->pembelian_id }}</span>
+                        <span class="w-75">{{ $sale?->penjualan_id }}</span>
                     </div>
                     <div class="d-flex p-2">
                         <span class="w-25 fw-bold" fw-bold>Faktur</span>
-                        <span class="w-75">{{ $purchase?->no_faktur ?? 'Waiting for payment' }}</span>
+                        <span class="w-75">{{ $sale?->no_faktur }}</span>
                     </div>
                     <div class="d-flex p-2">
                         <span class="w-25 fw-bold">Tanggal</span>
-                        <span class="w-75">{{ $purchase?->tanggal }}</span>
+                        <span class="w-75">{{ $sale?->tanggal }}</span>
                     </div>
                     <div class="d-flex p-2">
-                        <span class="w-25 fw-bold">Supplier</span>
-                        <span class="w-75">{{ $purchase?->supplier?->supplier_nama }}</span>
+                        <span class="w-25 fw-bold">Tipe</span>
+                        <span class="w-75">{{ $sale?->tipe }}</span>
                     </div>
-                    <div class="d-flex p-2">
-                        <span class="w-25 fw-bold">Status</span>
-                        <span class="w-75">{{ $purchase?->status }}</span>
-                    </div>
-                    <div class="d-flex p-2">
-                        <span class="w-25 fw-bold">Keterangan</span>
-                        <span class="w-75">{{ $purchase?->keterangan ?? '-' }}</span>
-                    </div>
+                    @if ($sale?->tipe == 'Resep')
+                        <div class="d-flex p-2">
+                            <span class="w-25 fw-bold">Nama Dokter</span>
+                            <span class="w-75">{{ $sale?->nama_dokter ?? '-' }}</span>
+                        </div>
+                        <div class="d-flex p-2">
+                            <span class="w-25 fw-bold">Nama Pelanggan</span>
+                            <span class="w-75">{{ $sale?->nama_pelanggan ?? '-' }}</span>
+                        </div>
+                    @endif
                 </div>
 
                 <div class="my-2 p-2">
                     <h5>Order List</h5>
                     <div id="accordion">
-                        @if ($purchase?->orderList)
-                            @foreach ($purchase?->orderList()->with('medicine')->get() as $index => $order)
+                        @if ($sale?->orderList)
+                            @foreach ($sale?->orderList()->with('medicine')->get() as $index => $order)
                                 @php($id = "collapse_$index")
                                 <div class="card">
                                     <div class="card-header">
                                         <h4 class="card-title w-100">
                                             <a class="d-block w-100" data-toggle="collapse" href="#{{ $id }}">
-                                                {{ $order->medicine->nama_obat }} - Rp. {{ number_format($order->total) }}
+                                                {{ $order->medicine->medicine->nama_obat }} - Rp. {{ number_format($order->total) }}
                                             </a>
                                         </h4>
                                     </div>
@@ -74,19 +76,19 @@
                                             </div>
                                             <div class="d-flex">
                                                 <span class="w-25 fw-bold">Nama</span>
-                                                <span class="w-75">{{ $order->medicine->nama_obat }}</span>
+                                                <span class="w-75">{{ $order->medicine->medicine->nama_obat }}</span>
                                             </div>
                                             <div class="d-flex">
                                                 <span class="w-25 fw-bold">Satuan</span>
-                                                <span class="w-75">{{ $order->medicine->satuan }}</span>
+                                                <span class="w-75">{{ $order->medicine->medicine->satuan }}</span>
                                             </div>
                                             <div class="d-flex">
-                                                <span class="w-25 fw-bold">jenis</span>
-                                                <span class="w-75">{{ $order->medicine->jenis }}</span>
+                                                <span class="w-25 fw-bold">Jenis</span>
+                                                <span class="w-75">{{ $order->medicine->medicine->jenis }}</span>
                                             </div>
                                             <div class="d-flex">
                                                 <span class="w-25 fw-bold">Harga</span>
-                                                <span class="w-75">Rp. {{ number_format($order->medicine->harga) }}</span>
+                                                <span class="w-75">Rp. {{ number_format($order->medicine->medicine->harga) }}</span>
                                             </div>
                                             <div class="d-flex">
                                                 <span class="w-25 fw-bold">Kuantitas</span>
@@ -98,11 +100,11 @@
                                             </div>
                                             <div class="d-flex">
                                                 <span class="w-25 fw-bold">Kategori</span>
-                                                <span class="w-75">{{ $order->medicine->category->nama_kategori }}</span>
+                                                <span class="w-75">{{ $order->medicine->medicine->category->nama_kategori }}</span>
                                             </div>
                                             <div class="d-flex">
                                                 <span class="w-25 fw-bold">Merek</span>
-                                                <span class="w-75">{{ $order->medicine->brand->nama_merek }}</span>
+                                                <span class="w-75">{{ $order->medicine->medicine->brand->nama_merek }}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -113,45 +115,18 @@
                 </div>
 
                 <div class="align-self-end my-2 p-2">
-                    <h4 class="fw-bold">Grand Total : Rp. {{ number_format($purchase?->total) }}</h4>
+                    <h4 class="fw-bold">Grand Total : Rp. {{ number_format($sale?->jumlah) }}</h4>
                 </div>
-    
-                @can('pemilik')
-                    @if ($purchase?->status === 'Requested')
-                        <div class="d-flex">
-                            <x-adminlte-button
-                                class="btn-flat flex-fill m-2"
-                                type="button"
-                                label="Approve"
-                                theme="success"
-                                icon="fas fa-lg fa-check"
-                                wire:click="approve"
-                            />
-                            <x-adminlte-button
-                                class="btn-flat flex-fill m-2"
-                                type="button"
-                                label="Reject"
-                                theme="danger"
-                                icon="fas fa-lg fa-times"
-                                wire:click="reject"
-                            />
-                        </div>
-                    @endif
-                @endcan
-
-                @can('gudang')
-                    @if ($purchase?->status === 'Approved')
-                        <x-adminlte-button
-                            class="btn-flat flex-fill m-2"
-                            type="button"
-                            label="Order & Pay"
-                            theme="primary"
-                            icon="fas fa-lg fa-shopping-basket"
-                            wire:click="orderAndPay"
-                        />
-                    @endif
-                @endcan
             </div>
         </form>
+
+        <x-adminlte-button
+            class="btn mb-3"
+            type="button"
+            label="Generate PDF"
+            theme="danger"
+            icon="fas fa-print"
+            wire:click="downloadPdf"
+        />
     </x-adminlte-modal>
 </div>

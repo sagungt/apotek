@@ -20,45 +20,69 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::middleware('auth')->group(function () {
+    Route::get('/', function () {
+        return redirect()->route('home');
+    });
 
-Route::prefix('admin')->name('admin.')->middleware('can:admin')->group(function () {
-    Route::prefix('users')->name('users.')->group(function () {
-        Route::get('/', [UserController::class, 'index'])
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    
+    Route::prefix('admin')->name('admin.')->middleware('can:pemilik')->group(function () {
+        Route::prefix('users')->name('users.')->group(function () {
+            Route::get('/', [UserController::class, 'index'])
+                ->name('index');
+        });
+    });
+    
+    Route::prefix('categories')->name('categories.')->group(function () {
+        Route::get('/', [CategoryController::class, 'index'])
             ->name('index');
     });
-});
-
-Route::prefix('categories')->name('categories.')->group(function () {
-    Route::get('/', [CategoryController::class, 'index'])
-        ->name('index');
-});
-
-Route::prefix('brands')->name('brands.')->group(function () {
-    Route::get('/', [BrandController::class, 'index'])
-        ->name('index');
-});
-
-Route::prefix('suppliers')->name('suppliers.')->group(function () {
-    Route::get('/', [SupplierController::class, 'index'])
-        ->name('index');
-});
-
-Route::prefix('medicines')->name('medicines.')->group(function () {
-    Route::get('/', [MedicimeController::class, 'index'])
-        ->name('index');
-});
-
-Route::prefix('orders')->name('orders.')->group(function () {
-    Route::get('/', [OrderController::class, 'index'])
-        ->name('index');
-
-    Route::get('/request', [OrderController::class, 'request'])
-        ->name('request');
+    
+    Route::prefix('brands')->name('brands.')->group(function () {
+        Route::get('/', [BrandController::class, 'index'])
+            ->name('index');
+    });
+    
+    Route::prefix('suppliers')->name('suppliers.')->group(function () {
+        Route::get('/', [SupplierController::class, 'index'])
+            ->name('index');
+    });
+    
+    Route::prefix('medicines')->name('medicines.')->group(function () {
+        Route::get('/', [MedicimeController::class, 'index'])
+            ->name('index');
+    });
+    
+    Route::prefix('orders')->name('orders.')->group(function () {
+        Route::get('/', [OrderController::class, 'index'])
+            ->name('index');
+    
+        Route::get('/request', [OrderController::class, 'request'])
+            ->name('request');
+    });
+    
+    Route::prefix('sales')->name('sales.')->group(function () {
+        Route::get('/', [OrderController::class, 'sales'])
+            ->name('index');
+    
+        Route::get('/sell', [OrderController::class, 'sell'])
+            ->name('sell');
+    });
+    
+    Route::prefix('history')->name('histories.')->group(function () {
+        Route::get('/pembelian', [OrderController::class, 'purchasesHistory'])
+            ->name('purchases');
+    
+        Route::get('/penjualan', [OrderController::class, 'salesHistory'])
+            ->name('sales');
+    });
+    
+    Route::prefix('stock')->name('stocks.')->group(function () {
+        Route::get('/expiry', [StockController::class, 'expiry'])
+            ->name('expiry');
+    });
 });

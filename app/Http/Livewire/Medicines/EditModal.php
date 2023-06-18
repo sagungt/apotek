@@ -18,7 +18,7 @@ class EditModal extends Component
         'medicine.nama_obat'   => 'required',
         'medicine.satuan'      => 'required',
         'medicine.harga'       => 'required|numeric',
-        'medicine.tipe'        => 'required',
+        'medicine.jenis'       => 'required',
         'medicine.kategori_id' => 'required|exists:kategori,kategori_id',
         'medicine.merek_id'    => 'required|exists:merek,merek_id',
     ];
@@ -26,7 +26,7 @@ class EditModal extends Component
         'medicine.nama_obat.required'   => 'The Medicine Name field is required',
         'medicine.satuan.required'      => 'The Medicine Unit of Measurement field is required',
         'medicine.harga.required'       => 'The Medicine Price field is required',
-        'medicine.tipe.required'       => 'The Medicine Type field is required',
+        'medicine.jenis.required'       => 'The Medicine Type field is required',
         'medicine.kategori_id.required' => 'The Medicine Category field is required',
         'medicine.merek_id.required'    => 'The Medicine Brand field is required',
     ];
