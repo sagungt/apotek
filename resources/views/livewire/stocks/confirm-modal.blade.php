@@ -128,8 +128,8 @@
                                                 <span class="w-75">{{ $order->medicine->satuan }}</span>
                                             </div>
                                             <div class="d-flex">
-                                                <span class="w-25 fw-bold">Tipe</span>
-                                                <span class="w-75">{{ $order->medicine->tipe }}</span>
+                                                <span class="w-25 fw-bold">Jenis</span>
+                                                <span class="w-75">{{ $order->medicine->jenis }}</span>
                                             </div>
                                             <div class="d-flex">
                                                 <span class="w-25 fw-bold">Harga</span>
