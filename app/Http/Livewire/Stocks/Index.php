@@ -64,7 +64,6 @@ class Index extends Component
         switch ($role) {
             case 1:
                 $purchases = Purchase::query()
-                    ->whereIn('status', ['Purchasing', 'Complete'])
                     ->when($this->isHistory, fn ($query) =>
                         $query
                             ->where(function ($query) {
