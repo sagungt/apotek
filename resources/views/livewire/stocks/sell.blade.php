@@ -1,5 +1,4 @@
 <div>
-    {{$errors}}
     <div class="my-2 container">
         <div class="bg-white p-4 border">
             <x-adminlte-select
@@ -65,6 +64,7 @@
                 placeholder="Tanggal"
                 wire:model.defer="sell.tanggal"
                 error-key="sell.tanggal"
+                disabled
                 x-data
                 x-on:click="$nextTick(() => $el.showPicker())"
             >

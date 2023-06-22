@@ -18,6 +18,11 @@ class SaleInfoModal extends Component
         $this->sale = $sale;
     }
 
+    public function print()
+    {
+        return redirect()->route('sales.print', ['id' => $this->sale->penjualan_id]);
+    }
+
     public function downloadPdf()
     {
         $filename = $this->sale->tanggal . '_' . $this->sale->no_faktur . '.pdf';

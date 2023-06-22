@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Invoce_{{ $tanggal }}_{{ $no_faktur }}</title>
+        <title>{{ $tanggal }}_ORDER</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
         <style type="text/css" media="screen">
@@ -132,80 +132,76 @@
         {{-- Header --}}
         <h1>Apotek Berkah</h1>
 
-        <table class="table mt-5">
+        <h2>Order {{ $tanggal }}</h2>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="border-0 pl-0 party-header" width="48.5%">
+                        Supplier
+                    </th>
+                </tr>
+            </thead>
             <tbody>
                 <tr>
-                    <td class="border-0 pl-0" width="70%">
-                        <h4 class="text-uppercase">
-                            <strong>Invoice</strong>
-                        </h4>
-                    </td>
-                    <td class="border-0 pl-0">
-                        <p>No Faktur: <strong>#{{ $no_faktur }}</strong></p>
-                        <p>Tanggal: <strong>{{ $tanggal }}</strong></p>
+                    <td class="px-0">
+                        <p class="seller-name">
+                            <strong>{{ $request->supplier->supplier_nama ?? '' }}</strong>
+                        </p>
+
+                        <p class="seller-address">
+                            NPWP: {{ $request->supplier->npwp ?? '' }}
+                        </p>
+
+                        <p class="seller-code">
+                            Alamat: {{ $request->supplier->alamat ?? '' }}
+                        </p>
+
+                        <p class="seller-code">
+                            Kota: {{ $request->supplier->kota ?? '' }}
+                        </p>
+
+                        <p class="seller-code">
+                            No Telepon: {{ $request->supplier->telepon ?? '' }}
+                        </p>
+
+                        <p class="seller-code">
+                            Email: {{ $request->supplier->email ?? '' }}
+                        </p>
                     </td>
                 </tr>
             </tbody>
         </table>
-
-        @if($tipe == 'Resep')
-            {{-- Seller - Buyer --}}
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th class="border-0 pl-0 party-header">
-                            {{ Buyer }}
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="px-0">
-                            @if($nama_pelanggan)
-                                <p class="buyer-name">
-                                    <strong>{{ $nama_pelanggan }}</strong>
-                                </p>
-                            @endif
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        @endif
 
         {{-- Table --}}
         <table class="table table-items">
             <thead>
                 <tr>
                     <th scope="col" class="border-0 pl-0">Nama Obat</th>
-                    <th scope="col" class="text-center border-0">Kuantitas</th>
-                    <th scope="col" class="text-right border-0">No Batch</th>
-                    <th scope="col" class="text-right border-0">No Exp</th>
+                    <th scope="col" class="text-center border-0">Satuan</th>
+                    <th scope="col" class="text-right border-0">Jenis</th>
+                    <th scope="col" class="text-right border-0">Kuantitas</th>
                     <th scope="col" class="text-right border-0">Sub total</th>
                 </tr>
             </thead>
             <tbody>
                 {{-- Items --}}
-                @foreach($order_list as $index => $item)
+                @foreach($request->orderList as $index => $item)
                 <tr>
                     <td class="pl-0">
-                        {{ $item['medicine']['medicine']['nama_obat'] }}
+                        {{ $item->medicine->nama_obat }}
                     </td>
-                    <td class="text-center">{{ $item['kuantitas'] }}</td>
-                    <td class="text-right">{{ $item['medicine']['no_batch'] }}</td>
-                    <td class="text-right">{{ $item['medicine']['no_exp'] }}</td>
+                    <td class="text-center">{{ $item->medicine->satuan }}</td>
+                    <td class="text-right">{{ $item->medicine->jenis }}</td>
+                    <td class="text-right">{{ $item->kuantitas }}</td>
                     <td class="text-right">
-                        Rp. {{ number_format($item['total']) }}
+                        Rp. {{ number_format($item->total) }}
                     </td>
                 </tr>
                 @endforeach
-                <tr>
-                    <td colspan="3" class="border-0"></td>
-                    <td class="text-right pl-0">Grand Total</td>
-                    <td class="text-right pr-0 total-amount">
-                        Rp. {{ number_format($jumlah) }}
-                    </td>
-                </tr>
             </tbody>
         </table>
+
+        <h2>Total : Rp. {{ number_format($request->orderList->sum('total')) }}</h2>
     </body>
 </html>

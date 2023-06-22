@@ -50,6 +50,16 @@
                         <span class="w-25 fw-bold">Keterangan</span>
                         <span class="w-75">{{ $purchase?->keterangan ?? '-' }}</span>
                     </div>
+                    @if ($attachment)
+                        <div class="d-flex flex-column p-2">
+                            <span class="w-25 fw-bold">Bukti</span>
+                            @if ($ext == 'pdf')
+                                <a href="{{ $attachment }}">{{ $attachment }}</a>
+                            @else
+                                <img src="{{ $attachment }}" alt="bukti" />
+                            @endif
+                        </div>
+                    @endif
                 </div>
 
                 <div class="my-2 p-2">
@@ -115,6 +125,29 @@
                 <div class="align-self-end my-2 p-2">
                     <h4 class="fw-bold">Grand Total : Rp. {{ number_format($purchase?->total) }}</h4>
                 </div>
+
+                @if ($purchase?->status == 'Approved')
+                    <div class="d-flex g-2">
+                        <x-adminlte-button
+                            class="btn mb-3 mx-2"
+                            type="button"
+                            label="Print"
+                            theme="primary"
+                            icon="fas fa-print"
+                            wire:click="print"
+                        />
+                        <x-adminlte-button
+                            class="btn mb-3 mx-2"
+                            type="button"
+                            label="Download PDF"
+                            theme="outline-danger"
+                            icon="fas fa-file-pdf"
+                            wire:click="generatePdf"
+                            wire:loading.attr="disabled"
+                            wire:target="generatePdf"
+                        />
+                    </div>
+                @endif
     
                 @can('pemilik')
                     @if ($purchase?->status === 'Requested')
@@ -139,7 +172,7 @@
                     @endif
                 @endcan
 
-                @can('gudang')
+                {{-- @can('gudang')
                     @if ($purchase?->status === 'Approved')
                         <x-adminlte-button
                             class="btn-flat flex-fill m-2"
@@ -150,7 +183,7 @@
                             wire:click="orderAndPay"
                         />
                     @endif
-                @endcan
+                @endcan --}}
             </div>
         </form>
     </x-adminlte-modal>

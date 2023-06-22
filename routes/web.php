@@ -63,6 +63,9 @@ Route::middleware('auth')->group(function () {
     
         Route::get('/request', [OrderController::class, 'request'])
             ->name('request');
+
+        Route::get('/print/{id}', [OrderController::class, 'print'])
+            ->name('print');
     });
     
     Route::prefix('sales')->name('sales.')->group(function () {
@@ -71,6 +74,9 @@ Route::middleware('auth')->group(function () {
     
         Route::get('/sell', [OrderController::class, 'sell'])
             ->name('sell');
+
+        Route::get('/print/{id}', [OrderController::class, 'printSaleInfo'])
+            ->name('print');
     });
     
     Route::prefix('history')->name('histories.')->group(function () {
@@ -79,9 +85,18 @@ Route::middleware('auth')->group(function () {
     
         Route::get('/penjualan', [OrderController::class, 'salesHistory'])
             ->name('sales');
+
+        Route::get('/print/purchases/{date}', [OrderController::class, 'printPurchases'])
+            ->name('printPurchases');
+
+        Route::get('/print/sales/{date}', [OrderController::class, 'printSales'])
+            ->name('printSales');
     });
     
     Route::prefix('stock')->name('stocks.')->group(function () {
+        Route::get('/', [StockController::class, 'index'])
+            ->name('index');
+
         Route::get('/expiry', [StockController::class, 'expiry'])
             ->name('expiry');
     });

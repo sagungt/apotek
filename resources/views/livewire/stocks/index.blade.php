@@ -10,6 +10,29 @@
             />
         </a>
     @endcan
+
+    @can('pemilik')
+        @if (sizeof($purchases) > 0)
+            <x-adminlte-button
+                class="btn mb-3"
+                type="button"
+                label="Print"
+                theme="primary"
+                icon="fas fa-print"
+                wire:click="print"
+            />
+            <x-adminlte-button
+                class="btn mb-3"
+                type="button"
+                label="Download PDF"
+                theme="outline-danger"
+                icon="fas fa-file-pdf"
+                wire:click="generatePdf"
+                wire:loading.attr="disabled"
+                wire:target="generatePdf"
+            />
+        @endif
+    @endcan
     
     <x-adminlte-input
         name="search"
@@ -102,7 +125,8 @@
                     <th scope="col">ID</th>
                     <th scope="col">No Faktur</th>
                     <th scope="col">Supplier</th>
-                    <th scope="col">Tanggal</th>
+                    <th scope="col">Tanggal Request</th>
+                    <th scope="col">Tanggal Terima</th>
                     <th scope="col">Total</th>
                     <th scope="col">Status</th>
                     @unless ($isHistory)
@@ -117,6 +141,7 @@
                         <td>{{ $purchase->no_faktur ?? 'Waiting for payment' }}</td>
                         <td>{{ $purchase->supplier->supplier_nama }}</td>
                         <td>{{ $purchase->tanggal }}</td>
+                        <td>{{ $purchase->tanggal_terima ?? '-' }}</td>
                         <td>{{ number_format($purchase->total) }}</td>
                         <td>
                             <span
@@ -124,7 +149,7 @@
                                     'badge',
                                     'badge-primary' => in_array($purchase->status, ['Requested']),
                                     'badge-danger' => in_array($purchase->status, ['Rejected']),
-                                    'badge-success' => in_array($purchase->status, ['Approved', 'Complete', 'Purchasing'])
+                                    'badge-success' => in_array($purchase->status, ['Approved', 'Complete'])
                                 ])
                             >
                                 {{ $purchase->status }}
@@ -133,7 +158,7 @@
                         @unless ($isHistory)
                             <td>
                                 @can('gudang')
-                                    @if ($purchase->status === 'Purchasing')
+                                    @if ($purchase->status === 'Approved')
                                         <button
                                             class="btn btn-xs btn-default text-success mx-1"
                                             title="Confirm"

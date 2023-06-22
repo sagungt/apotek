@@ -6,6 +6,7 @@ use App\Models\Medicine;
 use App\Models\OrderList;
 use App\Models\Purchase;
 use App\Models\Supplier;
+use Illuminate\Support\Carbon;
 use Livewire\Component;
 
 class Request extends Component
@@ -31,6 +32,7 @@ class Request extends Component
     {
         $this->medicines = Medicine::all();
         $this->suppliers = Supplier::all();
+        $this->pembelian['tanggal'] = Carbon::now()->format('Y-m-d');
     }
     
     public function addToOrder()
@@ -46,8 +48,6 @@ class Request extends Component
             'nama' => $name,
             'total' => $total,
         ]);
-
-        $this->grandTotal = array_sum(array_map(fn ($arr) => $arr['total'], $this->orders));
     }
 
     public function submit()
@@ -62,7 +62,7 @@ class Request extends Component
         $purchase = Purchase::create([
             ...$validated['pembelian'],
             'status' => 'Requested',
-            'total' => $this->grandTotal,
+            'total' => 0,
         ]);
 
         foreach ($this->orders as $order) {
@@ -85,7 +85,6 @@ class Request extends Component
     public function deleteOrder($id)
     {
         array_splice($this->orders, $id, 1);
-        $this->grandTotal = array_sum(array_map(fn ($arr) => $arr['total'], $this->orders));
     }
 
     public function render()

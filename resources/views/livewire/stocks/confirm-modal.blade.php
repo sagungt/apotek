@@ -55,11 +55,47 @@
                         placeholder="No Faktur"
                         wire:model.defer="purchase.no_faktur"
                         error-key="purchase.no_faktur"
-                        :disabled="$purchase?->status !== 'Purchasing'"
+                        :disabled="$purchase?->status !== 'Approved'"
                     >
                         <x-slot name="prependSlot">
                             <div class="input-group-text">
                                 <i class="fas fa-receipt"></i>
+                            </div>
+                        </x-slot>
+                    </x-adminlte-input>
+                    
+                    <x-adminlte-input
+                        class="fiex-fill"
+                        autocomplete="total"
+                        name="total"
+                        label="Total"
+                        type="number"
+                        wire:model.defer="purchase.total"
+                        error-key="purchase.total"
+                        :disabled="$purchase?->status !== 'Approved'"
+                    >
+                        <x-slot name="prependSlot">
+                            <div class="input-group-text">
+                                <i class="fas fa-dollar-sign"></i>
+                            </div>
+                        </x-slot>
+                    </x-adminlte-input>
+
+                    <x-adminlte-input
+                        class="fiex-fill"
+                        autocomplete="tanggal"
+                        name="tanggal"
+                        label="Tanggal Terima"
+                        type="date"
+                        wire:model.defer="purchase.tanggal_terima"
+                        error-key="purchase.tanggal_terima"
+                        x-data
+                        x-on:click="$nextTick(() => $el.showPicker())"
+                        :disabled="$purchase?->status !== 'Approved'"
+                    >
+                        <x-slot name="prependSlot">
+                            <div class="input-group-text">
+                                <i class="fas fa-calendar"></i>
                             </div>
                         </x-slot>
                     </x-adminlte-input>
@@ -72,7 +108,7 @@
                         placeholder="Keterangan"
                         wire:model.defer="purchase.keterangan"
                         error-key="purchase.keterangan"
-                        :disabled="$purchase?->status !== 'Purchasing'"
+                        :disabled="$purchase?->status !== 'Approved'"
                     >
                         <x-slot name="prependSlot">
                             <div class="input-group-text">
@@ -81,11 +117,11 @@
                         </x-slot>
                     </x-adminlte-textarea>
 
-                    {{-- @if ($purchase?->status === 'Purchasing')
+                    @if ($purchase?->status === 'Approved')
                         <x-adminlte-input-file
                             name="bukti"
                             id="bukti"
-                            label="Bukti (jika ada)"
+                            label="Bukti"
                             placeholder="Choose a file..."
                             wire:model="attachment"
                             error-key="attachment"
@@ -96,7 +132,15 @@
                                 </div>
                             </x-slot>
                         </x-adminlte-input-file>
-                    @endif --}}
+                    @endif
+
+                    @if ($attachment)
+                        @if ($attachment->getClientOriginalExtension() === 'pdf')
+                            <span>{{ $attachment->getClientOriginalName() }}</span>
+                        @else
+                            <img src="{{ $attachment->temporaryUrl() }}" alt="bukti">
+                        @endif
+                    @endif
                 </div>
 
                 <div class="my-2 p-2">
@@ -151,7 +195,7 @@
                                                 <span class="w-25 fw-bold">Merek</span>
                                                 <span class="w-75">{{ $order->medicine->brand->nama_merek }}</span>
                                             </div>
-                                            @if ($order->status == 'Purchasing')
+                                            @if ($purchase->status === 'Approved')
                                                 <div class="flex-fill">
                                                     <x-adminlte-input
                                                         autocomplete="no_batch"
@@ -160,11 +204,29 @@
                                                         placeholder="No Batch"
                                                         wire:model.defer="orders.{{ $index }}.no_batch"
                                                         error-key="orders.{{ $index }}.no_batch"
-                                                        :disabled="$purchase?->status !== 'Purchasing'"
+                                                        :disabled="$purchase?->status !== 'Approved'"
                                                     >
                                                         <x-slot name="prependSlot">
                                                             <div class="input-group-text">
                                                                 <i class="fas fa-receipt"></i>
+                                                            </div>
+                                                        </x-slot>
+                                                    </x-adminlte-input>
+                                                </div>
+                                                <div class="flex-fill">
+                                                    <x-adminlte-input
+                                                        autocomplete="harga"
+                                                        name="harga"
+                                                        label="Harga"
+                                                        type="number"
+                                                        placeholder="Harga"
+                                                        wire:model.defer="orders.{{ $index }}.harga_jual"
+                                                        error-key="orders.{{ $index }}.harga_jual"
+                                                        :disabled="$purchase?->status !== 'Approved'"
+                                                    >
+                                                        <x-slot name="prependSlot">
+                                                            <div class="input-group-text">
+                                                                <i class="fas fa-dollar-sign"></i>
                                                             </div>
                                                         </x-slot>
                                                     </x-adminlte-input>
@@ -180,7 +242,7 @@
                                                         error-key="orders.{{ $index }}.no_exp"
                                                         x-data
                                                         x-on:click="$nextTick(() => $el.showPicker())"
-                                                        :disabled="$purchase?->status !== 'Purchasing'"
+                                                        :disabled="$purchase?->status !== 'Approved'"
 
                                                     >
                                                         <x-slot name="prependSlot">
@@ -199,12 +261,12 @@
                     </div>
                 </div>
 
-                <div class="align-self-end my-2 p-2">
+                {{-- <div class="align-self-end my-2 p-2">
                     <h4 class="fw-bold">Grand Total : Rp. {{ number_format($purchase?->total) }}</h4>
-                </div>
+                </div> --}}
 
                 @can('gudang')
-                    @if ($purchase?->status === 'Purchasing')
+                    @if ($purchase?->status === 'Approved')
                         <x-adminlte-button
                             class="btn-flat flex-fill m-2"
                             type="button"

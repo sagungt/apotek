@@ -93,7 +93,6 @@
                             <th scope="col">No</th>
                             <th scope="col">Obat</th>
                             <th scope="col">Kuantitas</th>
-                            <th scope="col">Total</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -103,7 +102,6 @@
                                 <td>{{ $index + 1 }}</td>
                                 <td>{{ $order['nama'] }}</td>
                                 <td>{{ $order['kuantitas'] }}</td>
-                                <td>Rp. {{ number_format($order['total']) }}</td>
                                 <td>
                                     <button
                                         class="btn btn-xs btn-default text-danger mx-1"
@@ -119,10 +117,6 @@
                                 <td colspan="5" class="text-center">No Records found ...</td>
                             </tr>
                         @endforelse
-                        <tr>
-                            <td colspan="4" class="text-center"><span class="fw-bolder fs-4">Grand Total</span></td>
-                            <td>Rp. {{ number_format($grandTotal) }}</td>
-                        </tr>
                     </tbody>
                 </table>
             </div>

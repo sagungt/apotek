@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Stocks;
 
 use App\Models\Sell;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Carbon;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -47,6 +48,30 @@ class Sales extends Component
     {
         $this->currentMonth = Carbon::now();
         $this->reset('date');
+    }
+
+    public function print()
+    {
+        return redirect()->route('histories.printSales', ['date' => $this->currentMonth->format('Y-m-d')]);
+    }
+
+    public function generatePdf()
+    {
+        $sales = Sell::query()
+            ->where(function ($query) {
+                $first = Carbon::parse($this->currentMonth)->startOfMonth();
+                $last = Carbon::parse($this->currentMonth)->endOfMonth();
+                return $query
+                    ->whereDate('tanggal', '>=', $first)
+                    ->whereDate('tanggal', '<=', $last);
+            })
+            ->get();
+        $filename = Carbon::now()->format('Y-m') . '_PENJUALAN.pdf';
+        $pdf = Pdf::loadView('pdf.penjualan', ['penjualan' => $sales, 'tanggal' => Carbon::now()->format('Y-m')])->output();
+        return response()->streamDownload(
+            fn () => print($pdf),
+            $filename,
+        );
     }
 
     public function render()

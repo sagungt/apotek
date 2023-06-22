@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Stocks;
 
 use App\Models\Purchase;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Carbon;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -57,6 +58,31 @@ class Index extends Component
         $this->resetPage();
     }
 
+    public function print()
+    {
+        return redirect()->route('histories.printPurchases', ['date' => $this->currentMonth->format('Y-m-d')]);
+    }
+
+    public function generatePdf()
+    {
+        $purchases = Purchase::query()
+            ->whereIn('status', ['Complete'])
+            ->where(function ($query) {
+                $first = Carbon::parse($this->currentMonth)->startOfMonth();
+                $last = Carbon::parse($this->currentMonth)->endOfMonth();
+                return $query
+                    ->whereDate('tanggal', '>=', $first)
+                    ->whereDate('tanggal', '<=', $last);
+            })
+            ->get();
+        $filename = Carbon::now()->format('Y-m') . '_PEMBELIAN.pdf';
+        $pdf = Pdf::loadView('pdf.pembelian', ['pembelian' => $purchases, 'tanggal' => Carbon::now()->format('Y-m')])->output();
+        return response()->streamDownload(
+            fn () => print($pdf),
+            $filename,
+        );
+    }
+
     public function render()
     {
         $role = auth()->user()->role;
@@ -64,6 +90,10 @@ class Index extends Component
         switch ($role) {
             case 1:
                 $purchases = Purchase::query()
+                    ->when($this->isHistory, fn ($query) =>
+                        $query
+                            ->whereIn('status', ['Complete'])
+                    )
                     ->when($this->isHistory, fn ($query) =>
                         $query
                             ->where(function ($query) {
@@ -78,6 +108,7 @@ class Index extends Component
                         $query
                             ->where('no_faktur', 'like', '%' . $this->search . '%')
                             ->orWhere('tanggal', 'like', '%' . $this->search . '$')
+                            ->orWhere('tanggal_terima', 'like', '%' . $this->search . '$')
                             ->orWhere('total', 'like', '%' . $this->search . '%')
                             ->orWhere('status', 'like', '%' . $this->search . '%')
                             ->orWhereHas('supplier', fn ($query) =>
@@ -92,11 +123,12 @@ class Index extends Component
 
             case 2:
                 $purchases = Purchase::query()
-                    ->whereIn('status', ['Approved', 'Purchasing'])
+                    ->whereIn('status', ['Approved', 'Complete'])
                     ->when(strlen($this->search) > 0, fn ($query) =>
                         $query
                             ->where('no_faktur', 'like', '%' . $this->search . '%')
                             ->orWhere('tanggal', 'like', '%' . $this->search . '$')
+                            ->orWhere('tanggal_terima', 'like', '%' . $this->search . '$')
                             ->orWhere('total', 'like', '%' . $this->search . '%')
                             ->orWhere('status', 'like', '%' . $this->search . '%')
                             ->orWhereHas('supplier', fn ($query) =>
@@ -114,6 +146,7 @@ class Index extends Component
                         $query
                             ->where('no_faktur', 'like', '%' . $this->search . '%')
                             ->orWhere('tanggal', 'like', '%' . $this->search . '$')
+                            ->orWhere('tanggal_terima', 'like', '%' . $this->search . '$')
                             ->orWhere('total', 'like', '%' . $this->search . '%')
                             ->orWhere('status', 'like', '%' . $this->search . '%')
                             ->orWhereHas('supplier', fn ($query) =>

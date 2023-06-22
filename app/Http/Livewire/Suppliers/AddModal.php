@@ -34,7 +34,7 @@ class AddModal extends Component
 
         $data = [
             'supplier_nama' => $validated['newSupplier']['supplier_nama'],
-            'npwp'          => $validated['newSupplier']['email'],
+            'npwp'          => $validated['newSupplier']['npwp'],
             'alamat'        => $validated['newSupplier']['alamat'],
             'kota'          => $validated['newSupplier']['kota'],
             'telepon'       => $validated['newSupplier']['telepon'],

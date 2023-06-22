@@ -344,6 +344,12 @@ return [
             ]
         ],
         [
+            'text' => 'Stock',
+            'url' => 'stock',
+            'icon' => 'fas fa-box',
+            'can' => ['apoteker'],
+        ],
+        [
             'text' => 'History',
             'icon' => 'fas fa-chart-line',
             'can' => ['pemilik'],

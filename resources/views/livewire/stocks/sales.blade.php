@@ -10,6 +10,29 @@
             />
         </a>
     @endcan
+
+    @can('pemilik')
+        @if (sizeof($sales) > 0)
+            <x-adminlte-button
+                class="btn mb-3"
+                type="button"
+                label="Print"
+                theme="primary"
+                icon="fas fa-print"
+                wire:click="print"
+            />
+            <x-adminlte-button
+                class="btn mb-3"
+                type="button"
+                label="Download PDF"
+                theme="outline-danger"
+                icon="fas fa-file-pdf"
+                wire:click="generatePdf"
+                wire:loading.attr="disabled"
+                wire:target="generatePdf"
+            />
+        @endif
+    @endcan
     
     <x-adminlte-input
         name="search"

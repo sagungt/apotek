@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id('pembelian_id');
             $table->string('no_faktur')->unique()->nullable();
             $table->date('tanggal')->nullable();
-            $table->bigInteger('total')->default(0);
+            $table->date('tanggal_terima')->nullable();
+            $table->bigInteger('total')->nullable();
             $table->string('status')->nullable();
             $table->text('keterangan')->nullable();
             $table->foreignId('supplier_id')

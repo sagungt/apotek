@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Invoce_{{ $tanggal }}_{{ $no_faktur }}</title>
+        <title>{{ $tanggal }}_PENJUALAN</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
         <style type="text/css" media="screen">
@@ -132,80 +132,45 @@
         {{-- Header --}}
         <h1>Apotek Berkah</h1>
 
-        <table class="table mt-5">
-            <tbody>
-                <tr>
-                    <td class="border-0 pl-0" width="70%">
-                        <h4 class="text-uppercase">
-                            <strong>Invoice</strong>
-                        </h4>
-                    </td>
-                    <td class="border-0 pl-0">
-                        <p>No Faktur: <strong>#{{ $no_faktur }}</strong></p>
-                        <p>Tanggal: <strong>{{ $tanggal }}</strong></p>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-
-        @if($tipe == 'Resep')
-            {{-- Seller - Buyer --}}
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th class="border-0 pl-0 party-header">
-                            {{ Buyer }}
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="px-0">
-                            @if($nama_pelanggan)
-                                <p class="buyer-name">
-                                    <strong>{{ $nama_pelanggan }}</strong>
-                                </p>
-                            @endif
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        @endif
+        <h2>Penjualan {{ $tanggal }}</h2>
 
         {{-- Table --}}
         <table class="table table-items">
             <thead>
                 <tr>
-                    <th scope="col" class="border-0 pl-0">Nama Obat</th>
-                    <th scope="col" class="text-center border-0">Kuantitas</th>
-                    <th scope="col" class="text-right border-0">No Batch</th>
-                    <th scope="col" class="text-right border-0">No Exp</th>
+                    <th scope="col" class="border-0 pl-0">ID</th>
+                    <th scope="col" class="text-center border-0">No Faktur</th>
+                    <th scope="col" class="text-right border-0">Tanggal</th>
                     <th scope="col" class="text-right border-0">Sub total</th>
+                    <th scope="col" class="text-right border-0">Tipe</th>
                 </tr>
             </thead>
             <tbody>
                 {{-- Items --}}
-                @foreach($order_list as $index => $item)
+                @foreach($penjualan as $index => $item)
                 <tr>
                     <td class="pl-0">
-                        {{ $item['medicine']['medicine']['nama_obat'] }}
+                        {{ $item['penjualan_id'] }}
                     </td>
-                    <td class="text-center">{{ $item['kuantitas'] }}</td>
-                    <td class="text-right">{{ $item['medicine']['no_batch'] }}</td>
-                    <td class="text-right">{{ $item['medicine']['no_exp'] }}</td>
+                    <td class="text-center">{{ $item['no_faktur'] }}</td>
+                    <td class="text-right">{{ $item['tanggal'] }}</td>
                     <td class="text-right">
-                        Rp. {{ number_format($item['total']) }}
+                        Rp. {{ number_format($item['jumlah']) }}
+                    </td>
+                    <td class="text-right">
+                        @if ($item['tipe'] == 'Resep')
+                            <p>Resep</p>
+                            <p>Nama Dokter: {{ $item['nama_dokter'] ?? '' }}</p>
+                            <p>Nama Pelanggan: {{ $item['nama_pelanggan'] ?? '' }}</p>
+                        @else
+                            <p>Non Resep</p>
+                        @endif
                     </td>
                 </tr>
                 @endforeach
-                <tr>
-                    <td colspan="3" class="border-0"></td>
-                    <td class="text-right pl-0">Grand Total</td>
-                    <td class="text-right pr-0 total-amount">
-                        Rp. {{ number_format($jumlah) }}
-                    </td>
-                </tr>
             </tbody>
         </table>
+
+        <h2>Total : Rp. {{ number_format($penjualan->sum('jumlah')) }}</h2>
     </body>
 </html>

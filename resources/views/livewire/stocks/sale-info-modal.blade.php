@@ -123,10 +123,20 @@
         <x-adminlte-button
             class="btn mb-3"
             type="button"
-            label="Generate PDF"
+            label="Download PDF"
             theme="danger"
-            icon="fas fa-print"
+            icon="fas fa-file-pdf"
             wire:click="downloadPdf"
+            wire:loading.attr="disabled"
+            wire:target="downloadPdf"
+        />
+        <x-adminlte-button
+            class="btn mb-3"
+            type="button"
+            label="Print"
+            theme="outline-danger"
+            icon="fas fa-print"
+            wire:click="print"
         />
     </x-adminlte-modal>
 </div>

@@ -2,12 +2,12 @@
 
 namespace App\Http\Livewire\Stocks;
 
-use App\Models\Medicine;
 use App\Models\OrderList;
 use Illuminate\Support\Str;
 use Livewire\Component;
 use App\Models\Sell as SellModel;
 use App\Models\Stock;
+use Illuminate\Support\Carbon;
 
 class Sell extends Component
 {
@@ -20,16 +20,17 @@ class Sell extends Component
     public $quantities = [];
 
     protected $rules = [
-        'sell.tanggal' => 'required|date',
-        'sell.tipe' => 'required|in:Resep,Non Resep',
-        'sell.nama_dokter' => 'required_if:sell.tipe,Resep',
+        'sell.tanggal'        => 'required|date',
+        'sell.tipe'           => 'required|in:Resep,Non Resep',
+        'sell.nama_dokter'    => 'required_if:sell.tipe,Resep',
         'sell.nama_pelanggan' => 'required_if:sell.tipe,Resep',
-        'sell.no_faktur' => 'required',
+        'sell.no_faktur'      => 'required',
     ];
 
     public function mount()
     {
         $this->sell['no_faktur'] = Str::upper(Str::random(10));
+        $this->sell['tanggal'] = Carbon::now()->format('Y-m-d');
     }
 
     public function submit()
@@ -71,7 +72,7 @@ class Sell extends Component
     public function addToList()
     {
         $this->validate([
-            'order.obat_id' => 'required|exists:persediaan_obat,id',
+            'order.obat_id'   => 'required|exists:persediaan_obat,id',
             'order.kuantitas' => 'required|numeric|min:1',
         ]);
 
@@ -93,11 +94,11 @@ class Sell extends Component
         $inList = array_filter($this->orderList, fn ($order) => $order['obat_id'] == $id);
         if (empty($inList)) {
             array_push($this->orderList, [
-                'obat_id' => $stock->id,
-                'nama' => $stock->medicine->nama_obat,
-                'no_batch' => $stock->no_batch,
+                'obat_id'   => $stock->id,
+                'nama'      => $stock->medicine->nama_obat,
+                'no_batch'  => $stock->no_batch,
                 'kuantitas' => $qty,
-                'total' => $price,
+                'total'     => $price,
             ]);
         } else {
             $index = array_search($id, collect($this->orderList)->pluck('obat_id')->toArray());
