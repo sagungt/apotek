@@ -76,7 +76,7 @@
             }
 
             .table thead th {
-                vertical-align: bottom;
+                vertical-align: top;
                 border-bottom: 2px solid #dee2e6;
             }
 
@@ -130,58 +130,39 @@
 
     <body>
         {{-- Header --}}
-        <h1>Apotek Berkah</h1>
-
-        <h2>Order {{ $tanggal }}</h2>
-
         <table class="table">
             <thead>
                 <tr>
-                    <th class="border-0 pl-0 party-header" width="48.5%">
-                        Supplier
+                    <th scope="col">
+                        <h1>Apotek Berkah</h1>
+                        <h5>SIA: 503/0021.29/BPPT</h5>
+                        <p>JL. RAYA GEGESIK - JAGAPURA<br>
+                        GEGESIK - CIREBON<br>
+                        HP. 0831 2087 2687</p>
+                    </th>
+                    <th scope="col" class="text-right">
+                        <h2>Date {{ $tanggal }}</h2>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <p>
+                            Supplier: {{ $request->supplier->supplier_nama ?? '-' }}
+                        </p>
                     </th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td class="px-0">
-                        <p class="seller-name">
-                            <strong>{{ $request->supplier->supplier_nama ?? '' }}</strong>
-                        </p>
-
-                        <p class="seller-address">
-                            NPWP: {{ $request->supplier->npwp ?? '' }}
-                        </p>
-
-                        <p class="seller-code">
-                            Alamat: {{ $request->supplier->alamat ?? '' }}
-                        </p>
-
-                        <p class="seller-code">
-                            Kota: {{ $request->supplier->kota ?? '' }}
-                        </p>
-
-                        <p class="seller-code">
-                            No Telepon: {{ $request->supplier->telepon ?? '' }}
-                        </p>
-
-                        <p class="seller-code">
-                            Email: {{ $request->supplier->email ?? '' }}
-                        </p>
-                    </td>
-                </tr>
-            </tbody>
         </table>
 
         {{-- Table --}}
         <table class="table table-items">
             <thead>
                 <tr>
-                    <th scope="col" class="border-0 pl-0">Nama Obat</th>
-                    <th scope="col" class="text-center border-0">Satuan</th>
-                    <th scope="col" class="text-right border-0">Jenis</th>
+                    <th scope="col" class="border-0 pl-0">Nama Barang</th>
+                    <th scope="col" class="text-center border-0">Jumlah</th>
+                    {{-- <th scope="col" class="text-right border-0">Jenis</th>
                     <th scope="col" class="text-right border-0">Kuantitas</th>
-                    <th scope="col" class="text-right border-0">Sub total</th>
+                    <th scope="col" class="text-right border-0">Sub total</th> --}}
                 </tr>
             </thead>
             <tbody>
@@ -191,17 +172,17 @@
                     <td class="pl-0">
                         {{ $item->medicine->nama_obat }}
                     </td>
-                    <td class="text-center">{{ $item->medicine->satuan }}</td>
-                    <td class="text-right">{{ $item->medicine->jenis }}</td>
+                    <td class="text-center">{{ $item->kuantitas }} {{ $item->medicine->satuan }}</td>
+                    {{-- <td class="text-right">{{ $item->medicine->jenis }}</td>
                     <td class="text-right">{{ $item->kuantitas }}</td>
                     <td class="text-right">
                         Rp. {{ number_format($item->total) }}
-                    </td>
+                    </td> --}}
                 </tr>
                 @endforeach
             </tbody>
         </table>
 
-        <h2>Total : Rp. {{ number_format($request->orderList->sum('total')) }}</h2>
+        {{-- <h2>Total : Rp. {{ number_format($request->orderList->sum('total')) }}</h2> --}}
     </body>
 </html>
