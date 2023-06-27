@@ -81,7 +81,6 @@
                         <tr>
                             <th scope="col">No</th>
                             <th scope="col">Obat</th>
-                            <th scope="col">No Batch</th>
                             <th scope="col">Kuantitas</th>
                             <th scope="col">Total</th>
                             <th scope="col">Action</th>
@@ -92,7 +91,6 @@
                             <tr scope="row">
                                 <td>{{ $index + 1 }}</td>
                                 <td>{{ $order['nama'] }}</td>
-                                <td>{{ $order['no_batch'] }}</td>
                                 <td>{{ $order['kuantitas'] }}</td>
                                 <td>Rp. {{ number_format($order['total']) }}</td>
                                 <td>
@@ -107,11 +105,11 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="6" class="text-center">No Records found ...</td>
+                                <td colspan="5" class="text-center">No Records found ...</td>
                             </tr>
                         @endforelse
                         <tr>
-                            <td colspan="5" class="text-center"><span class="fw-bolder fs-4">Grand Total</span></td>
+                            <td colspan="4" class="text-center"><span class="fw-bolder fs-4">Grand Total</span></td>
                             <td>Rp. {{ number_format($grandTotal) }}</td>
                         </tr>
                     </tbody>
