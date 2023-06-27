@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\User::create([
             'username' => 'apoteker',
             'password' => bcrypt('apoteker'),
-            'shared_password' => bcrypt('password'),
+            'shared_password' => bcrypt('asisten apoteker'),
             'role' => 3,
         ]);
 
