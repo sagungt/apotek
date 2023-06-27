@@ -42,7 +42,7 @@
                 </x-adminlte-input>
             @endif
 
-            <x-adminlte-input
+            {{-- <x-adminlte-input
                 name="no_faktur"
                 label="No Faktur"
                 placeholder="No Faktur"
@@ -54,7 +54,7 @@
                         <i class="fas fa-receipt"></i>
                     </div>
                 </x-slot>
-            </x-adminlte-input>
+            </x-adminlte-input> --}}
 
             <x-adminlte-input
                 autocomplete="tanggal"

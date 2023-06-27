@@ -24,12 +24,12 @@ class Sell extends Component
         'sell.tipe'           => 'required|in:Resep,Non Resep',
         'sell.nama_dokter'    => 'required_if:sell.tipe,Resep',
         'sell.nama_pelanggan' => 'required_if:sell.tipe,Resep',
-        'sell.no_faktur'      => 'required',
+        // 'sell.no_faktur'      => 'required',
     ];
 
     public function mount()
     {
-        $this->sell['no_faktur'] = Str::upper(Str::random(10));
+        // $this->sell['no_faktur'] = Str::upper(Str::random(10));
         $this->sell['tanggal'] = Carbon::now()->format('Y-m-d');
     }
 
@@ -46,6 +46,9 @@ class Sell extends Component
             ...$this->sell,
             'jumlah' => $this->grandTotal,
         ]);
+
+        $penjualan->no_faktur = 'OB' . Carbon::now()->format('dmY') . '-' . $penjualan->penjualan_id;
+        $penjualan->save();
 
         foreach ($this->orderList as $order) {
             $stock = Stock::find($order['obat_id']);
