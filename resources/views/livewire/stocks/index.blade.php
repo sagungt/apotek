@@ -138,7 +138,7 @@
                 @forelse ($purchases as $purchase)
                     <tr scope="row">
                         <td>{{ $purchase->pembelian_id }}</td>
-                        <td>{{ $purchase->no_faktur ?? 'Waiting for payment' }}</td>
+                        <td>{{ $purchase->no_faktur ?? '-' }}</td>
                         <td>{{ $purchase->supplier->supplier_nama }}</td>
                         <td>{{ $purchase->tanggal }}</td>
                         <td>{{ $purchase->tanggal_terima ?? '-' }}</td>
