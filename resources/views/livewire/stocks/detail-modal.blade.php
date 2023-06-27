@@ -126,28 +126,30 @@
                     <h4 class="fw-bold">Grand Total : Rp. {{ number_format($purchase?->total) }}</h4>
                 </div>
 
-                @if ($purchase?->status == 'Approved')
-                    <div class="d-flex g-2">
-                        <x-adminlte-button
-                            class="btn mb-3 mx-2"
-                            type="button"
-                            label="Print"
-                            theme="primary"
-                            icon="fas fa-print"
-                            wire:click="print"
-                        />
-                        <x-adminlte-button
-                            class="btn mb-3 mx-2"
-                            type="button"
-                            label="Download PDF"
-                            theme="outline-danger"
-                            icon="fas fa-file-pdf"
-                            wire:click="generatePdf"
-                            wire:loading.attr="disabled"
-                            wire:target="generatePdf"
-                        />
-                    </div>
-                @endif
+                @can('apoteker')
+                    @if ($purchase?->status == 'Approved')
+                        <div class="d-flex g-2">
+                            <x-adminlte-button
+                                class="btn mb-3 mx-2"
+                                type="button"
+                                label="Print"
+                                theme="primary"
+                                icon="fas fa-print"
+                                wire:click="print"
+                            />
+                            <x-adminlte-button
+                                class="btn mb-3 mx-2"
+                                type="button"
+                                label="Download PDF"
+                                theme="outline-danger"
+                                icon="fas fa-file-pdf"
+                                wire:click="generatePdf"
+                                wire:loading.attr="disabled"
+                                wire:target="generatePdf"
+                            />
+                        </div>
+                    @endif
+                @endcan
     
                 @can('pemilik')
                     @if ($purchase?->status === 'Requested')
