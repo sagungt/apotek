@@ -190,7 +190,7 @@
                     <td class="pl-0">
                         {{ $item['medicine']['medicine']['nama_obat'] }}
                     </td>
-                    <td class="text-center">{{ $item['kuantitas'] }}</td>
+                    <td class="text-center">{{ $item['kuantitas'] }} {{ $item['medicine']['medicine']['satuan'] }}</td>
                     <td class="text-right">{{ $item['medicine']['no_batch'] }}</td>
                     <td class="text-right">{{ $item['medicine']['no_exp'] }}</td>
                     <td class="text-right">
