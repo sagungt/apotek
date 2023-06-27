@@ -1,6 +1,6 @@
 <div>
     @can('apoteker')
-        <a href="{{ route('sales.index') }}">
+        <a href="{{ route('sales.sell) }}">
             <x-adminlte-button
                 class="btn mb-3"
                 type="button"
