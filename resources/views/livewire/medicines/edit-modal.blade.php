@@ -96,7 +96,7 @@
                     @endforeach
                 </x-adminlte-select>
 
-                <x-adminlte-select
+                {{-- <x-adminlte-select
                     name="brand"
                     label="Brand"
                     wire:model.defer="medicine.merek_id"
@@ -106,7 +106,7 @@
                     @foreach ($brands as $brand)
                         <option value="{{ $brand->merek_id }}">{{ $brand->nama_merek }}</option>
                     @endforeach
-                </x-adminlte-select>
+                </x-adminlte-select> --}}
 
                 <x-adminlte-button
                     class="btn-flat"

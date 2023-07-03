@@ -93,7 +93,8 @@ class Sell extends Component
 
     public function add($stock, $id, $qty, ?callable $callback = null)
     {
-        $price = ($stock->medicine->harga + ($stock->medicine->harga * 0.1)) * $qty;
+        // $price = ($stock->medicine->harga + ($stock->medicine->harga * 0.1)) * $qty;
+        $price = $stock->harga_jual * $qty;
         $inList = array_filter($this->orderList, fn ($order) => $order['obat_id'] == $id);
         if (empty($inList)) {
             array_push($this->orderList, [
@@ -148,7 +149,9 @@ class Sell extends Component
 
     public function render()
     {
-        $stocks = Stock::with(['medicine', 'medicine.category', 'medicine.brand'])
+        $stocks = Stock::query()
+            // ->with(['medicine', 'medicine.category', 'medicine.brand'])
+            ->with(['medicine', 'medicine.category'])
             ->where('status', 'Active')
             ->when(strlen($this->search) > 0, fn ($query) =>
                 $query
@@ -162,9 +165,9 @@ class Sell extends Component
                             ->orWhereHas('category', fn ($query) =>
                                 $query->where('nama_kategori', 'like', '%' . $this->search . '%')
                             )
-                            ->orWhereHas('brand', fn ($query) =>
-                                $query->where('nama_merek', 'like', '%' . $this->search . '%')
-                            )
+                            // ->orWhereHas('brand', fn ($query) =>
+                            //     $query->where('nama_merek', 'like', '%' . $this->search . '%')
+                            // )
                     )    
                     ->orWhere('no_batch', 'like', '%' . $this->search . '%')
             )

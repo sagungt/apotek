@@ -216,12 +216,13 @@
                             </div>
                             <div class="d-flex">
                                 <span class="w-25 fw-bold">Harga</span>
-                                <span class="w-75">Rp. {{ number_format($stock->medicine->harga + ($stock->medicine->harga * 0.1)) }}</span>
+                                {{-- <span class="w-75">Rp. {{ number_format($stock->medicine->harga + ($stock->medicine->harga * 0.1)) }}</span> --}}
+                                <span class="w-75">Rp. {{ number_format($stock->harga_jual) }}</span>
                             </div>
-                            <div class="d-flex">
+                            {{-- <div class="d-flex">
                                 <span class="w-25 fw-bold">Merek</span>
                                 <span class="w-75">{{ $stock->medicine->brand->nama_merek }}</span>
-                            </div>
+                            </div> --}}
                             <div class="d-flex">
                                 <span class="w-25 fw-bold">No Exp</span>
                                 <span class="w-75">{{ Carbon\Carbon::parse($stock->no_exp)->format('d F Y') }}</span>

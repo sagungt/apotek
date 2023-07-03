@@ -20,7 +20,7 @@ class EditModal extends Component
         'medicine.harga'       => 'required|numeric',
         'medicine.jenis'       => 'required',
         'medicine.kategori_id' => 'required|exists:kategori,kategori_id',
-        'medicine.merek_id'    => 'required|exists:merek,merek_id',
+        // 'medicine.merek_id'    => 'required|exists:merek,merek_id',
     ];
     protected $messages = [
         'medicine.nama_obat.required'   => 'The Medicine Name field is required',
@@ -28,7 +28,7 @@ class EditModal extends Component
         'medicine.harga.required'       => 'The Medicine Price field is required',
         'medicine.jenis.required'       => 'The Medicine Type field is required',
         'medicine.kategori_id.required' => 'The Medicine Category field is required',
-        'medicine.merek_id.required'    => 'The Medicine Brand field is required',
+        // 'medicine.merek_id.required'    => 'The Medicine Brand field is required',
     ];
 
     public function mount ()

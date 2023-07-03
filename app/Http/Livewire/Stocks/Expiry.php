@@ -33,7 +33,8 @@ class Expiry extends Component
         switch ($role) {
             case 2:
                 $expires = Stock::query()
-                    ->with(['medicine', 'medicine.category', 'medicine.brand'])
+                    // ->with(['medicine', 'medicine.category', 'medicine.brand'])
+                    ->with(['medicine', 'medicine.category'])
                     ->where(function ($query) {
                         $threeMonthFromNow = Carbon::now()->addMonths(3);
                         return $query

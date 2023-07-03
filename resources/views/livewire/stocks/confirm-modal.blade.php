@@ -100,22 +100,24 @@
                         </x-slot>
                     </x-adminlte-input>
 
-                    <x-adminlte-textarea
-                        class="flex-fill"
-                        autocomplete="keterangan"
-                        name="keterangan"
-                        label="Keterangan"
-                        placeholder="Keterangan"
-                        wire:model.defer="purchase.keterangan"
-                        error-key="purchase.keterangan"
-                        :disabled="$purchase?->status !== 'Approved'"
-                    >
-                        <x-slot name="prependSlot">
-                            <div class="input-group-text">
-                                <i class="fas fa-info"></i>
-                            </div>
-                        </x-slot>
-                    </x-adminlte-textarea>
+                    {{-- @can('pemilik')
+                        <x-adminlte-textarea
+                            class="flex-fill"
+                            autocomplete="keterangan"
+                            name="keterangan"
+                            label="Keterangan"
+                            placeholder="Keterangan"
+                            wire:model.defer="purchase.keterangan"
+                            error-key="purchase.keterangan"
+                            :disabled="$purchase?->status !== 'Approved'"
+                        >
+                            <x-slot name="prependSlot">
+                                <div class="input-group-text">
+                                    <i class="fas fa-info"></i>
+                                </div>
+                            </x-slot>
+                        </x-adminlte-textarea>
+                    @endcan --}}
 
                     @if ($purchase?->status === 'Approved')
                         <x-adminlte-input-file
@@ -191,10 +193,10 @@
                                                 <span class="w-25 fw-bold">Kategori</span>
                                                 <span class="w-75">{{ $order->medicine->category->nama_kategori }}</span>
                                             </div>
-                                            <div class="d-flex">
+                                            {{-- <div class="d-flex">
                                                 <span class="w-25 fw-bold">Merek</span>
                                                 <span class="w-75">{{ $order->medicine->brand->nama_merek }}</span>
-                                            </div>
+                                            </div> --}}
                                             @if ($purchase->status === 'Approved')
                                                 <div class="flex-fill">
                                                     <x-adminlte-input

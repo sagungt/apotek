@@ -15,6 +15,9 @@ class DetailModal extends Component
     public $ext;
 
     protected $listeners = ['setPurchase'];
+    protected $rules = [
+        'purchase.keterangan' => 'nullable',
+    ];
 
     public function setPurchase($id)
     {

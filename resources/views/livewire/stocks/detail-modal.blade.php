@@ -110,10 +110,10 @@
                                                 <span class="w-25 fw-bold">Kategori</span>
                                                 <span class="w-75">{{ $order->medicine->category->nama_kategori }}</span>
                                             </div>
-                                            <div class="d-flex">
+                                            {{-- <div class="d-flex">
                                                 <span class="w-25 fw-bold">Merek</span>
                                                 <span class="w-75">{{ $order->medicine->brand->nama_merek }}</span>
-                                            </div>
+                                            </div> --}}
                                         </div>
                                     </div>
                                 </div>
@@ -153,6 +153,21 @@
     
                 @can('pemilik')
                     @if ($purchase?->status === 'Requested')
+                        <x-adminlte-textarea
+                            class="flex-fill"
+                            autocomplete="keterangan"
+                            name="keterangan"
+                            label="Keterangan"
+                            placeholder="Keterangan"
+                            wire:model.defer="purchase.keterangan"
+                            error-key="purchase.keterangan"
+                        >
+                            <x-slot name="prependSlot">
+                                <div class="input-group-text">
+                                    <i class="fas fa-info"></i>
+                                </div>
+                            </x-slot>
+                        </x-adminlte-textarea>
                         <div class="d-flex">
                             <x-adminlte-button
                                 class="btn-flat flex-fill m-2"

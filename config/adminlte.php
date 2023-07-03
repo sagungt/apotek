@@ -380,12 +380,12 @@ return [
             'can' => ['gudang'],
             'icon' => 'fas fa-list'
         ],
-        [
-            'text' => 'Merek',
-            'url'  => 'brands',
-            'can' => ['gudang'],
-            'icon' => 'fas fa-copyright'
-        ],
+        // [
+        //     'text' => 'Merek',
+        //     'url'  => 'brands',
+        //     'can' => ['gudang'],
+        //     'icon' => 'fas fa-copyright'
+        // ],
         [
             'text' => 'Supplier',
             'url'  => 'suppliers',

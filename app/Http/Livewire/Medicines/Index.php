@@ -23,7 +23,8 @@ class Index extends Component
     public function render()
     {
         $medicines = Medicine::query()
-            ->with(['category', 'brand'])
+            // ->with(['category', 'brand'])
+            ->with(['category'])
             ->when(strlen($this->search) > 0, fn ($query) =>
                 $query
                     ->where('obat_id', 'like', '%' . $this->search . '%')
@@ -34,9 +35,9 @@ class Index extends Component
                     ->orWhereHas('category', fn ($query) =>
                         $query->where('nama_kategori', 'like', '%' . $this->search . '%')
                     )
-                    ->orWhereHas('brand', fn ($query) =>
-                        $query->where('nama_merek', 'like', '%' . $this->search . '%')
-                    )
+                    // ->orWhereHas('brand', fn ($query) =>
+                    //     $query->where('nama_merek', 'like', '%' . $this->search . '%')
+                    // )
             )
             ->paginate(10);
 

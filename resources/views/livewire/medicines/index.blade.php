@@ -33,7 +33,7 @@
                     <th scope="col">Harga</th>
                     <th scope="col">Jenis</th>
                     <th scope="col">Kategori</th>
-                    <th scope="col">Merek</th>
+                    {{-- <th scope="col">Merek</th> --}}
                     <th scope="col">Action</th>
                 </tr>
             </thead>
@@ -46,7 +46,7 @@
                         <td>{{ $medicine->harga ?? '-' }}</td>
                         <td>{{ $medicine->jenis ?? '-' }}</td>
                         <td>{{ $medicine->category?->nama_kategori ?? '-' }}</td>
-                        <td>{{ $medicine->brand?->nama_merek ?? '-' }}</td>
+                        {{-- <td>{{ $medicine->brand?->nama_merek ?? '-' }}</td> --}}
                         <td>
                             <button
                                 class="btn btn-xs btn-default text-primary mx-1"
@@ -70,7 +70,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="8" class="text-center">No Records found ...</td>
+                        <td colspan="7" class="text-center">No Records found ...</td>
                     </tr>
                 @endforelse
             </tbody>

@@ -19,9 +19,9 @@ return new class extends Migration
             $table->foreignId('kategori_id')
                 ->references('kategori_id')
                 ->on('kategori');
-            $table->foreignId('merek_id')
-                ->references('merek_id')
-                ->on('merek');
+            // $table->foreignId('merek_id')
+            //     ->references('merek_id')
+            //     ->on('merek');
             $table->string('jenis');
             $table->timestamps();
         });
