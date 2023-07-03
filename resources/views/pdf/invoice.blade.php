@@ -153,8 +153,11 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th class="border-0 pl-0 party-header">
-                            {{ Buyer }}
+                        <th class="border-0 pl-0">
+                            Pelanggan
+                        </th>
+                        <th class="border-0 pl-0">
+                            Dokter
                         </th>
                     </tr>
                 </thead>
@@ -162,8 +165,15 @@
                     <tr>
                         <td class="px-0">
                             @if($nama_pelanggan)
-                                <p class="buyer-name">
+                                <p>
                                     <strong>{{ $nama_pelanggan }}</strong>
+                                </p>
+                            @endif
+                        </td>
+                        <td class="px-0">
+                            @if($nama_dokter)
+                                <p>
+                                    <strong>{{ $nama_dokter }}</strong>
                                 </p>
                             @endif
                         </td>

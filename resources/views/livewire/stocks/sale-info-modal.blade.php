@@ -102,10 +102,10 @@
                                                 <span class="w-25 fw-bold">Kategori</span>
                                                 <span class="w-75">{{ $order->medicine->medicine->category->nama_kategori }}</span>
                                             </div>
-                                            <div class="d-flex">
+                                            {{-- <div class="d-flex">
                                                 <span class="w-25 fw-bold">Merek</span>
                                                 <span class="w-75">{{ $order->medicine->medicine->brand->nama_merek }}</span>
-                                            </div>
+                                            </div> --}}
                                         </div>
                                     </div>
                                 </div>
