@@ -72,7 +72,8 @@
                                     <div class="card-header">
                                         <h4 class="card-title w-100">
                                             <a class="d-block w-100" data-toggle="collapse" href="#{{ $id }}">
-                                                {{ $order->medicine->nama_obat }} - Rp. {{ number_format($order->total) }}
+                                                {{-- {{ $order->medicine->nama_obat }} - Rp. {{ number_format($order->total) }} --}}
+                                                {{ $order->medicine->nama_obat }}
                                             </a>
                                         </h4>
                                     </div>
@@ -91,21 +92,23 @@
                                                 <span class="w-75">{{ $order->medicine->satuan }}</span>
                                             </div>
                                             <div class="d-flex">
-                                                <span class="w-25 fw-bold">jenis</span>
+                                                <span class="w-25 fw-bold">Jenis</span>
                                                 <span class="w-75">{{ $order->medicine->jenis }}</span>
                                             </div>
-                                            <div class="d-flex">
+                                            {{-- <div class="d-flex">
                                                 <span class="w-25 fw-bold">Harga</span>
                                                 <span class="w-75">Rp. {{ number_format($order->medicine->harga) }}</span>
-                                            </div>
+                                                <span class="w-75">-</span>
+                                            </div> --}}
                                             <div class="d-flex">
                                                 <span class="w-25 fw-bold">Kuantitas</span>
                                                 <span class="w-75">{{ $order->kuantitas }}</span>
                                             </div>
-                                            <div class="d-flex">
+                                            {{-- <div class="d-flex">
                                                 <span class="w-25 fw-bold">Total</span>
                                                 <span class="w-75">Rp. {{ number_format($order->total) }}</span>
-                                            </div>
+                                                <span class="w-75">-</span>
+                                            </div> --}}
                                             <div class="d-flex">
                                                 <span class="w-25 fw-bold">Kategori</span>
                                                 <span class="w-75">{{ $order->medicine->category->nama_kategori }}</span>

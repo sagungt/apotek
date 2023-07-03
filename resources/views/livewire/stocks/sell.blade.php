@@ -142,7 +142,7 @@
                 </x-slot>
                 <option>Pilih Obat</option>
                 @forelse ($stocks as $stock)
-                    <option value="{{ $stock->id }}">{{ $stock->medicine->nama_obat }} ({{ $stock->stok }}) | Rp. {{ number_format($stock->medicine->harga + ($stock->medicine->harga * 0.1)) }}</option>
+                    <option value="{{ $stock->id }}">{{ $stock->medicine->nama_obat }} ({{ $stock->stok }}) | Rp. {{ number_format($stock->harga_jual + ($stock->harga_jual * 0.1)) }}</option>
                 @empty
                     <option disabled>Tidak ada obat</option>
                 @endforelse
@@ -217,7 +217,7 @@
                             <div class="d-flex">
                                 <span class="w-25 fw-bold">Harga</span>
                                 {{-- <span class="w-75">Rp. {{ number_format($stock->medicine->harga + ($stock->medicine->harga * 0.1)) }}</span> --}}
-                                <span class="w-75">Rp. {{ number_format($stock->harga_jual) }}</span>
+                                <span class="w-75">Rp. {{ number_format($stock->harga_jual + ($stock->harga_jual * 0.1)) }}</span>
                             </div>
                             {{-- <div class="d-flex">
                                 <span class="w-25 fw-bold">Merek</span>

@@ -88,7 +88,7 @@
                                             </div>
                                             <div class="d-flex">
                                                 <span class="w-25 fw-bold">Harga</span>
-                                                <span class="w-75">Rp. {{ number_format($order->medicine->harga_jual) }}</span>
+                                                <span class="w-75">Rp. {{ number_format($order->medicine->harga_jual + ($order->medicine->harga_jual * 0.1)) }}</span>
                                             </div>
                                             <div class="d-flex">
                                                 <span class="w-25 fw-bold">Kuantitas</span>

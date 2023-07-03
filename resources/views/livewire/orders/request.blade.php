@@ -66,7 +66,7 @@
                 name="kuantitas"
                 label="Kuantitas"
                 type="number"
-                placeholder="Kunatitas"
+                placeholder="Kuantitas"
                 wire:model.defer="orderList.kuantitas"
                 error-key="orderList.kuantitas"
             >

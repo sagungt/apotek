@@ -94,7 +94,7 @@ class Sell extends Component
     public function add($stock, $id, $qty, ?callable $callback = null)
     {
         // $price = ($stock->medicine->harga + ($stock->medicine->harga * 0.1)) * $qty;
-        $price = $stock->harga_jual * $qty;
+        $price = ($stock->harga_jual + ($stock->harga_jual * 0.1)) * $qty;
         $inList = array_filter($this->orderList, fn ($order) => $order['obat_id'] == $id);
         if (empty($inList)) {
             array_push($this->orderList, [
@@ -145,6 +145,12 @@ class Sell extends Component
     public function updated($propName, $val)
     {
         $this->resetErrorBag();
+    }
+
+    public function deleteOrder($index)
+    {
+        array_splice($this->orderList, $index, 1);
+        $this->grandTotal = array_sum(collect($this->orderList)->pluck('total')->toArray());
     }
 
     public function render()

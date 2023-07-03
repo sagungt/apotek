@@ -20,7 +20,8 @@
                     <th scope="col">Nama Obat</th>
                     <th scope="col">No Batch</th>
                     <th scope="col">No Exp</th>
-                    <th scope="col">Harga</th>
+                    <th scope="col">Harga Beli</th>
+                    <th scope="col">Harga Jual</th>
                     <th scope="col">Stock</th>
                     <th scope="col">Status</th>
                     <th scope="col">Action</th>
@@ -33,6 +34,7 @@
                         <td>{{ $stock->no_batch }}</td>
                         <td>{{ $stock->no_exp }}</td>
                         <td>Rp. {{ number_format($stock->harga_jual) }}</td>
+                        <td>Rp. {{ number_format($stock->harga_jual + ($stock->harga_jual * 0.1)) }}</td>
                         <td>{{ $stock->stok }}</td>
                         <td>
                             <span
@@ -71,7 +73,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="7" class="text-center">No Records found ...</td>
+                        <td colspan="8" class="text-center">No Records found ...</td>
                     </tr>
                 @endforelse
             </tbody>
