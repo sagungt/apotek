@@ -47,7 +47,8 @@ class Expiry extends Component
             default:
                 $expires = Stock::query()
                     ->where('status', 'Almost Expired')
-                    ->with(['medicine', 'medicine.category', 'medicine.brand'])
+                    // ->with(['medicine', 'medicine.category', 'medicine.brand'])
+                    ->with(['medicine', 'medicine.category'])
                     ->latest()
                     ->paginate(10);
                 break;
