@@ -129,6 +129,7 @@
     </head>
 
     <body>
+        <p class="text-right">{{ $name }} - {{ $now }}</p>
         {{-- Header --}}
         <table class="table">
             <thead>
@@ -172,7 +173,7 @@
                     <td class="pl-0">
                         {{ $item->medicine->nama_obat }}
                     </td>
-                    <td class="text-center">{{ $item->kuantitas }} {{ $item->medicine->satuan }}</td>
+                    <td class="text-center">{{ $item->kuantitas }} Box</td>
                     {{-- <td class="text-right">{{ $item->medicine->jenis }}</td>
                     <td class="text-right">{{ $item->kuantitas }}</td>
                     <td class="text-right">
