@@ -101,7 +101,7 @@
                             <tr scope="row">
                                 <td>{{ $index + 1 }}</td>
                                 <td>{{ $order['nama'] }}</td>
-                                <td>{{ $order['kuantitas'] }}</td>
+                                <td>{{ $order['kuantitas'] }} Box</td>
                                 <td>
                                     <button
                                         class="btn btn-xs btn-default text-danger mx-1"

@@ -14,6 +14,7 @@ class ConfirmModal extends Component
     public $purchase;
     public $orders;
     public $attachment;
+    public $qty = [];
 
     protected $listeners = ['setPurchase'];
 
@@ -25,6 +26,7 @@ class ConfirmModal extends Component
         'orders.*.no_batch'       => 'required',
         'orders.*.no_exp'         => 'required|date',
         'orders.*.harga_jual'     => 'required|numeric',
+        'qty.*'                   => 'required|numeric',
         'attachment'              => 'required|file|mimes:jpg,png,pdf'
     ];
 
@@ -38,10 +40,10 @@ class ConfirmModal extends Component
     {
         $this->validate();
 
-        foreach ($this->orders as $order) {
+        foreach ($this->orders as $index => $order) {
             Stock::create([
                 'obat_id'    => $order->medicine->obat_id,
-                'stok'       => $order->kuantitas,
+                'stok'       => $this->qty[$index],
                 'harga_jual' => $order->harga_jual,
                 'no_batch'   => $order->no_batch,
                 'no_exp'     => $order->no_exp,

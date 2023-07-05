@@ -184,7 +184,7 @@
                                             </div> --}}
                                             <div class="d-flex">
                                                 <span class="w-25 fw-bold">Kuantitas</span>
-                                                <span class="w-75">{{ $order->kuantitas }}</span>
+                                                <span class="w-75">{{ $order->kuantitas }} Box</span>
                                             </div>
                                             {{-- <div class="d-flex">
                                                 <span class="w-25 fw-bold">Total</span>
@@ -251,6 +251,25 @@
                                                         <x-slot name="prependSlot">
                                                             <div class="input-group-text">
                                                                 <i class="fas fa-hourglass-half"></i>
+                                                            </div>
+                                                        </x-slot>
+                                                    </x-adminlte-input>
+                                                </div>
+                                                <div class="flex-fill">
+                                                    <x-adminlte-input
+                                                        autocomplete="kuantitas"
+                                                        name="kuantitas"
+                                                        label="Kuantitas"
+                                                        type="number"
+                                                        placeholder="Kuantitas"
+                                                        wire:model.defer="qty.{{ $index }}"
+                                                        error-key="qty.{{ $index }}"
+                                                        :disabled="$purchase?->status !== 'Approved'"
+
+                                                    >
+                                                        <x-slot name="prependSlot">
+                                                            <div class="input-group-text">
+                                                                <i class="fas fa-plus"></i>
                                                             </div>
                                                         </x-slot>
                                                     </x-adminlte-input>

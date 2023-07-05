@@ -158,7 +158,7 @@ class Sell extends Component
         $stocks = Stock::query()
             // ->with(['medicine', 'medicine.category', 'medicine.brand'])
             ->with(['medicine', 'medicine.category'])
-            ->where('status', 'Active')
+            ->whereIn('status', ['Active', 'Almost Expired'])
             ->when(strlen($this->search) > 0, fn ($query) =>
                 $query
                     ->whereHas('medicine', fn ($query) =>
