@@ -16,6 +16,7 @@ class Index extends Component
     public $isHistory;
     public $date;
     public $search;
+    public $name;
 
     protected $listeners = ['reset' => 'refresh'];
 
@@ -60,11 +61,13 @@ class Index extends Component
 
     public function print()
     {
-        return redirect()->route('histories.printPurchases', ['date' => $this->currentMonth->format('Y-m-d')]);
+        $this->validate(['name' => 'required']);
+        return redirect()->route('histories.printPurchases', ['date' => $this->currentMonth->format('Y-m-d'), 'name' => $this->name]);
     }
 
     public function generatePdf()
     {
+        $this->validate(['name' => 'required']);
         $purchases = Purchase::query()
             ->whereIn('status', ['Complete'])
             ->where(function ($query) {
@@ -76,7 +79,7 @@ class Index extends Component
             })
             ->get();
         $filename = Carbon::now()->format('Y-m') . '_PEMBELIAN.pdf';
-        $pdf = Pdf::loadView('pdf.pembelian', ['pembelian' => $purchases, 'tanggal' => Carbon::now()->format('Y-m')])->output();
+        $pdf = Pdf::loadView('pdf.pembelian', ['pembelian' => $purchases, 'tanggal' => Carbon::now()->format('Y-m'), 'name' => $this->name, 'now' => Carbon::now()->format('Y-m-d')])->output();
         return response()->streamDownload(
             fn () => print($pdf),
             $filename,

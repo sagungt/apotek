@@ -102,7 +102,7 @@
                                             </div> --}}
                                             <div class="d-flex">
                                                 <span class="w-25 fw-bold">Kuantitas</span>
-                                                <span class="w-75">{{ $order->kuantitas }}</span>
+                                                <span class="w-75">{{ $order->kuantitas }} Box</span>
                                             </div>
                                             {{-- <div class="d-flex">
                                                 <span class="w-25 fw-bold">Total</span>
@@ -138,7 +138,9 @@
                                 label="Print"
                                 theme="primary"
                                 icon="fas fa-print"
-                                wire:click="print"
+                                {{-- wire:click="print" --}}
+                                data-toggle="modal"
+                                data-target="#print-modal"
                             />
                             <x-adminlte-button
                                 class="btn mb-3 mx-2"
@@ -146,9 +148,11 @@
                                 label="Download PDF"
                                 theme="outline-danger"
                                 icon="fas fa-file-pdf"
-                                wire:click="generatePdf"
+                                {{-- wire:click="generatePdf"
                                 wire:loading.attr="disabled"
-                                wire:target="generatePdf"
+                                wire:target="generatePdf" --}}
+                                data-toggle="modal"
+                                data-target="#download-modal"
                             />
                         </div>
                     @endif
@@ -206,5 +210,74 @@
                 @endcan --}}
             </div>
         </form>
+    </x-adminlte-modal>
+
+    <x-adminlte-modal
+        id="print-modal"
+        title="Nama Pencetak"
+        theme="success"
+        icon="fas fa-print"
+        size='lg'
+        v-centered
+        wire:ignore.self
+        x-data
+    >
+        <x-adminlte-input
+            autocomplete="nama"
+            name="nama"
+            label="Nama Pencetak"
+            placeholder="Nama Pencetak"
+            wire:model.defer="name"
+            error-key="name"
+        >
+            <x-slot name="prependSlot">
+                <div class="input-group-text">
+                    <i class="fas fa-user"></i>
+                </div>
+            </x-slot>
+        </x-adminlte-input>
+
+        <x-slot name="footerSlot">
+            <x-adminlte-button class="mr-auto" theme="primary" label="Print" wire:click="print"/>
+            <x-adminlte-button label="Dismiss" data-dismiss="print-modal"/>
+        </x-slot>
+    </x-adminlte-modal>
+
+    <x-adminlte-modal
+        id="download-modal"
+        title="Nama Pencetak"
+        theme="success"
+        icon="fas fa-print"
+        size='lg'
+        v-centered
+        wire:ignore.self
+        x-data
+    >
+        <x-adminlte-input
+            autocomplete="nama"
+            name="nama"
+            label="Nama Pencetak"
+            placeholder="Nama Pencetak"
+            wire:model.defer="name"
+            error-key="name"
+        >
+            <x-slot name="prependSlot">
+                <div class="input-group-text">
+                    <i class="fas fa-user"></i>
+                </div>
+            </x-slot>
+        </x-adminlte-input>
+
+        <x-slot name="footerSlot">
+            <x-adminlte-button
+                class="mr-auto"
+                theme="primary"
+                label="Download PDF"
+                wire:click="generatePdf"
+                wire:loading.attr="disabled"
+                wire:target="generatePdf"
+            />
+            <x-adminlte-button label="Dismiss" data-dismiss="download-modal"/>
+        </x-slot>
     </x-adminlte-modal>
 </div>

@@ -19,7 +19,9 @@
                 label="Print"
                 theme="primary"
                 icon="fas fa-print"
-                wire:click="print"
+                {{-- wire:click="print" --}}
+                data-toggle="modal"
+                data-target="#print"
             />
             <x-adminlte-button
                 class="btn mb-3"
@@ -27,9 +29,11 @@
                 label="Download PDF"
                 theme="outline-danger"
                 icon="fas fa-file-pdf"
-                wire:click="generatePdf"
+                {{-- wire:click="generatePdf"
                 wire:loading.attr="disabled"
-                wire:target="generatePdf"
+                wire:target="generatePdf" --}}
+                data-toggle="modal"
+                data-target="#download"
             />
         @endif
     @endcan
@@ -154,6 +158,18 @@
                             >
                                 {{ $purchase->status }}
                             </span>
+                            <br>
+                            <span class="text-sm">
+                                @if ($purchase->status == 'Requested')
+                                    Permohonan pesanan dibuat, menunggu persetujuan
+                                @elseif ($purchase->status == 'Rejected')
+                                    Permohonan pesanan ditolak
+                                @elseif ($purchase->status == 'Approved')
+                                    Permohonan pesanan disetujui
+                                @elseif  ($purchase->status == 'Complete')
+                                    Pesanan berhasil dan selesai
+                                @endif
+                            </span>
                         </td>
                         @unless ($isHistory)
                             <td>
@@ -204,4 +220,78 @@
     <livewire:stocks.detail-modal />
 
     <livewire:stocks.confirm-modal />
+
+    <x-adminlte-modal
+        id="print"
+        title="Nama Pencetak"
+        theme="success"
+        icon="fas fa-print"
+        size='lg'
+        v-centered
+        wire:ignore.self
+        x-data
+    >
+        <x-adminlte-input
+            autocomplete="nama"
+            name="nama"
+            label="Nama Pencetak"
+            placeholder="Nama Pencetak"
+            wire:model.defer="name"
+            error-key="name"
+        >
+            <x-slot name="prependSlot">
+                <div class="input-group-text">
+                    <i class="fas fa-user"></i>
+                </div>
+            </x-slot>
+        </x-adminlte-input>
+
+        <x-slot name="footerSlot">
+            <x-adminlte-button
+                class="mr-auto"
+                theme="primary"
+                label="Print"
+                wire:click="print"
+            />
+            <x-adminlte-button label="Dismiss" data-dismiss="print"/>
+        </x-slot>
+    </x-adminlte-modal>
+
+    <x-adminlte-modal
+        id="download"
+        title="Nama Pencetak"
+        theme="success"
+        icon="fas fa-print"
+        size='lg'
+        v-centered
+        wire:ignore.self
+        x-data
+    >
+        <x-adminlte-input
+            autocomplete="nama"
+            name="nama"
+            label="Nama Pencetak"
+            placeholder="Nama Pencetak"
+            wire:model.defer="name"
+            error-key="name"
+        >
+            <x-slot name="prependSlot">
+                <div class="input-group-text">
+                    <i class="fas fa-user"></i>
+                </div>
+            </x-slot>
+        </x-adminlte-input>
+
+        <x-slot name="footerSlot">
+            <x-adminlte-button
+                class="mr-auto"
+                theme="primary"
+                label="Download PDF"
+                wire:click="generatePdf"
+                wire:loading.attr="disabled"
+                wire:target="generatePdf"
+            />
+            <x-adminlte-button label="Dismiss" data-dismiss="download"/>
+        </x-slot>
+    </x-adminlte-modal>
 </div>

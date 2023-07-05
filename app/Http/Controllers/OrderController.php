@@ -42,12 +42,14 @@ class OrderController extends Controller
 
     public function printSaleInfo(Request $request, $id = null)
     {
+        $name = $request->query('name');
         $sale = Sell::with('orderList', 'orderList.medicine', 'orderList.medicine.medicine')->find($id);
-        return Pdf::loadView('pdf.invoice', $sale?->toArray())->stream();
+        return Pdf::loadView('pdf.invoice', [...$sale?->toArray(), 'name' => $name, 'now' => Carbon::now()->format('Y-m-d')])->stream();
     }
 
     public function printPurchases(Request $request, $date)
     {
+        $name = $request->query('name');
         $currentMonth = Carbon::parse($date);
         $purchases = Purchase::query()
             ->whereIn('status', ['Complete'])
@@ -59,11 +61,12 @@ class OrderController extends Controller
                     ->whereDate('tanggal', '<=', $last);
                 })
             ->get();
-        return Pdf::loadView('pdf.pembelian', ['pembelian' => $purchases, 'tanggal' => $currentMonth->format('Y-m')])->stream();
+        return Pdf::loadView('pdf.pembelian', ['pembelian' => $purchases, 'tanggal' => $currentMonth->format('Y-m'), 'name' => $name, 'now' => Carbon::now()->format('Y-m-d')])->stream();
     }
 
     public function printSales(Request $request, $date)
     {
+        $name = $request->query('name');
         $currentMonth = Carbon::parse($date);
         $sales = Sell::query()
             ->where(function ($query) use ($currentMonth) {
@@ -74,12 +77,13 @@ class OrderController extends Controller
                     ->whereDate('tanggal', '<=', $last);
             })
             ->get();
-        return Pdf::loadView('pdf.penjualan', ['penjualan' => $sales, 'tanggal' => $currentMonth->format('Y-m')])->stream();
+        return Pdf::loadView('pdf.penjualan', ['penjualan' => $sales, 'tanggal' => $currentMonth->format('Y-m'), 'name' => $name, 'now' => Carbon::now()->format('Y-m-d')])->stream();
     }
 
     public function print($id)
     {
+        $name = request()->query('name');
         $request = Purchase::with('orderList', 'orderList.medicine', 'supplier')->find($id);
-        return Pdf::loadView('pdf.request', ['request' => $request, 'tanggal' => $request->tanggal])->stream();
+        return Pdf::loadView('pdf.request', ['request' => $request, 'tanggal' => $request->tanggal, 'name' => $name, 'now' => Carbon::now()->format('Y-m-d')])->stream();
     }
 }

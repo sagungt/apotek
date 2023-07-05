@@ -15,6 +15,7 @@ class Sales extends Component
     public $isHistory;
     public $currentMonth;
     public $search = '';
+    public $name;
 
     public function mount($isHistory = true)
     {
@@ -52,11 +53,13 @@ class Sales extends Component
 
     public function print()
     {
-        return redirect()->route('histories.printSales', ['date' => $this->currentMonth->format('Y-m-d')]);
+        $this->validate(['name' => 'required']);
+        return redirect()->route('histories.printSales', ['date' => $this->currentMonth->format('Y-m-d'), 'name' => $this->name]);
     }
 
     public function generatePdf()
     {
+        $this->validate(['name' => 'required']);
         $sales = Sell::query()
             ->where(function ($query) {
                 $first = Carbon::parse($this->currentMonth)->startOfMonth();
@@ -67,7 +70,7 @@ class Sales extends Component
             })
             ->get();
         $filename = Carbon::now()->format('Y-m') . '_PENJUALAN.pdf';
-        $pdf = Pdf::loadView('pdf.penjualan', ['penjualan' => $sales, 'tanggal' => Carbon::now()->format('Y-m')])->output();
+        $pdf = Pdf::loadView('pdf.penjualan', ['penjualan' => $sales, 'tanggal' => Carbon::now()->format('Y-m'), 'name' => $this->name, 'now' => Carbon::now()->format('Y-m-d')])->output();
         return response()->streamDownload(
             fn () => print($pdf),
             $filename,
