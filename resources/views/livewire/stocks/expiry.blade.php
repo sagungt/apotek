@@ -23,7 +23,11 @@
                     <th scope="col">No Exp</th>
                     <th scope="col">Stok</th>
                     <th scope="col">Status</th>
-                    <th scope="col">Action</th>
+                    <th scope="col">
+                        @can('gudang')
+                            Action
+                        @endcan
+                    </th>
                 </tr>
             </thead>
             <tbody>
