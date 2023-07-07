@@ -85,6 +85,10 @@
     <div>
         Keterangan: 
         <div>
+            <span class="badge badge-success">Active</span>
+            <span class="text-sm font-italic">Masih tersedia</span>
+        </div>
+        <div>
             <span class="badge badge-danger">Expired</span>
             <span class="text-sm font-italic">Sudah Kadaluarsa</span>
         </div>
