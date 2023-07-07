@@ -82,5 +82,17 @@
         </table>
     </div>
 
+    <div>
+        Keterangan: 
+        <div>
+            <span class="badge badge-danger">Expired</span>
+            <span class="text-sm font-italic">Sudah Kadaluarsa</span>
+        </div>
+        <div>
+            <span class="badge badge-warning">Almost Expired</span>
+            <span class="text-sm font-italic">Hampir kadaluarsa</span>
+        </div>
+    </div>
+
     {{ $expires->links() }}
 </div>
