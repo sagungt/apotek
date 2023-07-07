@@ -126,11 +126,11 @@
             label="Download PDF"
             theme="danger"
             icon="fas fa-file-pdf"
-            {{-- wire:click="downloadPdf"
+            wire:click="downloadPdf"
             wire:loading.attr="disabled"
-            wire:target="downloadPdf" --}}
-            data-toggle="modal"
-            data-target="#download-modal"
+            wire:target="downloadPdf"
+            {{-- data-toggle="modal"
+            data-target="#download-modal" --}}
         />
         <x-adminlte-button
             class="btn mb-3"
@@ -138,13 +138,13 @@
             label="Print"
             theme="outline-danger"
             icon="fas fa-print"
-            {{-- wire:click="print" --}}
-            data-toggle="modal"
-            data-target="#print-modal"
+            wire:click="print"
+            {{-- data-toggle="modal"
+            data-target="#print-modal" --}}
         />
     </x-adminlte-modal>
 
-    <x-adminlte-modal
+    {{-- <x-adminlte-modal
         id="print-modal"
         title="Nama Pencetak"
         theme="success"
@@ -211,5 +211,5 @@
             />
             <x-adminlte-button label="Dismiss" data-dismiss="download-modal"/>
         </x-slot>
-    </x-adminlte-modal>
+    </x-adminlte-modal> --}}
 </div>

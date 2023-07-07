@@ -129,7 +129,7 @@
     </head>
 
     <body>
-        <p class="text-right">{{ $name }} - {{ $now }}</p>
+        {{-- <p class="text-right">{{ $name }} - {{ $now }}</p> --}}
         {{-- Header --}}
         <h1>Apotek Berkah</h1>
 

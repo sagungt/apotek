@@ -22,15 +22,15 @@ class SaleInfoModal extends Component
 
     public function print()
     {
-        $this->validate(['name' => 'required']);
-        return redirect()->route('sales.print', ['id' => $this->sale->penjualan_id, 'name' => $this->name]);
+        // $this->validate(['name' => 'required']);
+    return redirect()->route('sales.print', ['id' => $this->sale->penjualan_id,/* 'name' => $this->name*/]);
     }
 
     public function downloadPdf()
     {
-        $this->validate(['name' => 'required']);
+        // $this->validate(['name' => 'required']);
         $filename = $this->sale->tanggal . '_' . $this->sale->no_faktur . '.pdf';
-        $pdf = Pdf::loadView('pdf.invoice', [...$this->sale->toArray(), 'name' => $this->name, 'now' => Carbon::now()->format('Y-m-d')])->output();
+        $pdf = Pdf::loadView('pdf.invoice', [...$this->sale->toArray(),/* 'name' => $this->name, 'now' => Carbon::now()->format('Y-m-d')*/])->output();
         return response()->streamDownload(
             fn () => print($pdf),
             $filename,

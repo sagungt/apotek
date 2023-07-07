@@ -42,9 +42,9 @@ class OrderController extends Controller
 
     public function printSaleInfo(Request $request, $id = null)
     {
-        $name = $request->query('name');
+        // $name = $request->query('name');
         $sale = Sell::with('orderList', 'orderList.medicine', 'orderList.medicine.medicine')->find($id);
-        return Pdf::loadView('pdf.invoice', [...$sale?->toArray(), 'name' => $name, 'now' => Carbon::now()->format('Y-m-d')])->stream();
+        return Pdf::loadView('pdf.invoice', [...$sale?->toArray(),/* 'name' => $name, 'now' => Carbon::now()->format('Y-m-d')*/])->stream();
     }
 
     public function printPurchases(Request $request, $date)
@@ -82,8 +82,8 @@ class OrderController extends Controller
 
     public function print($id)
     {
-        $name = request()->query('name');
+        // $name = request()->query('name');
         $request = Purchase::with('orderList', 'orderList.medicine', 'supplier')->find($id);
-        return Pdf::loadView('pdf.request', ['request' => $request, 'tanggal' => $request->tanggal, 'name' => $name, 'now' => Carbon::now()->format('Y-m-d')])->stream();
+        return Pdf::loadView('pdf.request', ['request' => $request, 'tanggal' => $request->tanggal,/* 'name' => $name, 'now' => Carbon::now()->format('Y-m-d')*/])->stream();
     }
 }

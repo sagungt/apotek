@@ -60,16 +60,16 @@ class DetailModal extends Component
 
     public function print()
     {
-        $this->validate(['name' => 'required']);
-        return redirect()->route('orders.print', ['id' => $this->purchase->pembelian_id, 'name' => $this->name]);
+        // $this->validate(['name' => 'required']);
+    return redirect()->route('orders.print', ['id' => $this->purchase->pembelian_id,/* 'name' => $this->name*/]);
     }
 
     public function generatePdf()
     {
-        $this->validate(['name' => 'required']);
+        // $this->validate(['name' => 'required']);
         $request = Purchase::with('orderList', 'orderList.medicine', 'supplier')->find($this->purchase->pembelian_id);
         $filename = Carbon::now()->format('Y-m-d') . '_REQUEST_PEMBELIAN.pdf';
-        $pdf = Pdf::loadView('pdf.request', ['request' => $request, 'tanggal' => Carbon::now()->format('Y-m-d'), 'name' => $this->name, 'now' => Carbon::now()->format('Y-m-d')])->output();
+        $pdf = Pdf::loadView('pdf.request', ['request' => $request, 'tanggal' => Carbon::now()->format('Y-m-d'),/* 'name' => $this->name, 'now' => Carbon::now()->format('Y-m-d')*/])->output();
         return response()->streamDownload(
             fn () => print($pdf),
             $filename,
