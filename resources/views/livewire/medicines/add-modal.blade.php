@@ -54,7 +54,20 @@
                         </div>
                     </x-slot>
                 </x-adminlte-input>
-
+                <x-adminlte-input
+                autocomplete="minimal_stok"
+                name="minimal_stok"
+                label="Minimal Stok"
+                placeholder="Minimal Stok"
+                wire:model.defer="newMedicine.minimal_stok"
+                error-key="newMedicine.minimal_stok"
+            >
+                <x-slot name="prependSlot">
+                    <div class="input-group-text">
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                </x-slot>
+            </x-adminlte-input>
                 <x-adminlte-input
                     autocomplete="harga"
                     name="harga"

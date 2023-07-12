@@ -185,5 +185,13 @@
         </table>
 
         {{-- <h2>Total : Rp. {{ number_format($request->orderList->sum('total')) }}</h2> --}}
+        <h5 style="position: absolute;
+        right: 0px;  
+        width: 200px;
+        height: 120px">Hormat Kami,</h5><br><br><br><br>
+        <h5 style="position: absolute;
+         right: 0px;  
+         width: 200px;
+         height: 120px">apt.Fika Rohatul Maula,S.Farm</h5>
     </body>
 </html>

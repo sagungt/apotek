@@ -17,6 +17,7 @@ class EditModal extends Component
     protected $rules = [
         'medicine.nama_obat'   => 'required',
         'medicine.satuan'      => 'required',
+        'medicine.minimal_stok'      => 'required',
         'medicine.harga'       => 'required|numeric',
         'medicine.jenis'       => 'required',
         'medicine.kategori_id' => 'required|exists:kategori,kategori_id',
@@ -25,6 +26,7 @@ class EditModal extends Component
     protected $messages = [
         'medicine.nama_obat.required'   => 'The Medicine Name field is required',
         'medicine.satuan.required'      => 'The Medicine Unit of Measurement field is required',
+        'medicine.minimal_stok.required'      => 'Minimal Stok field is required',
         'medicine.harga.required'       => 'The Medicine Price field is required',
         'medicine.jenis.required'       => 'The Medicine Type field is required',
         'medicine.kategori_id.required' => 'The Medicine Category field is required',

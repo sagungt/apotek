@@ -34,6 +34,7 @@
                     <th scope="col">Jenis</th>
                     <th scope="col">Kategori</th>
                     {{-- <th scope="col">Merek</th> --}}
+                    <th scope="col">Minimal Stok</th>
                     <th scope="col">Action</th>
                 </tr>
             </thead>
@@ -46,6 +47,8 @@
                         <td>{{ $medicine->harga ?? '-' }}</td>
                         <td>{{ $medicine->jenis ?? '-' }}</td>
                         <td>{{ $medicine->category?->nama_kategori ?? '-' }}</td>
+                        <td>{{ $medicine->minimal_stok ?? '-' }}</td>
+
                         {{-- <td>{{ $medicine->brand?->nama_merek ?? '-' }}</td> --}}
                         <td>
                             <button

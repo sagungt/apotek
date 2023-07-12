@@ -137,9 +137,9 @@
             <tbody>
                 <tr>
                     <td class="border-0 pl-0" width="70%">
-                        <h4 class="text-uppercase">
+                        {{-- <h4 class="text-uppercase">
                             <strong>Invoice</strong>
-                        </h4>
+                        </h4> --}}
                     </td>
                     <td class="border-0 pl-0">
                         <p>No Faktur: <strong>#{{ $no_faktur }}</strong></p>
@@ -189,8 +189,8 @@
                 <tr>
                     <th scope="col" class="border-0 pl-0">Nama Obat</th>
                     <th scope="col" class="text-center border-0">Kuantitas</th>
-                    <th scope="col" class="text-right border-0">No Batch</th>
-                    <th scope="col" class="text-right border-0">No Exp</th>
+                    {{-- <th scope="col" class="text-right border-0">No Batch</th>
+                    <th scope="col" class="text-right border-0">No Exp</th> --}}
                     <th scope="col" class="text-right border-0">Sub total</th>
                 </tr>
             </thead>
@@ -202,21 +202,23 @@
                         {{ $item['medicine']['medicine']['nama_obat'] }}
                     </td>
                     <td class="text-center">{{ $item['kuantitas'] }} {{ $item['medicine']['medicine']['satuan'] }}</td>
-                    <td class="text-right">{{ $item['medicine']['no_batch'] }}</td>
-                    <td class="text-right">{{ $item['medicine']['no_exp'] }}</td>
+                    {{-- <td class="text-right">{{ $item['medicine']['no_batch'] }}</td>
+                    <td class="text-right">{{ $item['medicine']['no_exp'] }}</td> --}}
                     <td class="text-right">
                         Rp. {{ number_format($item['total']) }}
                     </td>
                 </tr>
                 @endforeach
                 <tr>
-                    <td colspan="3" class="border-0"></td>
+                    <td colspan="0" class="border-0"></td>
                     <td class="text-right pl-0">Grand Total</td>
                     <td class="text-right pr-0 total-amount">
                         Rp. {{ number_format($jumlah) }}
                     </td>
                 </tr>
             </tbody>
+          
         </table>
+	
     </body>
 </html>

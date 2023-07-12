@@ -23,6 +23,7 @@ return new class extends Migration
             //     ->references('merek_id')
             //     ->on('merek');
             $table->string('jenis');
+            $table->string('minimal_stok');
             $table->timestamps();
         });
     }

@@ -20,7 +20,7 @@
 
         <x-adminlte-select
             name="obat"
-            label="Obat"
+            label="Supplier"
             wire:model.defer="pembelian.supplier_id"
             error-key="pembelian.supplier_id"
         >
