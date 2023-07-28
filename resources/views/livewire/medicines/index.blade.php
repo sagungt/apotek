@@ -30,7 +30,7 @@
                     <th scope="col">ID</th>
                     <th scope="col">Nama Obat</th>
                     <th scope="col">Satuan</th>
-                    <th scope="col">Harga</th>
+                    <th scope="col">Supplier</th>
                     <th scope="col">Jenis</th>
                     <th scope="col">Kategori</th>
                     {{-- <th scope="col">Merek</th> --}}
@@ -44,7 +44,7 @@
                         <td>{{ $medicine->obat_id }}</td>
                         <td>{{ $medicine->nama_obat ?? '-' }}</td>
                         <td>{{ $medicine->satuan ?? '-' }}</td>
-                        <td>{{ $medicine->harga ?? '-' }}</td>
+                        <td>{{ $medicine->suppliers ?? '-' }}</td>
                         <td>{{ $medicine->jenis ?? '-' }}</td>
                         <td>{{ $medicine->category?->nama_kategori ?? '-' }}</td>
                         <td>{{ $medicine->minimal_stok ?? '-' }}</td>

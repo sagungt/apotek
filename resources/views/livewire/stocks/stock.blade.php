@@ -24,6 +24,8 @@
                     <th scope="col">Harga Jual</th>
                     <th scope="col">Minimal Stok</th>
                     <th scope="col">Stock</th>
+                    <th scope="col">Supplier</th>
+
                     <th scope="col">Status</th>
                     <th scope="col">Action</th>
                 </tr>
@@ -39,6 +41,8 @@
                         <td>{{ $stock->medicine->minimal_stok ?? '-' }}</td>
 
                         <td>{{ $stock->stok }}</td>
+                        <td>{{ $stock->medicine->suppliers }}</td>
+
                         <td>
                             <span
                                 @class([
