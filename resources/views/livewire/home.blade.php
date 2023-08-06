@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="row" style="gap: 20px">
         <x-adminlte-info-box
-            class="col-2"
+            class="col-4"
             title="Penjualan"
             :text="$saleCount . ' Transaksi'"
             :description="'Rp. ' . number_format($salesDetail)"
@@ -9,7 +9,7 @@
             theme="gradient-teal"
         />
         <x-adminlte-info-box
-            class="col-2"
+            class="col-4"
             title="Pembelian"
             :text="$purchaseCount . ' Transaksi'"
             :description="'Rp. ' . number_format($purchasesDetail)"
@@ -17,7 +17,7 @@
             theme="gradient-red"
         />
         <x-adminlte-info-box
-            class="col-2"
+            class="col-4"
             title="Stock Obat"
             :text="$stockCount . ' Obat'"
             :description="$stockDetail . ' Obat terjual'"
@@ -25,7 +25,7 @@
             theme="gradient-blue"
         />
         <x-adminlte-info-box
-            class="col-2"
+            class="col-4"
             title="Hampir Kadaluarsa"
             :text="$almostExpiredCount . ' Obat'"
             icon="fas fa-lg fa-hourglass-half text-dark"

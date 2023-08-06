@@ -329,7 +329,7 @@ return [
         ],
         [
             'text' => 'Penjualan',
-            'icon' => 'fas fa-dollar-sign',
+            'icon' => 'fas fa-money-bill',
             'can' => ['apoteker', 'pemilik'],
             'submenu' => [
                 [
@@ -347,7 +347,7 @@ return [
             'text' => 'Stock',
             'url' => 'stock',
             'icon' => 'fas fa-box',
-            'can' => ['apoteker'],
+            'can' => ['apoteker', 'gudang'],
         ],
         [
             'text' => 'History',

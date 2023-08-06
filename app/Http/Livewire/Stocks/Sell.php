@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Stocks;
 
+use App\Models\Medicine;
 use App\Models\OrderList;
 use Illuminate\Support\Str;
 use Livewire\Component;
@@ -18,6 +19,8 @@ class Sell extends Component
     public $grandTotal = 0;
     public $order;
     public $quantities = [];
+    public $suppliers = [];
+    public $supplier;
 
     protected $rules = [
         'sell.tanggal'        => 'required|date',
@@ -31,6 +34,7 @@ class Sell extends Component
     {
         // $this->sell['no_faktur'] = Str::upper(Str::random(10));
         $this->sell['tanggal'] = Carbon::now()->format('Y-m-d');
+        $this->suppliers = Medicine::all()->unique('suppliers')->pluck('suppliers')->toArray();
     }
 
     public function submit()
@@ -153,6 +157,12 @@ class Sell extends Component
         $this->grandTotal = array_sum(collect($this->orderList)->pluck('total')->toArray());
     }
 
+    public function resetFilter()
+    {
+        $this->search = '';
+        $this->supplier = null;
+    }
+
     public function render()
     {
         $stocks = Stock::query()
@@ -176,6 +186,12 @@ class Sell extends Component
                             // )
                     )    
                     ->orWhere('no_batch', 'like', '%' . $this->search . '%')
+            )
+            ->when($this->supplier, fn ($query) =>
+                $query
+                    ->whereHas('medicine', fn ($query) =>
+                        $query->where('suppliers', $this->supplier)
+                    )
             )
             ->get();
 

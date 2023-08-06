@@ -17,6 +17,8 @@ class Request extends Component
     public $orderList;
     public $grandTotal = 0;
     public $pembelian;
+    public $filterSuppliers;
+    public $filterSupplier = 'all';
 
     protected $orderRules = [
         'orderList.obat_id' => 'required|exists:obat,obat_id',
@@ -32,6 +34,7 @@ class Request extends Component
     {
         $this->medicines = Medicine::all();
         $this->suppliers = Supplier::all();
+        $this->filterSuppliers = Medicine::all()->unique('suppliers')->pluck('suppliers');
         $this->pembelian['tanggal'] = Carbon::now()->format('Y-m-d');
     }
     
@@ -48,6 +51,13 @@ class Request extends Component
             'nama' => $name,
             'total' => $total,
         ]);
+    }
+
+    public function updated($propName, $val)
+    {
+        if ($propName == 'filterSupplier') {
+            $this->medicines = Medicine::when($this->filterSupplier !== 'all', fn ($query) => $query->where('suppliers', $this->filterSupplier))->get();
+        }
     }
 
     public function submit()

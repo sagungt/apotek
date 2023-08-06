@@ -42,24 +42,49 @@
         <div class="p-2 border rounded">
             <h4>Daftar Obat</h4>
     
-            <x-adminlte-select
-                name="obat"
-                label="Obat"
-                wire:model.defer="orderList.obat_id"
-                error-key="orderList.obat_id"
-            >
-                <x-slot name="prependSlot">
-                    <div class="input-group-text">
-                        <i class="fas fa-capsules"></i>
-                    </div>
-                </x-slot>
-                <option selected>Select Medicine</option>
-                @forelse ($medicines as $medicine)
-                    <option value="{{ $medicine->obat_id }}">{{ $medicine->nama_obat }}</option>
-                @empty
-                    <option value="" disabled>No Medicine Found</option>
-                @endforelse
-            </x-adminlte-select>
+            <div class="d-flex">
+                <div class="w-100">
+                    <x-adminlte-select
+                        name="obat"
+                        label="Obat"
+                        wire:model.defer="orderList.obat_id"
+                        error-key="orderList.obat_id"
+                    >
+                        <x-slot name="prependSlot">
+                            <div class="input-group-text">
+                                <i class="fas fa-capsules"></i>
+                            </div>
+                        </x-slot>
+                        <option selected>Select Medicine</option>
+                        @forelse ($medicines as $medicine)
+                            <option value="{{ $medicine->obat_id }}">{{ $medicine->nama_obat }}</option>
+                        @empty
+                            <option value="" disabled>No Medicine Found</option>
+                        @endforelse
+                    </x-adminlte-select>
+                </div>
+
+                <div class="w-100">
+                    <x-adminlte-select
+                        name="filterSupplier"
+                        label=" Filter Supplier"
+                        wire:model="filterSupplier"
+                        error-key="filterSupplier"
+                    >
+                        <x-slot name="prependSlot">
+                            <div class="input-group-text">
+                                <i class="fas fa-box"></i>
+                            </div>
+                        </x-slot>
+                        <option selected value="all">All supplier</option>
+                        @forelse ($filterSuppliers as $supplier)
+                            <option value="{{ $supplier }}">{{ $supplier }}</option>
+                        @empty
+                            <option value="" disabled>No Supplier Found</option>
+                        @endforelse
+                    </x-adminlte-select>
+                </div>
+            </div>
     
             <x-adminlte-input
                 autocomplete="kuantitas"

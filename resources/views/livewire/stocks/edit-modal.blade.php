@@ -82,7 +82,7 @@
                 >
                     <x-slot name="prependSlot">
                         <div class="input-group-text">
-                            <i class="fas fa-dollar-sign"></i>
+                            <i class="fas fa-money-bill"></i>
                         </div>
                     </x-slot>
                 </x-adminlte-input>

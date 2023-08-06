@@ -187,6 +187,35 @@
                     </div>
                 </x-slot>
             </x-adminlte-input>
+
+            <x-adminlte-select
+                name="suppliers"
+                id="suppliers"
+                class="border"
+                label="Filter Supplier"
+                wire:model="supplier"
+                error-key="supplier"
+            >
+                <x-slot name="prependSlot">
+                    <div class="input-group-text">
+                        <i class="fas fa-box"></i>
+                    </div>
+                </x-slot>
+                <option>Pilih Supplier</option>
+                @forelse ($suppliers as $supplier)
+                    <option value="{{ $supplier }}">{{ $supplier }}</option>
+                @empty
+                    <option disabled>Tidak ada supplier</option>
+                @endforelse
+            </x-adminlte-select>
+
+            <x-adminlte-button
+                class="btn mb-3"
+                type="button"
+                label="Reset"
+                theme="primary"
+                wire:click="resetFilter"
+            />
         </div>
 
         <div class="p-4">
@@ -197,7 +226,7 @@
             @endif
             <div class="row row-cols-3">
                 @forelse ($stocks as $index => $stock)
-                    <div class="card">
+                    <div class="card" wire:key="stock-obat-{{ $index }}">
                         <div class="card-header">
                             {{ $stock->medicine->category->nama_kategori }}
                         </div>
@@ -235,7 +264,7 @@
                                 <x-adminlte-input
                                     type="number"
                                     class="flex-fill w-100"
-                                    name="qty"
+                                    name="qty-{{ $index }}"
                                     placeholder="Kuantitas"
                                     wire:model="quantities.{{ $index }}"
                                     error-key="quantities.{{ $index }}"
@@ -250,6 +279,13 @@
                                     wire:click="addOne({{ $stock->id }}, {{ $index }})"
                                 />
                             </div>
+                            @if ($stock->stok <= $stock->medicine->minimal_stok)
+                                <div class="d-flex fw-bold">
+                                    <a href="{{ route('orders.request') }}">
+                                        Obat telah mencapai minimal stok klik untuk Request.
+                                    </a>
+                                </div>
+                            @endif
                         </div>
                         <div class="card-footer text-body-secondary">
                             {{ Carbon\Carbon::parse($stock->no_exp)->diffForHumans() }}
