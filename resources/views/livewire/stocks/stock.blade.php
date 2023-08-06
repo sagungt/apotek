@@ -22,7 +22,10 @@
                     <th scope="col">No Exp</th>
                     <th scope="col">Harga Beli</th>
                     <th scope="col">Harga Jual</th>
+                    <th scope="col">Minimal Stok</th>
                     <th scope="col">Stock</th>
+                    <th scope="col">Supplier</th>
+
                     <th scope="col">Status</th>
                     <th scope="col">Action</th>
                 </tr>
@@ -35,7 +38,11 @@
                         <td>{{ $stock->no_exp }}</td>
                         <td>Rp. {{ number_format($stock->harga_jual) }}</td>
                         <td>Rp. {{ number_format($stock->harga_jual + ($stock->harga_jual * 0.1)) }}</td>
+                        <td>{{ $stock->medicine->minimal_stok ?? '-' }}</td>
+
                         <td>{{ $stock->stok }}</td>
+                        <td>{{ $stock->medicine->suppliers }}</td>
+
                         <td>
                             <span
                                 @class([
@@ -78,6 +85,21 @@
                 @endforelse
             </tbody>
         </table>
+    </div>
+    <div>
+        Keterangan: 
+        <div>
+            <span class="badge badge-success">Active</span>
+            <span class="text-sm font-italic">Masih tersedia</span>
+        </div>
+        <div>
+            <span class="badge badge-danger">Expired</span>
+            <span class="text-sm font-italic">Sudah Kadaluarsa</span>
+        </div>
+        <div>
+            <span class="badge badge-warning">Almost Expired</span>
+            <span class="text-sm font-italic">Hampir kadaluarsa</span>
+        </div>
     </div>
 
     {{ $stocks->links() }}
