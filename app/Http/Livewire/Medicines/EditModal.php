@@ -20,6 +20,8 @@ class EditModal extends Component
         'medicine.minimal_stok'      => 'required',
         'medicine.suppliers'       => 'required',
         'medicine.jenis'       => 'required',
+        'medicine.isi_box'       => 'required',
+        'medicine.harga_per_box'       => 'required',
         'medicine.kategori_id' => 'required|exists:kategori,kategori_id',
         // 'medicine.merek_id'    => 'required|exists:merek,merek_id',
     ];
@@ -29,6 +31,8 @@ class EditModal extends Component
         'medicine.minimal_stok.required'      => 'Minimal Stok field is required',
         'medicine.suppliers.required'       => 'The Medicine Price field is required',
         'medicine.jenis.required'       => 'The Medicine Type field is required',
+        'medicine.isi_box.required'       => 'The Medicine count field is required',
+        'medicine.harga_per_box.required'       => 'The Medicine Price field is required',
         'medicine.kategori_id.required' => 'The Medicine Category field is required',
         // 'medicine.merek_id.required'    => 'The Medicine Brand field is required',
     ];
