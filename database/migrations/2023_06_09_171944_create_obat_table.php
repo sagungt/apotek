@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('nama_obat');
             $table->string('satuan');
             $table->string('suppliers');
+            $table->integer('isi_box');
+            $table->bigInteger('harga_per_box');
             $table->foreignId('kategori_id')
                 ->references('kategori_id')
                 ->on('kategori');

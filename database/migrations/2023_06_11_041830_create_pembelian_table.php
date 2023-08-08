@@ -19,9 +19,9 @@ return new class extends Migration
             $table->bigInteger('total')->nullable();
             $table->string('status')->nullable();
             $table->text('keterangan')->nullable();
-            $table->foreignId('supplier_id')
-                ->references('supplier_id')
-                ->on('supplier');
+            // $table->foreignId('supplier_id')
+            //     ->references('supplier_id')
+            //     ->on('supplier');
             $table->timestamps();
         });
     }

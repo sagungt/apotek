@@ -128,7 +128,7 @@
                 <tr>
                     <th scope="col">ID</th>
                     <th scope="col">No Faktur</th>
-                    <th scope="col">Supplier</th>
+                    {{-- <th scope="col">Supplier</th> --}}
                     <th scope="col">Tanggal Request</th>
                     <th scope="col">Tanggal Terima</th>
                     <th scope="col">Total</th>
@@ -143,7 +143,7 @@
                     <tr scope="row">
                         <td>{{ $purchase->pembelian_id }}</td>
                         <td>{{ $purchase->no_faktur ?? '-' }}</td>
-                        <td>{{ $purchase->supplier->supplier_nama }}</td>
+                        {{-- <td>{{ $purchase->supplier->supplier_nama }}</td> --}}
                         <td>{{ $purchase->tanggal }}</td>
                         <td>{{ $purchase->tanggal_terima ?? '-' }}</td>
                         <td>{{ number_format($purchase->total) }}</td>
@@ -200,7 +200,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="8" class="text-center">No Records found ...</td>
+                        <td colspan="7" class="text-center">No Records found ...</td>
                     </tr>
                 @endforelse
             </tbody>

@@ -18,7 +18,7 @@
             </x-slot>
         </x-adminlte-input>
 
-        <x-adminlte-select
+        {{-- <x-adminlte-select
             name="obat"
             label="Supplier"
             wire:model.defer="pembelian.supplier_id"
@@ -35,7 +35,7 @@
             @empty
                 <option value="" disabled>No Supplier Found</option>
             @endforelse
-        </x-adminlte-select>
+        </x-adminlte-select> --}}
 
         <hr>
 
@@ -47,7 +47,7 @@
                     <x-adminlte-select
                         name="obat"
                         label="Obat"
-                        wire:model.defer="orderList.obat_id"
+                        wire:model="orderList.obat_id"
                         error-key="orderList.obat_id"
                     >
                         <x-slot name="prependSlot">
@@ -110,6 +110,8 @@
                 icon="fas fa-plus"
                 wire:click="addToOrder"
             />
+
+            <p>{{$info ?? ''}}</p>
     
             <div class="table-responsive mt-3">
                 <table class="table table-striped table-hover">
@@ -118,6 +120,8 @@
                             <th scope="col">No</th>
                             <th scope="col">Obat</th>
                             <th scope="col">Kuantitas</th>
+                            <th scope="col">Harga per box</th>
+                            <th scope="col">Total</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -127,6 +131,8 @@
                                 <td>{{ $index + 1 }}</td>
                                 <td>{{ $order['nama'] }}</td>
                                 <td>{{ $order['kuantitas'] }} Box</td>
+                                <td>{{ 'Rp. ' . number_format($order['harga']) }}</td>
+                                <td>{{ 'Rp. ' . number_format($order['total']) }}</td>
                                 <td>
                                     <button
                                         class="btn btn-xs btn-default text-danger mx-1"
@@ -139,7 +145,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="5" class="text-center">No Records found ...</td>
+                                <td colspan="7" class="text-center">No Records found ...</td>
                             </tr>
                         @endforelse
                     </tbody>

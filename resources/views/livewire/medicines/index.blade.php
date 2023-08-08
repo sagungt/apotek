@@ -35,6 +35,8 @@
                     <th scope="col">Kategori</th>
                     {{-- <th scope="col">Merek</th> --}}
                     <th scope="col">Minimal Stok</th>
+                    <th scope="col">Isi Per Box</th>
+                    <th scope="col">Harga Per Box</th>
                     <th scope="col">Action</th>
                 </tr>
             </thead>
@@ -48,6 +50,8 @@
                         <td>{{ $medicine->jenis ?? '-' }}</td>
                         <td>{{ $medicine->category?->nama_kategori ?? '-' }}</td>
                         <td>{{ $medicine->minimal_stok ?? '-' }}</td>
+                        <td>{{ $medicine->isi_box ?? '-' }}</td>
+                        <td>{{ 'Rp.' . number_format($medicine->harga_per_box) }}</td>
 
                         {{-- <td>{{ $medicine->brand?->nama_merek ?? '-' }}</td> --}}
                         <td>
@@ -73,7 +77,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="7" class="text-center">No Records found ...</td>
+                        <td colspan="10" class="text-center">No Records found ...</td>
                     </tr>
                 @endforelse
             </tbody>

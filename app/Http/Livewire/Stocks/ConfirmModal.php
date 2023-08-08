@@ -34,6 +34,10 @@ class ConfirmModal extends Component
     {
         $this->purchase = Purchase::with('orderList')->find($id);
         $this->orders = $this->purchase->orderList;
+        foreach ($this->orders as $index => $order) {
+            $this->orders[$index]->harga_jual = $order->total / ($order->kuantitas * ($order->medicine->isi_box ?? 1));
+            $this->qty[$index] = $order->kuantitas * ($order->medicine->isi_box ?? 1);
+        }
     }
 
     public function confirm()

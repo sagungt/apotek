@@ -38,10 +38,10 @@
                         <span class="w-25 fw-bold">Tanggal</span>
                         <span class="w-75">{{ $purchase?->tanggal }}</span>
                     </div>
-                    <div class="d-flex p-2">
+                    {{-- <div class="d-flex p-2">
                         <span class="w-25 fw-bold">Supplier</span>
                         <span class="w-75">{{ $purchase?->supplier?->supplier_nama }}</span>
-                    </div>
+                    </div> --}}
                     <div class="d-flex p-2">
                         <span class="w-25 fw-bold">Status</span>
                         <span class="w-75">{{ $purchase?->status }}</span>
@@ -104,11 +104,14 @@
                                                 <span class="w-25 fw-bold">Kuantitas</span>
                                                 <span class="w-75">{{ $order->kuantitas }} Box</span>
                                             </div>
-                                            {{-- <div class="d-flex">
-                                                <span class="w-25 fw-bold">Total</span>
-                                                <span class="w-75">Rp. {{ number_format($order->total) }}</span>
-                                                <span class="w-75">-</span>
-                                            </div> --}}
+                                            <div class="d-flex">
+                                                <span class="w-25 fw-bold">Isi per Box</span>
+                                                <span class="w-75">{{ $order->medicine->isi_box }}</span>
+                                            </div>
+                                            <div class="d-flex">
+                                                <span class="w-25 fw-bold">Harga per Box</span>
+                                                <span class="w-75">Rp. {{ number_format($order->medicine->harga_per_box) }}</span>
+                                            </div>
                                             <div class="d-flex">
                                                 <span class="w-25 fw-bold">Kategori</span>
                                                 <span class="w-75">{{ $order->medicine->category->nama_kategori }}</span>

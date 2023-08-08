@@ -99,6 +99,36 @@
                     </x-slot>
                 </x-adminlte-input>
 
+                <x-adminlte-input
+                    autocomplete="isi_box"
+                    name="isi_box"
+                    label="Isi per box"
+                    placeholder="Jumlah"
+                    wire:model.defer="newMedicine.isi_box"
+                    error-key="newMedicine.isi_box"
+                >
+                    <x-slot name="prependSlot">
+                        <div class="input-group-text">
+                            <i class="fas fa-capsules"></i>
+                        </div>
+                    </x-slot>
+                </x-adminlte-input>
+
+                <x-adminlte-input
+                    autocomplete="harga"
+                    name="harga"
+                    label="Harga per box"
+                    placeholder="Harga"
+                    wire:model.defer="newMedicine.harga_per_box"
+                    error-key="newMedicine.harga_per_box"
+                >
+                    <x-slot name="prependSlot">
+                        <div class="input-group-text">
+                            <i class="fas fa-money-bill"></i>
+                        </div>
+                    </x-slot>
+                </x-adminlte-input>
+
                 <x-adminlte-select
                     name="category"
                     label="Category"

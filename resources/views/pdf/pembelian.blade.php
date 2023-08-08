@@ -141,7 +141,7 @@
                 <tr>
                     <th scope="col" class="border-0 pl-0">ID</th>
                     <th scope="col" class="text-center border-0">No Faktur</th>
-                    <th scope="col" class="text-right border-0">Supplier</th>
+                    {{-- <th scope="col" class="text-right border-0">Supplier</th> --}}
                     <th scope="col" class="text-right border-0">Tanggal Order</th>
                     <th scope="col" class="text-right border-0">Tanggal Terima</th>
                     <th scope="col" class="text-right border-0">Sub total</th>
@@ -155,7 +155,7 @@
                         {{ $item['pembelian_id'] }}
                     </td>
                     <td class="text-center">{{ $item['no_faktur'] }}</td>
-                    <td class="text-right">{{ $item['supplier']['supplier_nama'] }}</td>
+                    {{-- <td class="text-right">{{ $item['supplier']['supplier_nama'] }}</td> --}}
                     <td class="text-right">{{ $item['tanggal'] }}</td>
                     <td class="text-right">{{ $item['tanggal_terima'] }}</td>
                     <td class="text-right">

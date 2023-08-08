@@ -20,6 +20,8 @@ class AddModal extends Component
         'newMedicine.suppliers'       => 'required',
         'newMedicine.jenis'       => 'required',
         'newMedicine.kategori_id' => 'required|exists:kategori,kategori_id',
+        'newMedicine.harga_per_box' => 'required|numeric',
+        'newMedicine.isi_box' => 'required|numeric',
         // 'newMedicine.merek_id'    => 'required|exists:merek,merek_id',
     ];
     protected $messages = [
@@ -29,6 +31,8 @@ class AddModal extends Component
         'newMedicine.suppliers.required'       => 'The Medicine Price field is required',
         'newMedicine.jenis.required'       => 'The Medicine Type field is required',
         'newMedicine.kategori_id.required' => 'The Medicine Category field is required',
+        'newMedicine.harga_per_box.required' => 'The Medicine Price field is required',
+        'newMedicine.isi_box.required' => 'The Medicine Count field is required',
         // 'newMedicine.merek_id.required'    => 'The Medicine Brand field is required',
     ];
 
