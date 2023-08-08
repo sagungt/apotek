@@ -85,7 +85,7 @@
     <div>
         Keterangan: 
         <div>
-            <span class="badge badge-success">Active</span>
+            <span class="badge badge-primary">Active</span>
             <span class="text-sm font-italic">Masih tersedia</span>
         </div>
         <div>
