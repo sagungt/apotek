@@ -42,9 +42,9 @@
                             <span
                                 @class([
                                     'badge',
-                                    'badge-primary' => in_array($expiry->status, ['Active']),
-                                    'badge-danger' => in_array($expiry->status, ['Expired']),
-                                    'badge-success' => in_array($expiry->status, ['Almost Expired'])
+                                    'badge-primary' => in_array($expiry->status, ['Tersedia']),
+                                    'badge-danger' => in_array($expiry->status, ['Kadaluarsa']),
+                                    'badge-success' => in_array($expiry->status, ['Hampir Kadaluarsa'])
                                 ])
                             >
                                 {{ $expiry->status }}
@@ -52,7 +52,7 @@
                         </td>
                         <td>
                             @can('gudang')
-                                @if ($expiry->status === 'Active')
+                                @if ($expiry->status === 'Tersedia')
                                     <button
                                         class="btn btn-xs btn-default text-warning mx-1"
                                         title="Mark Almost Expired"
@@ -61,7 +61,7 @@
                                         <i class="fa fa-lg fa-fw fa-check"></i>
                                     </button>
                                 @endif
-                                @if ($expiry->status === 'Almost Expired')
+                                @if ($expiry->status === 'Hampir Kadaluarsa')
                                     <button
                                         class="btn btn-xs btn-default text-danger mx-1"
                                         title="Mark Expired"
@@ -85,16 +85,16 @@
     <div>
         Keterangan: 
         <div>
-            <span class="badge badge-primary">Active</span>
+            <span class="badge badge-primary">Tersedia</span>
             <span class="text-sm font-italic">Masih tersedia</span>
         </div>
         <div>
-            <span class="badge badge-danger">Expired</span>
+            <span class="badge badge-danger">Kadaluarsa</span>
             <span class="text-sm font-italic">Sudah Kadaluarsa</span>
         </div>
         <div>
-            <span class="badge badge-warning">Almost Expired</span>
-            <span class="text-sm font-italic">Hampir kadaluarsa</span>
+            <span class="badge badge-warning">Hampir Kadaluarsa</span>
+            <span class="text-sm font-italic">Hampir kadaluarsa, kurang dari sama dengan 3 bulan</span>
         </div>
     </div>
 

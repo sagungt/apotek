@@ -47,9 +47,9 @@
                             <span
                                 @class([
                                     'badge',
-                                    'badge-primary' => in_array($stock->status, ['Active']),
-                                    'badge-warning' => in_array($stock->status, ['Almost Expired']),
-                                    'badge-danger' => in_array($stock->status, ['Expired', 'Archived'])
+                                    'badge-primary' => in_array($stock->status, ['Tersedia']),
+                                    'badge-warning' => in_array($stock->status, ['Hampir Kadaluarsa']),
+                                    'badge-danger' => in_array($stock->status, ['Kadaluarsa', 'Archived'])
                                 ])
                             >
                                 {{ $stock->status }}
@@ -80,7 +80,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="8" class="text-center">No Records found ...</td>
+                        <td colspan="10" class="text-center">No Records found ...</td>
                     </tr>
                 @endforelse
             </tbody>
@@ -89,15 +89,15 @@
     <div>
         Keterangan: 
         <div>
-            <span class="badge badge-primary">Active</span>
+            <span class="badge badge-primary">Tersedia</span>
             <span class="text-sm font-italic">Masih tersedia</span>
         </div>
         <div>
-            <span class="badge badge-danger">Expired</span>
+            <span class="badge badge-danger">Kadaluarsa</span>
             <span class="text-sm font-italic">Sudah Kadaluarsa</span>
         </div>
         <div>
-            <span class="badge badge-warning">Almost Expired</span>
+            <span class="badge badge-warning">Hampir Kadaluarsa</span>
             <span class="text-sm font-italic">Hampir kadaluarsa</span>
         </div>
     </div>

@@ -109,9 +109,9 @@
                     error-key="stock.status"
                 >
                     <option selected>Select Status</option>
-                    <option value="Active">Active</option>
-                    <option value="Almost Expired">Almost Expired</option>
-                    <option value="Expired">Expired</option>
+                    <option value="Tersedia">Tersedia</option>
+                    <option value="Hanpir Kadaluarsa">Hampir Kadaluarsa</option>
+                    <option value="Kadaluarsa">Kadaluarsa</option>
                 </x-adminlte-select>
 
                 <x-adminlte-button

@@ -23,7 +23,7 @@ class Request extends Component
 
     protected $orderRules = [
         'orderList.obat_id' => 'required|exists:obat,obat_id',
-        'orderList.kuantitas' => 'required|min:1|numeric',
+        'orderList.kuantitas' => 'required|min:1|numeric|max:10',
     ];
     protected $purchaseRules = [
         'pembelian.tanggal' => 'required|date',
