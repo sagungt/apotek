@@ -40,6 +40,20 @@
                         </div>
                     </x-slot>
                 </x-adminlte-input>
+
+                <x-adminlte-input
+                    name="no_resep"
+                    label="Nomor Resep"
+                    placeholder="Nomor Resep"
+                    wire:model="sell.no_resep"
+                    error-key="sell.no_resep"
+                >
+                    <x-slot name="prependSlot">
+                        <div class="input-group-text">
+                            <i class="fas fa-receipt"></i>
+                        </div>
+                    </x-slot>
+                </x-adminlte-input>
             @endif
 
             {{-- <x-adminlte-input
@@ -260,6 +274,10 @@
                                 <span class="w-25 fw-bold">No Batch</span>
                                 <span class="w-75">{{ $stock->no_batch }}</span>
                             </div>
+                            <div class="d-flex">
+                                <span class="w-25 fw-bold">Supplier</span>
+                                <span class="w-75">{{ $stock->medicine->suppliers }}</span>
+                            </div>
                             <div class="d-flex mt-4">
                                 <x-adminlte-input
                                     type="number"
@@ -295,6 +313,7 @@
                     <h4>No Stock</h4>
                 @endforelse
             </div>
+            {{ $stocks->links() }}
         </div>
     </div>
 

@@ -132,8 +132,8 @@
                     <h4 class="fw-bold">Grand Total : Rp. {{ number_format($purchase?->total) }}</h4>
                 </div>
 
-                @can('apoteker')
-                    @if ($purchase?->status == 'Approved')
+                {{-- @can('apoteker')
+                    @if ($purchase?->status == 'Approved') --}}
                         <div class="d-flex g-2">
                             <x-adminlte-button
                                 class="btn mb-3 mx-2"
@@ -158,8 +158,8 @@
                                 data-target="#download-modal" --}}
                             />
                         </div>
-                    @endif
-                @endcan
+                    {{-- @endif
+                @endcan --}}
     
                 @can('pemilik')
                     @if ($purchase?->status === 'Requested')

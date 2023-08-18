@@ -20,4 +20,14 @@ class OrderList extends Model
     {
         return $this->morphTo();
     }
+
+    public function grossProfit()
+    {
+        return $this->kuantitas * $this->medicine->finalPrice();
+    }
+
+    public function netProfit()
+    {
+        return $this->grossProfit() - ($this->kuantitas * $this->medicine->harga_jual);
+    }
 }

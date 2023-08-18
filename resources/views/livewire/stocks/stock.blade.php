@@ -37,7 +37,7 @@
                         <td>{{ $stock->no_batch }}</td>
                         <td>{{ $stock->no_exp }}</td>
                         <td>Rp. {{ number_format($stock->harga_jual) }}</td>
-                        <td>Rp. {{ number_format($stock->harga_jual + ($stock->harga_jual * 0.1)) }}</td>
+                        <td>Rp. {{ number_format($stock->harga_jual + ($stock->harga_jual * ($stock->medicine->margin / 100))) }}</td>
                         <td>{{ $stock->medicine->minimal_stok ?? '-' }}</td>
 
                         <td>{{ $stock->stok }}</td>

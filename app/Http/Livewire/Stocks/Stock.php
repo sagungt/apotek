@@ -11,6 +11,7 @@ class Stock extends Component
     use WithPagination;
 
     public $search = '';
+    protected $paginationTheme = 'bootstrap';
 
     protected $listeners = ['reset' => 'refresh'];
 

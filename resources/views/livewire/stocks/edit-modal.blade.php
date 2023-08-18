@@ -110,7 +110,7 @@
                 >
                     <option selected>Select Status</option>
                     <option value="Tersedia">Tersedia</option>
-                    <option value="Hanpir Kadaluarsa">Hampir Kadaluarsa</option>
+                    <option value="Hampir Kadaluarsa">Hampir Kadaluarsa</option>
                     <option value="Kadaluarsa">Kadaluarsa</option>
                 </x-adminlte-select>
 

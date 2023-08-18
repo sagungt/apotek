@@ -16,4 +16,9 @@ class Stock extends Model
     {
         return $this->belongsTo(Medicine::class, 'obat_id');
     }
+
+    public function finalPrice()
+    {
+        return $this->harga_jual + ($this->harga_jual * ($this->medicine->margin / 100));
+    }
 }

@@ -33,10 +33,10 @@
                     <th scope="col">Supplier</th>
                     <th scope="col">Jenis</th>
                     <th scope="col">Kategori</th>
-                    {{-- <th scope="col">Merek</th> --}}
                     <th scope="col">Minimal Stok</th>
                     <th scope="col">Isi Per Box</th>
                     <th scope="col">Harga Per Box</th>
+                    <th scope="col">Margin</th>
                     <th scope="col">Action</th>
                 </tr>
             </thead>
@@ -53,7 +53,7 @@
                         <td>{{ $medicine->isi_box ?? '-' }}</td>
                         <td>{{ 'Rp.' . number_format($medicine->harga_per_box) }}</td>
 
-                        {{-- <td>{{ $medicine->brand?->nama_merek ?? '-' }}</td> --}}
+                        <td>{{ $medicine->margin . '%' ?? '-' }}</td>
                         <td>
                             <button
                                 class="btn btn-xs btn-default text-primary mx-1"
@@ -77,7 +77,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="10" class="text-center">No Records found ...</td>
+                        <td colspan="11" class="text-center">No Records found ...</td>
                     </tr>
                 @endforelse
             </tbody>

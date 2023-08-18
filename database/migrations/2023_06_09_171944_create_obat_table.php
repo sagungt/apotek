@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('satuan');
             $table->string('suppliers');
             $table->integer('isi_box');
+            $table->integer('margin');
             $table->bigInteger('harga_per_box');
             $table->foreignId('kategori_id')
                 ->references('kategori_id')

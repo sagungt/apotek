@@ -69,7 +69,7 @@ class DetailModal extends Component
         // $this->validate(['name' => 'required']);
         $request = Purchase::with('orderList', 'orderList.medicine', 'supplier')->find($this->purchase->pembelian_id);
         $filename = Carbon::now()->format('Y-m-d') . '_REQUEST_PEMBELIAN.pdf';
-        $pdf = Pdf::loadView('pdf.request', ['request' => $request, 'tanggal' => Carbon::now()->format('Y-m-d'),/* 'name' => $this->name, 'now' => Carbon::now()->format('Y-m-d')*/])->output();
+        $pdf = Pdf::loadView('pdf.request', ['request' => $request, 'tanggal' => Carbon::now()->format('Y-m-d'),/* 'name' => $this->name, 'now' => Carbon::now()->format('Y-m-d')*/])->setPaper('a6')->output();
         return response()->streamDownload(
             fn () => print($pdf),
             $filename,

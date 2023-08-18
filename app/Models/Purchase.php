@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 class Purchase extends Model
 {
@@ -26,5 +27,10 @@ class Purchase extends Model
     public function supplier()
     {
         return $this->belongsTo(Supplier::class, 'supplier_id');
+    }
+
+    public function generateID()
+    {
+        return 'RQ' . $this->pembelian_id . '-' . Carbon::parse($this->created_at)->format('dmy');
     }
 }

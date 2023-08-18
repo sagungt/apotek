@@ -9,9 +9,12 @@ use Livewire\Component;
 use App\Models\Sell as SellModel;
 use App\Models\Stock;
 use Illuminate\Support\Carbon;
+use Livewire\WithPagination;
 
 class Sell extends Component
 {
+    use WithPagination;
+
     public $search;
     public $sell;
     public $medicines;
@@ -21,12 +24,14 @@ class Sell extends Component
     public $quantities = [];
     public $suppliers = [];
     public $supplier;
+    protected $paginationTheme = 'bootstrap';
 
     protected $rules = [
         'sell.tanggal'        => 'required|date',
         'sell.tipe'           => 'required|in:Resep,Non Resep',
         'sell.nama_dokter'    => 'required_if:sell.tipe,Resep',
         'sell.nama_pelanggan' => 'required_if:sell.tipe,Resep',
+        'sell.no_resep'       => 'required_if:sell.tipe,Resep',
         // 'sell.no_faktur'      => 'required',
     ];
 
@@ -98,7 +103,7 @@ class Sell extends Component
     public function add($stock, $id, $qty, ?callable $callback = null)
     {
         // $price = ($stock->medicine->harga + ($stock->medicine->harga * 0.1)) * $qty;
-        $price = ($stock->harga_jual + ($stock->harga_jual * 0.1)) * $qty;
+        $price = ($stock->harga_jual + ($stock->harga_jual * ($stock->medicine->margin / 100))) * $qty;
         $inList = array_filter($this->orderList, fn ($order) => $order['obat_id'] == $id);
         if (empty($inList)) {
             array_push($this->orderList, [
@@ -178,6 +183,7 @@ class Sell extends Component
                             ->orWhere('harga_jual', 'like', '%' . $this->search . '%')
                             ->orWhere('satuan', 'like', '%' . $this->search . '%')
                             ->orWhere('jenis', 'like', '%' . $this->search . '%')
+                            ->orWhere('suppliers', 'like', '%' . $this->search . '%')
                             ->orWhereHas('category', fn ($query) =>
                                 $query->where('nama_kategori', 'like', '%' . $this->search . '%')
                             )
@@ -193,7 +199,7 @@ class Sell extends Component
                         $query->where('suppliers', $this->supplier)
                     )
             )
-            ->get();
+            ->paginate(30);
 
         return view('livewire.stocks.sell', compact('stocks'));
     }

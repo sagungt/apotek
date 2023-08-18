@@ -22,7 +22,7 @@ class AddModal extends Component
         'newMedicine.kategori_id' => 'required|exists:kategori,kategori_id',
         'newMedicine.harga_per_box' => 'required|numeric',
         'newMedicine.isi_box' => 'required|numeric',
-        // 'newMedicine.merek_id'    => 'required|exists:merek,merek_id',
+        'newMedicine.margin'    => 'required|numeric|min:0|max:100',
     ];
     protected $messages = [
         'newMedicine.nama_obat.required'   => 'The Medicine Name field is required',
@@ -33,7 +33,7 @@ class AddModal extends Component
         'newMedicine.kategori_id.required' => 'The Medicine Category field is required',
         'newMedicine.harga_per_box.required' => 'The Medicine Price field is required',
         'newMedicine.isi_box.required' => 'The Medicine Count field is required',
-        // 'newMedicine.merek_id.required'    => 'The Medicine Brand field is required',
+        'newMedicine.margin.required'    => 'The Medicine Margin field is required',
     ];
 
     public function mount()

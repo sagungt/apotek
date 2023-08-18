@@ -20,4 +20,9 @@ class StockController extends Controller
     {
         return view('stocks.expiry');
     }
+
+    public function stockHistory()
+    {
+        return view('stocks.history');
+    }
 }

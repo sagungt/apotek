@@ -2,8 +2,11 @@
 
 namespace App\Http\Livewire\Stocks;
 
+use App\Jobs\AlmostExpiredJob;
+use App\Jobs\ExpiredJob;
 use App\Models\Purchase;
 use App\Models\Stock;
+use Illuminate\Support\Carbon;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -45,14 +48,20 @@ class ConfirmModal extends Component
         $this->validate();
 
         foreach ($this->orders as $index => $order) {
-            Stock::create([
+            $stock = Stock::create([
                 'obat_id'    => $order->medicine->obat_id,
                 'stok'       => $this->qty[$index],
                 'harga_jual' => $order->harga_jual,
                 'no_batch'   => $order->no_batch,
                 'no_exp'     => $order->no_exp,
-                'status'     => 'Active'
+                'status'     => 'Tersedia'
             ]);
+
+            AlmostExpiredJob::dispatch($stock)
+                ->delay(Carbon::parse($stock->no_exp)->subMonths(3));
+
+            ExpiredJob::dispatch($stock)
+                ->delay(Carbon::parse($stock->no_exp));
 
             unset($order->no_batch);
             unset($order->no_exp);

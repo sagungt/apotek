@@ -17,6 +17,10 @@ class Index extends Component
     public $date;
     public $search;
     public $name;
+    public $startDate;
+    public $endDate;
+    public $isFilter;
+    protected $paginationTheme = 'bootstrap';
 
     protected $listeners = ['reset' => 'refresh'];
 
@@ -86,6 +90,16 @@ class Index extends Component
         );
     }
 
+    public function filterDate()
+    {
+        $this->isFilter = true;
+    }
+
+    public function resetFilterDate()
+    {
+        $this->isFilter = false;
+    }
+
     public function render()
     {
         $role = auth()->user()->role;
@@ -119,6 +133,11 @@ class Index extends Component
                                     ->where('supplier_nama', 'like', '%' . $this->search . '%')
                             )
                     )
+                    ->when($this->isFilter, fn ($query) =>
+                        $query
+                            ->whereBetween('tanggal', array($this->startDate, $this->endDate))
+                            ->orWhereBetween('tanggal_terima', array($this->startDate, $this->endDate))
+                    )
                     ->latest();
                 $totalMonth = array_sum($purchases->pluck('total')->toArray());
                 $purchases = $purchases->paginate(10);
@@ -139,6 +158,11 @@ class Index extends Component
                                     ->where('supplier_nama', 'like', '%' . $this->search . '%')
                             )
                     )
+                    ->when($this->isFilter, fn ($query) =>
+                        $query
+                            ->whereBetween('tanggal', array($this->startDate, $this->endDate))
+                            ->orWhereBetween('tanggal_terima', array($this->startDate, $this->endDate))
+                    )
                     ->latest()
                     ->paginate(10);
                 break;
@@ -156,6 +180,11 @@ class Index extends Component
                                 $query
                                     ->where('supplier_nama', 'like', '%' . $this->search . '%')
                             )
+                    )
+                    ->when($this->isFilter, fn ($query) =>
+                        $query
+                            ->whereBetween('tanggal', array($this->startDate, $this->endDate))
+                            ->orWhereBetween('tanggal_terima', array($this->startDate, $this->endDate))
                     )
                     ->latest()
                     ->paginate(10);

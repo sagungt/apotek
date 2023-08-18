@@ -7,6 +7,7 @@
         <style type="text/css" media="screen">
             html {
                 font-family: sans-serif;
+                font-size: 4px;
                 line-height: 1.15;
                 margin: 0;
             }
@@ -112,7 +113,7 @@
                 line-height: 1.1;
             }
             .party-header {
-                font-size: 1.5rem;
+                font-size: 1rem;
                 font-weight: 400;
             }
             .total-amount {
@@ -124,6 +125,12 @@
             }
             .cool-gray {
                 color: #6B7280;
+            }
+            h1 {
+                font-size: 4rem;
+            }
+            h2 {
+                font-size: 2rem;
             }
         </style>
     </head>

@@ -355,6 +355,10 @@ return [
             'can' => ['pemilik'],
             'submenu' => [
                 [
+                    'text' => 'Barang',
+                    'url'  => 'history/barang',
+                ],
+                [
                     'text' => 'Pembelian',
                     'url'  => 'history/pembelian',
                 ],

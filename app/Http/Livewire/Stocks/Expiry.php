@@ -12,6 +12,7 @@ class Expiry extends Component
     use WithPagination;
 
     public $search;
+    protected $paginationTheme = 'bootstrap';
 
     public function markAlmostExpired($id)
     {

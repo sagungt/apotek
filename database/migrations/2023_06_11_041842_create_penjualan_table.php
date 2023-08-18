@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('tipe');
             $table->string('nama_dokter')->nullable();
             $table->string('nama_pelanggan')->nullable();
+            $table->string('no_resep')->nullable();
             $table->timestamps();
         });
     }

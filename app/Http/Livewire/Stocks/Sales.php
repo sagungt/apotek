@@ -16,6 +16,12 @@ class Sales extends Component
     public $currentMonth;
     public $search = '';
     public $name;
+    public $date;
+    public $startDate;
+    public $endDate;
+    public $isFilter = false;
+
+    protected $paginationTheme = 'bootstrap';
 
     public function mount($isHistory = true)
     {
@@ -57,6 +63,16 @@ class Sales extends Component
         return redirect()->route('histories.printSales', ['date' => $this->currentMonth->format('Y-m-d'), 'name' => $this->name]);
     }
 
+    public function filterDate()
+    {
+        $this->isFilter = true;
+    }
+
+    public function resetFilterDate()
+    {
+        $this->isFilter = false;
+    }
+
     public function generatePdf()
     {
         $this->validate(['name' => 'required']);
@@ -70,7 +86,7 @@ class Sales extends Component
             })
             ->get();
         $filename = Carbon::now()->format('Y-m') . '_PENJUALAN.pdf';
-        $pdf = Pdf::loadView('pdf.penjualan', ['penjualan' => $sales, 'tanggal' => Carbon::now()->format('Y-m'), 'name' => $this->name, 'now' => Carbon::now()->format('Y-m-d')])->output();
+        $pdf = Pdf::loadView('pdf.penjualan', ['penjualan' => $sales, 'tanggal' => Carbon::now()->format('Y-m'), 'name' => $this->name, 'now' => Carbon::now()->format('Y-m-d')])->setPaper('a4', 'landscape')->output();
         return response()->streamDownload(
             fn () => print($pdf),
             $filename,
@@ -84,6 +100,7 @@ class Sales extends Component
         switch ($role) {
             case 1:
                 $sales = Sell::query()
+                    ->with('orderList', 'orderList.medicine', 'orderList.medicine.medicine')
                     ->when($this->isHistory, fn ($query) =>
                         $query
                             ->where(function ($query) {
@@ -103,6 +120,10 @@ class Sales extends Component
                             ->orWhere('nama_dokter', 'like', '%' . $this->search . '%')
                             ->orWhere('nama_pelanggan', 'like', '%' . $this->search . '%')
                     )
+                    ->when($this->isFilter, fn ($query) =>
+                        $query
+                            ->whereBetween('tanggal', array($this->startDate, $this->endDate))
+                    )
                     ->latest();
                 $totalMonth = array_sum($sales->pluck('jumlah')->toArray());
                 $sales = $sales->paginate(10);
@@ -118,6 +139,10 @@ class Sales extends Component
                             ->orWhere('tipe', 'like', '%' . $this->search . '%')
                             ->orWhere('nama_dokter', 'like', '%' . $this->search . '%')
                             ->orWhere('nama_pelanggan', 'like', '%' . $this->search . '%')
+                    )
+                    ->when($this->isFilter, fn ($query) =>
+                        $query
+                            ->whereBetween('tanggal', array($this->startDate, $this->endDate))
                     )
                     ->latest()
                     ->paginate(10);

@@ -7,6 +7,7 @@
         <style type="text/css" media="screen">
             html {
                 font-family: sans-serif;
+                font-size: 4px;
                 line-height: 1.15;
                 margin: 0;
             }
@@ -56,7 +57,7 @@
             }
 
             h4, .h4 {
-                font-size: 1.5rem;
+                font-size: 1rem;
             }
 
             .table {
@@ -112,7 +113,7 @@
                 line-height: 1.1;
             }
             .party-header {
-                font-size: 1.5rem;
+                font-size: 1rem;
                 font-weight: 400;
             }
             .total-amount {
@@ -136,7 +137,7 @@
         <table class="table mt-5">
             <tbody>
                 <tr>
-                    <td class="border-0 pl-0" width="70%">
+                    <td class="border-0 pl-0" width="50%">
                         {{-- <h4 class="text-uppercase">
                             <strong>Invoice</strong>
                         </h4> --}}

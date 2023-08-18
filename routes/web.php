@@ -86,6 +86,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/penjualan', [OrderController::class, 'salesHistory'])
             ->name('sales');
 
+        Route::get('/barang', [StockController::class, 'stockHistory'])
+            ->name('sales');
+
         Route::get('/print/purchases/{date}', [OrderController::class, 'printPurchases'])
             ->name('printPurchases');
 

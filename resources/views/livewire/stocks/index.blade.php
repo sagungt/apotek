@@ -52,6 +52,46 @@
         </x-slot>
     </x-adminlte-input>
 
+    <div class="w-100 d-flex align-items-center">
+        <x-adminlte-input
+            name="start_date"
+            type="date"
+            label="Filter Start Date"
+            wire:model.defer="startDate"
+            error-key="startDate"
+            class="mr-2"
+            x-data
+            x-on:click="$nextTick(() => $el.showPicker())"
+        >
+        </x-adminlte-input>
+
+        <x-adminlte-input
+            name="end_date"
+            label="Filter End Date"
+            type="date"
+            wire:model.defer="endDate"
+            error-key="endDate"
+            class="mr-2"                    
+            x-data
+            x-on:click="$nextTick(() => $el.showPicker())"
+        >
+        </x-adminlte-input>
+
+        <x-adminlte-button
+            theme="primary"
+            label="Submit"
+            wire:click="filterDate"
+            class="mr-2"
+            style="height: fit-content; transform: translateY(8px)"
+        />
+        <x-adminlte-button
+            theme="outline-primary"
+            label="Reset"
+            wire:click="resetFilterDate"
+            class="mr-2"
+            style="height: fit-content; transform: translateY(8px)"
+        />
+    </div>
     @if ($isHistory)
         @can('pemilik')
             <div class="w-100 d-flex justify-content-between">
@@ -141,12 +181,12 @@
             <tbody>
                 @forelse ($purchases as $purchase)
                     <tr scope="row">
-                        <td>{{ $purchase->pembelian_id }}</td>
+                        <td>{{ $purchase->generateID() }}</td>
                         <td>{{ $purchase->no_faktur ?? '-' }}</td>
                         {{-- <td>{{ $purchase->supplier->supplier_nama }}</td> --}}
                         <td>{{ $purchase->tanggal }}</td>
                         <td>{{ $purchase->tanggal_terima ?? '-' }}</td>
-                        <td>{{ number_format($purchase->total) }}</td>
+                        <td>{{ 'Rp. ' . number_format($purchase->total) }}</td>
                         <td>
                             <span
                                 @class([

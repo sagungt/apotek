@@ -30,7 +30,7 @@ class SaleInfoModal extends Component
     {
         // $this->validate(['name' => 'required']);
         $filename = $this->sale->tanggal . '_' . $this->sale->no_faktur . '.pdf';
-        $pdf = Pdf::loadView('pdf.invoice', [...$this->sale->toArray(),/* 'name' => $this->name, 'now' => Carbon::now()->format('Y-m-d')*/])->output();
+        $pdf = Pdf::loadView('pdf.invoice', [...$this->sale->toArray(),/* 'name' => $this->name, 'now' => Carbon::now()->format('Y-m-d')*/])->setPaper('a6')->output();
         return response()->streamDownload(
             fn () => print($pdf),
             $filename,

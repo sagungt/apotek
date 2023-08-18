@@ -129,6 +129,21 @@
                     </x-slot>
                 </x-adminlte-input>
 
+                <x-adminlte-input
+                    autocomplete="margin"
+                    name="margin"
+                    label="Margin (%)"
+                    placeholder="Margin"
+                    wire:model.defer="newMedicine.margin"
+                    error-key="newMedicine.margin"
+                >
+                    <x-slot name="prependSlot">
+                        <div class="input-group-text">
+                            <i class="fas fa-percent"></i>
+                        </div>
+                    </x-slot>
+                </x-adminlte-input>
+
                 <x-adminlte-select
                     name="category"
                     label="Category"

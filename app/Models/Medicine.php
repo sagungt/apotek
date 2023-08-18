@@ -30,6 +30,24 @@ class Medicine extends Model
 
     public function stocks()
     {
-        return $this->hasMany(Stock::class, 'id', 'obat_id');
+        return $this->hasMany(Stock::class, 'obat_id');
+    }
+
+    public function purchases($startDate, $endDate)
+    {
+        return OrderList::where('flow_type', Purchase::class)
+            ->where('medicine_type', Medicine::class)
+            ->where('medicine_id', $this->obat_id)
+            ->whereBetween('created_at', array($startDate, $endDate))
+            ->get();
+    }
+
+    public function sales($startDate, $endDate)
+    {
+        return OrderList::where('flow_type', Sell::class)
+            ->where('medicine_type', Stock::class)
+            ->where('medicine_id', $this->obat_id)
+            ->whereBetween('created_at', array($startDate, $endDate))
+            ->get();
     }
 }
