@@ -145,6 +145,8 @@
                     <td class="border-0 pl-0">
                         <p>No Faktur: <strong>#{{ $no_faktur }}</strong></p>
                         <p>Tanggal: <strong>{{ $tanggal }}</strong></p>
+                        <p><span style="border-bottom: 1px solid black">Tuan</span> :</p>
+                        <p>Toko</p>
                     </td>
                 </tr>
             </tbody>
@@ -161,6 +163,9 @@
                         <th class="border-0 pl-0">
                             Dokter
                         </th>
+                        <th class="border-0 pl-0">
+                            Nomor Resep
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -176,6 +181,13 @@
                             @if($nama_dokter)
                                 <p>
                                     <strong>{{ $nama_dokter }}</strong>
+                                </p>
+                            @endif
+                        </td>
+                        <td class="px-0">
+                            @if($no_resep)
+                                <p>
+                                    <strong>{{ $no_resep }}</strong>
                                 </p>
                             @endif
                         </td>
@@ -218,7 +230,18 @@
                     </td>
                 </tr>
             </tbody>
-          
+        </table>
+        <table class="table">
+            <tbody>
+                <tr>
+                    <td class="border-0 pl-0">
+                        Tanda terima
+                    </td>
+                    <td class="border-0 pl-0">
+                        Hormat kami,
+                    </td>
+                </tr>
+            </tbody>
         </table>
 	
     </body>
