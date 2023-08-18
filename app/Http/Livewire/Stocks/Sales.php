@@ -19,6 +19,10 @@ class Sales extends Component
     public $date;
     public $startDate;
     public $endDate;
+    public $printStartDate;
+    public $printEndDate;
+    public $printStartDate1;
+    public $printEndDate1;
     public $isFilter = false;
 
     protected $paginationTheme = 'bootstrap';
@@ -59,8 +63,8 @@ class Sales extends Component
 
     public function print()
     {
-        $this->validate(['name' => 'required']);
-        return redirect()->route('histories.printSales', ['date' => $this->currentMonth->format('Y-m-d'), 'name' => $this->name]);
+        $this->validate(['name' => 'required', 'printStartDate1' => 'nullable|date', 'printEndDate1' => 'nullable|date']);
+        return redirect()->route('histories.printSales', ['date' => $this->currentMonth->format('Y-m-d'), 'name' => $this->name, 'startDate' => $this->printStartDate1 ?? null, 'endDate' => $this->printEndDate1 ?? null]);
     }
 
     public function filterDate()
@@ -75,15 +79,26 @@ class Sales extends Component
 
     public function generatePdf()
     {
-        $this->validate(['name' => 'required']);
+        $this->validate(['name' => 'required', 'printStartDate' => 'nullable|date', 'printEndDate' => 'nullable|date']);
         $sales = Sell::query()
-            ->where(function ($query) {
-                $first = Carbon::parse($this->currentMonth)->startOfMonth();
-                $last = Carbon::parse($this->currentMonth)->endOfMonth();
-                return $query
-                    ->whereDate('tanggal', '>=', $first)
-                    ->whereDate('tanggal', '<=', $last);
-            })
+            ->when(!$this->printStartDate && !$this->printEndDate, fn ($query) =>
+                $query
+                    ->where(function ($query) {
+                        $first = Carbon::parse($this->currentMonth)->startOfMonth();
+                        $last = Carbon::parse($this->currentMonth)->endOfMonth();
+                        return $query
+                            ->whereDate('tanggal', '>=', $first)
+                            ->whereDate('tanggal', '<=', $last);
+                    })
+            )
+            ->when($this->printStartDate, fn ($query) =>
+                    $query
+                        ->whereDate('tanggal', '>=', Carbon::parse($this->printStartDate))
+            )
+            ->when($this->printEndDate, fn ($query) =>
+                    $query
+                        ->whereDate('tanggal', '<=', Carbon::parse($this->printEndDate))
+            )
             ->get();
         $filename = Carbon::now()->format('Y-m') . '_PENJUALAN.pdf';
         $pdf = Pdf::loadView('pdf.penjualan', ['penjualan' => $sales, 'tanggal' => Carbon::now()->format('Y-m'), 'name' => $this->name, 'now' => Carbon::now()->format('Y-m-d')])->setPaper('a4', 'landscape')->output();

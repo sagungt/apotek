@@ -286,6 +286,28 @@
             </x-slot>
         </x-adminlte-input>
 
+        <x-adminlte-input
+            name="print_start_date"
+            type="date"
+            label="Start Date"
+            wire:model.defer="printStartDate1"
+            error-key="printStartDate1"
+            x-data
+            x-on:click="$nextTick(() => $el.showPicker())"
+        >
+        </x-adminlte-input>
+
+        <x-adminlte-input
+            name="print_end_date"
+            label="End Date"
+            type="date"
+            wire:model.defer="printEndDate1"
+            error-key="printEndDate1"
+            x-data
+            x-on:click="$nextTick(() => $el.showPicker())"
+        >
+        </x-adminlte-input>
+
         <x-slot name="footerSlot">
             <x-adminlte-button
                 class="mr-auto"
@@ -320,6 +342,28 @@
                     <i class="fas fa-user"></i>
                 </div>
             </x-slot>
+        </x-adminlte-input>
+
+        <x-adminlte-input
+            name="print_start_date"
+            type="date"
+            label="Start Date"
+            wire:model.defer="printStartDate"
+            error-key="printStartDate"
+            x-data
+            x-on:click="$nextTick(() => $el.showPicker())"
+        >
+        </x-adminlte-input>
+
+        <x-adminlte-input
+            name="print_end_date"
+            label="End Date"
+            type="date"
+            wire:model.defer="printEndDate"
+            error-key="printEndDate"
+            x-data
+            x-on:click="$nextTick(() => $el.showPicker())"
+        >
         </x-adminlte-input>
 
         <x-slot name="footerSlot">

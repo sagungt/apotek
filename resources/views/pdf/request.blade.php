@@ -155,7 +155,7 @@
                         <br>
                         <br>
                         <p>
-                            Supplier: {{ $request->supplier->supplier_nama ?? '-' }}
+                            Supplier: {{ $request->orderList[0]->medicine->suppliers ?? '-' }}
                         </p>
                     </th>
                 </tr>

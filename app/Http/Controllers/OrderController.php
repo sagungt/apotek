@@ -50,16 +50,29 @@ class OrderController extends Controller
     public function printPurchases(Request $request, $date)
     {
         $name = $request->query('name');
+        $startDate = $request->query('startDate') ?? null;
+        $endDate = $request->query('endDate') ?? null;
         $currentMonth = Carbon::parse($date);
         $purchases = Purchase::query()
             ->whereIn('status', ['Complete'])
-            ->where(function ($query) use ($currentMonth) {
-                $first = Carbon::parse($currentMonth)->startOfMonth();
-                $last = Carbon::parse($currentMonth)->endOfMonth();
-                return $query
-                    ->whereDate('tanggal', '>=', $first)
-                    ->whereDate('tanggal', '<=', $last);
-                })
+            ->when(!$startDate && !$endDate, fn ($query) =>
+                $query
+                    ->where(function ($query) use ($currentMonth) {
+                        $first = Carbon::parse($currentMonth)->startOfMonth();
+                        $last = Carbon::parse($currentMonth)->endOfMonth();
+                        return $query
+                            ->whereDate('tanggal', '>=', $first)
+                            ->whereDate('tanggal', '<=', $last);
+                        })
+            )
+            ->when($startDate, fn ($query) =>
+                    $query
+                        ->whereDate('tanggal', '>=', Carbon::parse($startDate))
+            )
+            ->when($endDate, fn ($query) =>
+                    $query
+                        ->whereDate('tanggal', '<=', Carbon::parse($endDate))
+            )
             ->get();
         return Pdf::loadView('pdf.pembelian', ['pembelian' => $purchases, 'tanggal' => $currentMonth->format('Y-m'), 'name' => $name, 'now' => Carbon::now()->format('Y-m-d')])->stream();
     }
@@ -67,15 +80,28 @@ class OrderController extends Controller
     public function printSales(Request $request, $date)
     {
         $name = $request->query('name');
+        $startDate = $request->query('startDate') ?? null;
+        $endDate = $request->query('endDate') ?? null;
         $currentMonth = Carbon::parse($date);
         $sales = Sell::query()
-            ->where(function ($query) use ($currentMonth) {
-                $first = Carbon::parse($currentMonth)->startOfMonth();
-                $last = Carbon::parse($currentMonth)->endOfMonth();
-                return $query
-                    ->whereDate('tanggal', '>=', $first)
-                    ->whereDate('tanggal', '<=', $last);
-            })
+            ->when(!$startDate && !$endDate, fn ($query) =>
+                $query
+                ->where(function ($query) use ($currentMonth) {
+                    $first = Carbon::parse($currentMonth)->startOfMonth();
+                    $last = Carbon::parse($currentMonth)->endOfMonth();
+                    return $query
+                        ->whereDate('tanggal', '>=', $first)
+                        ->whereDate('tanggal', '<=', $last);
+                })
+            )
+            ->when($startDate, fn ($query) =>
+                    $query
+                        ->whereDate('tanggal', '>=', Carbon::parse($startDate))
+            )
+            ->when($endDate, fn ($query) =>
+                    $query
+                        ->whereDate('tanggal', '<=', Carbon::parse($endDate))
+            )
             ->get();
         return Pdf::loadView('pdf.penjualan', ['penjualan' => $sales, 'tanggal' => $currentMonth->format('Y-m'), 'name' => $name, 'now' => Carbon::now()->format('Y-m-d')])->setPaper('a4', 'landscape')->stream();
     }
