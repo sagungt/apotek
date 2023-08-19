@@ -64,7 +64,7 @@ class Request extends Component
         if ($propName == 'orderList.obat_id') {
             $medicine = Medicine::find($val);
             $stock = $medicine->stocks->reduce(fn ($carry, $s) => $carry + $s->stok, 0);
-            $this->info = $stock <= $medicine->minimal_stok ? 'Stok = ' . $stock . '. Stok obat sudah mencapat minimal stok' : 'Stok = ' . $stock . '.';
+            $this->info = $stock <= $medicine->minimal_stok ? 'Stok = ' . $stock . '. Stok obat sudah mencapai minimal stok' : 'Stok = ' . $stock . '.';
         }
     }
 

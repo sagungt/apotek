@@ -12,7 +12,7 @@
     @endcan
 
     @can('pemilik')
-        @if (sizeof($purchases) > 0)
+        @if (sizeof($purchases) > 0 && $isHistory)
             <x-adminlte-button
                 class="btn mb-3"
                 type="button"

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('obat_id')
                 ->references('obat_id')
                 ->on('obat');
-            $table->integer('stok');
+            $table->string('stok');
             $table->bigInteger('harga_jual');
             $table->string('no_batch');
             $table->date('no_exp');
